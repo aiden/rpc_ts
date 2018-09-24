@@ -1,5 +1,7 @@
 # api_framework
 
+[![CircleCI](https://circleci.com/gh/aiden/ts-grpc/tree/master.svg?style=svg)](https://circleci.com/gh/aiden/ts-grpc/tree/master)
+
 TODO: Rework after article.
 
 `api_framework` is a framework for doing typesafe [_Remote Procedure Calls (RPC)_](https://en.wikipedia.org/wiki/Remote_procedure_call) in TypeScript. It uses no [_Domain-Specific Language_](https://en.wikipedia.org/wiki/Domain-specific_language) (and in that differs from RPC frameworks that serialize their messages using [Protocol Buffers](https://developers.google.com/protocol-buffers/) and [Apache Thrift](https://thrift.apache.org/)): the services are all defined using TypeScript. This approach is particularly suitable for shortening the development cycle of isomorphic web applications that rely on TypeScript for both frontend and backend development.
