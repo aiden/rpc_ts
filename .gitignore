@@ -2,3 +2,4 @@
 /lib
 /es
 /coverage
+/.nyc_output
