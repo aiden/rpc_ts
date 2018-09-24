@@ -1,0 +1,80 @@
+{
+  "name": "ts-grpc",
+  "version": "1.0.0",
+  "description": "Aiden Mono Repo",
+  "repository": "git@github.com:aiden/ts-grpc.git",
+  "author": "Dashbot Ltd",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "lib/index.js",
+  "unpkg": "dist/index.js",
+  "module": "es/index.js",
+  "typings": "./index.d.ts",
+  "dependencies": {
+    "express": "^4.16.3",
+    "compression": "^1.0.3",
+    "lodash": "^4.17.5",
+    "grpc-web-client": "^0.6.2",
+    "moment": "^2.14.1",
+    "node-jose": "^1.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "query-string": "^6.0.0",
+    "fast-text-encoding": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.11.1",
+    "@types/sinon": "^2.3.7",
+    "sinon": "^4.0.1",
+    "fetch-mock": "^6.5.0",
+    "@types/fetch-mock": "^6.0.3",
+    "@types/lodash": "^4.14.106",
+    "prettier": "^1.13.7",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.13.0",
+    "tslint-config-standard": "^7.0.0",
+    "tslint-language-service": "^0.9.8",
+    "tslint-no-circular-imports": "^0.6.1",
+    "ts-node": "^4",
+    "mocha": "^4",
+    "@types/mocha": "^2.2.41",
+    "typescript": "2.8.4",
+    "@types/chai": "^4.0.0",
+    "chai": "3.5.0",
+    "tsconfig-paths": "^3.5.0",
+    "type-zoo": "^1.2.1",
+    "@types/query-string": "^5.1.0",
+    "@types/node": "^8.0.47",
+    "rimraf": "^2.6.2",
+    "fast-check": "^1.5.0",
+    "nyc": "^13.0.1",
+    "rxjs": "^6.3.2"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist es",
+    "test": "mocha --exit -r ts-node/register -r tsconfig-paths/register 'lib/**/*.test.js'",
+    "coverage": "nyc --reporter=html --reporter=text yarn test",
+    "ts": "tsc -p tsconfig.json --noEmit",
+    "build:es": "tsc -p tsconfig.json --declaration --module esnext --outDir ./es",
+    "build:cjs": "tsc -p tsconfig.json --declaration --module commonjs --outDir ./lib",
+    "build": "yarn run build:cjs && yarn run build:es",
+    "lint": "tslint -p tsconfig.json",
+    "format": "prettier --write --ignore-path .gitignore '**/*.ts'",
+    "format:check": "prettier -l --list-different --ignore-path .gitignore '**/*.ts'",
+    "all": "yarn clean && yarn ts && yarn format:check && yarn lint && yarn build && yarn test",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "{./*,typescript/**/*}.{js,jsx,ts,tsx,css,scss,md,json}": "prettier -l",
+    "*.{ts,tsx}": "tslint -c tslint.json"
+  },
+  "npmName": "ts-grpc",
+  "npmFileMap": [
+    {
+      "basePath": "/dist/",
+      "files": [
+        "*.js"
+      ]
+    }
+  ],
+  "sideEffects": false
+}

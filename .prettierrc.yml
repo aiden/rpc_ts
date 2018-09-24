@@ -1,0 +1,14 @@
+# These are all Prettier defaults, just specifying them
+# for the sake of being explicit
+printWidth: 80
+tabWidth: 2
+semi: true
+bracketSpacing: true
+jsxBracketSameLine: false
+arrowParens: avoid
+useTabs: false
+
+# These we differ from Prettier's defaults
+singleQuote: true
+proseWrap: never
+trailingComma: all

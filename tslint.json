@@ -1,0 +1,85 @@
+{
+  "extends": [
+    "tslint-config-standard",
+    "tslint-config-prettier",
+    "tslint-no-circular-imports"
+  ],
+  "defaultSeverity": "error",
+  "linterOptions": { "exclude": ["**/node_modules"] },
+  "rules": {
+    "no-angle-bracket-type-assertion": false,
+    "one-variable-per-declaration": false,
+    "prefer-const": true,
+    "no-var-keyword": true,
+    "ter-prefer-arrow-callback": [false],
+    "no-unused-expression": false,
+    "member-ordering": false,
+    "variable-name": false,
+    "no-empty": false,
+    "curly": false,
+    "completed-docs": {
+      "severity": "warning",
+      "options": {
+        "functions": { "visibilities": ["exported"] },
+        "classes": { "visibilities": ["exported"] },
+        "methods": { "privacies": ["public"] },
+        "interfaces": { "visibilities": ["exported"] },
+        "enums": { "visibilities": ["exported"] },
+        "properties": { "privacies": ["public"] },
+        "types": { "visibilities": ["exported"] }
+      }
+    },
+    "jsdoc-format": false,
+    "no-floating-promises": false,
+    "no-use-before-declare": false,
+    "no-unused-variable": true,
+    "no-boolean-literal-compare": false,
+    "await-promise": [true, "Bluebird"],
+    "comment-format": true,
+    "no-duplicate-imports": true,
+    "jsx-no-multiline-js": false,
+    "jsx-no-lambda": false,
+    "ban": [
+      true,
+      "eval",
+      ["describe", "only", "Don't focus tests."],
+      ["it", "only", "Don't focus tests."],
+      {
+        "name": ["chai", "assert", "equal"],
+        "message": "Use 'strictEqual' instead."
+      },
+      {
+        "name": ["_", "omit"],
+        "message": "Use 'Utils.omit instead."
+      },
+      {
+        "name": ["_", "flatten"],
+        "message": "Use 'Utils.flatten instead."
+      },
+      {
+        "name": ["_", "without"],
+        "message": "Use 'Utils.without instead."
+      },
+      {
+        "name": ["_", "pick"],
+        "message": "Use 'Utils.pick instead."
+      },
+      {
+        "name": ["_", "mapValues"],
+        "message": "Use 'Utils.mapValues instead."
+      },
+      {
+        "name": ["Object", "entries"],
+        "message": "Use 'Utils.entries instead."
+      },
+      {
+        "name": ["Object", "values"],
+        "message": "Use 'Utils.values instead."
+      },
+      {
+        "name": ["Object", "keys"],
+        "message": "Use 'Utils.keys instead."
+      }
+    ]
+  }
+}
