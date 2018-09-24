@@ -11,7 +11,7 @@ jobs:
     steps:
       - checkout
       - run: yarn
-      - ryn: yarn build
+      - run: yarn build
       - run: yarn test
       - persist_to_workspace:
           root: '~/repo'
