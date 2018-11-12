@@ -13,7 +13,7 @@ import * as sinon from 'sinon';
 import { expect } from 'chai';
 import * as Utils from '../../utils/utils';
 
-describe('ts-rpc', () => {
+describe('rpc_ts', () => {
   describe('client stream_retrier', () => {
     let sandbox: sinon.SinonSandbox;
 

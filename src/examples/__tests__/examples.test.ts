@@ -8,7 +8,7 @@
 import * as child_process from 'child_process';
 import * as path from 'path';
 
-describe('ts-rpc', () => {
+describe('rpc_ts', () => {
   describe('examples', () => {
     // Just invoke the examples
 

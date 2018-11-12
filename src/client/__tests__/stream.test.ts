@@ -11,7 +11,7 @@ import * as sinon from 'sinon';
 import { expect } from 'chai';
 import { AssertionError } from 'assert';
 
-describe('ts-rpc', () => {
+describe('rpc_ts', () => {
   describe('client stream', () => {
     describe('transformStream', () => {
       it('transforms', async () => {

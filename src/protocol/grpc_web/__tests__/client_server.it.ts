@@ -25,7 +25,7 @@ import { ModuleRpcCommon } from '../../../common';
 import { ModuleRpcClient } from '../../../client';
 import { ModuleRpcServer } from '../../../server';
 
-describe('ts-rpc', () => {
+describe('rpc_ts', () => {
   describe('protocol client/server', () => {
     it('successful unary call', async () => {
       await fc.assert(
@@ -164,7 +164,7 @@ describe('ts-rpc', () => {
           },
         ),
       );
-    }).timeout(20000);
+    }).timeout(30000);
 
     describe('client errors', () => {
       let server: http.Server;

@@ -7,7 +7,7 @@ import {
 import { expect } from 'chai';
 import { ModuleRpcCommon } from '../../../../common';
 
-describe('ts-rpc', () => {
+describe('rpc_ts', () => {
   describe('protocol grpc', () => {
     describe('getGrpcWebErrorFromMetadata', () => {
       it('ok', () => {

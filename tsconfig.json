@@ -35,10 +35,10 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "ts-rpc/*": [
+      "rpc_ts/*": [
         "./*"
       ],
-      "ts-rpc": [
+      "rpc_ts": [
         "./"
       ]
     }

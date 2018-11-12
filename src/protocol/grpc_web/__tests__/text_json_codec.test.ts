@@ -11,7 +11,7 @@ import { grpc } from 'grpc-web-client';
 import { ModuleRpcProtocolGrpcWebCommon } from '../common';
 import { ModuleRpcUtils } from '../../../utils';
 
-describe('ts-rpc', () => {
+describe('rpc_ts', () => {
   describe('protocol json_codec', () => {
     const codec = new ModuleRpcProtocolGrpcWebCommon.GrpcWebJsonCodec();
 

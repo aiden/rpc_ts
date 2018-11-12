@@ -1,28 +1,28 @@
-# ts-rpc: Remote Procedure Calls in TypeScript made simple
+# rpc_ts: Remote Procedure Calls in TypeScript made simple
 
-[![CircleCI](https://circleci.com/gh/aiden/ts-rpc/tree/master.svg?style=svg)](https://circleci.com/gh/aiden/ts-rpc/tree/master) [![typescript](./docs/typescript.svg)](https://aleen42.github.io/badges/src/typescript.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![CircleCI](https://circleci.com/gh/aiden/rpc_ts/tree/master.svg?style=svg)](https://circleci.com/gh/aiden/rpc_ts/tree/master) [![typescript](./docs/typescript.svg)](https://aleen42.github.io/badges/src/typescript.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-`ts-rpc` is a framework for doing typesafe [Remote Procedure Calls (RPC)](https://en.wikipedia.org/wiki/Remote_procedure_call) in TypeScript. It uses no [Domain-Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language) such as [Protocol Buffers](https://developers.google.com/protocol-buffers/) or [Apache Thrift](https://thrift.apache.org/): the services are all defined using the powerful TypeScript type system. This approach is particularly suitable for shortening the development cycle of isomorphic web applications that rely on TypeScript for both frontend and backend development.
+`rpc_ts` is a framework for doing typesafe [Remote Procedure Calls (RPC)](https://en.wikipedia.org/wiki/Remote_procedure_call) in TypeScript. It uses no [Domain-Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language) such as [Protocol Buffers](https://developers.google.com/protocol-buffers/) or [Apache Thrift](https://thrift.apache.org/): the services are all defined using the powerful TypeScript type system. This approach is particularly suitable for shortening the development cycle of isomorphic web applications that rely on TypeScript for both frontend and backend development.
 
-`ts-rpc` supports both unary calls and server-side streaming and is fully compatible with the [grpc-web+json](https://github.com/grpc/grpc-web) protocol (an adaptation of the popular gRPC protocol for the web). It has been designed with a relentless focus on modularity, simplicity, and robustness, and does not require the use of an intermediate gRPC proxy.
+`rpc_ts` supports both unary calls and server-side streaming and is fully compatible with the [grpc-web+json](https://github.com/grpc/grpc-web) protocol (an adaptation of the popular gRPC protocol for the web). It has been designed with a relentless focus on modularity, simplicity, and robustness, and does not require the use of an intermediate gRPC proxy.
 
 ## Examples
 
 ### Chat room
 
-[![Chat room](docs/ts-rpc-chat-demo.gif)](https://github.com/aiden/ts-rpc-chat)
+[![Chat room](docs/rpc_ts_chat-demo.gif)](https://github.com/aiden/rpc_ts_chat)
 
-The [chat room](https://github.com/aiden/ts-rpc-chat) example showcases error handling and real-time with `ts-rpc`, and also best practices.
+The [chat room](https://github.com/aiden/rpc_ts_chat) example showcases error handling and real-time with `rpc_ts`, and also best practices.
 
 ### Primer
 
 This is how a minimal RPC service with one procedure, `getHello`, looks like:
 
 ```Typescript
-import { ModuleRpcCommon } from 'ts-rpc/lib/common';
-import { ModuleRpcServer } from 'ts-rpc/lib/server';
-import { ModuleRpcProtocolServer } from 'ts-rpc/lib/protocol/server';
-import { ModuleRpcProtocolClient } from 'ts-rpc/lib/protocol/client';
+import { ModuleRpcCommon } from 'rpc_ts/lib/common';
+import { ModuleRpcServer } from 'rpc_ts/lib/server';
+import { ModuleRpcProtocolServer } from 'rpc_ts/lib/protocol/server';
+import { ModuleRpcProtocolClient } from 'rpc_ts/lib/protocol/client';
 
 // Definition of the RPC service
 const helloServiceDefinition = {
@@ -65,7 +65,7 @@ rpc().then(() => server.close()).catch(err => {
 });
 ```
 
-## Why ts-rpc?
+## Why rpc_ts?
 
 Bootstrapping an HTTP REST API over JSON is extremely simple in dynamic languages such as Python and JavaScript. With the right framework, it is possible to write a client/server interaction in a few lines of codes. This simplicity comes from that the conversion to and from untyped JSON feels natural, but also that no explicit contract is specified between the client and the user.
 
@@ -77,7 +77,7 @@ On the other side of the spectrum, both gRPC and Thrift are built around Interfa
 
 3.  The very rigid IDL type system fights against, rather than helps, the manually-typed constructs and tends to [contaminate more and more of the code base](http://reasonablypolymorphic.com/blog/protos-are-wrong/). This is especially saddening with regards to TypeScript and its well-crafted system of [algebraic data types](https://en.wikipedia.org/wiki/Algebraic_data_type).
 
-We believe that `ts-rpc` fills an important gap in the RPC ecosystem: it provides a hassle-free way to define APIs in an expressive language, TypeScript, so that we can build isomorphic applications faster.
+We believe that `rpc_ts` fills an important gap in the RPC ecosystem: it provides a hassle-free way to define APIs in an expressive language, TypeScript, so that we can build isomorphic applications faster.
 
 ## The protocol
 
@@ -91,7 +91,7 @@ Our implementation, to the best of our knowledge, is the first implementation of
 
 ## Runtime type checks
 
-In the context of an isomorphic web application running on Node.js, `ts-rpc` is typesafe as long as both the client and the server are compiled from the same codebase and share the same service definition. This is a real shortcoming for public APIs as well as a security issue. Fortunately, the TypeScript compiler can be very easily plugged into. We are using such runtime type checking internally and are also in the process of open sourcing it so that this I/O boundary can be addressed.
+In the context of an isomorphic web application running on Node.js, `rpc_ts` is typesafe as long as both the client and the server are compiled from the same codebase and share the same service definition. This is a real shortcoming for public APIs as well as a security issue. Fortunately, the TypeScript compiler can be very easily plugged into. We are using such runtime type checking internally and are also in the process of open sourcing it so that this I/O boundary can be addressed.
 
 ## Concepts
 
@@ -123,8 +123,8 @@ RPCs can be classified according to how requests and responses intermingle durin
 
 Unary RPCs and server streams can be implemented using half duplexes (think of "walkie-talkies" where the two parties to the communication cannot communicate at the same time), client and bidirectional streams require a full duplex communication (where simultaneous communication is possible). This has implications for the transportation layer used. For example, client and bidirectional streams cannot be implemented in HTTP/1.1 and, whereas the HTTP2 RFC provides a full duplex, the current browser interface to HTTP2 allows only for a half duplex (in the browser, full duplexes can be implemented using WebSocket). That's why for, now, gRPC-Web, including our implementation, only supports unary calls and server streams.
 
-Go to the [server_stream](.src/examples/server_stream) example to see how server streams are implemented with `ts-rpc`.
+Go to the [server_stream](.src/examples/server_stream) example to see how server streams are implemented with `rpc_ts`.
 
 ## License
 
-`ts-rpc` is licensed under the MIT License.
+`rpc_ts` is licensed under the MIT License.

@@ -1,8 +1,8 @@
 {
-  "name": "ts-rpc",
-  "version": "1.0.0",
+  "name": "rpc_ts",
+  "version": "1.1.0",
   "description": "Remote Procedure Calls in TypeScript made simple",
-  "repository": "git@github.com:aiden/ts-rpc.git",
+  "repository": "git@github.com:aiden/rpc_ts.git",
   "author": "Dashbot Ltd",
   "license": "MIT",
   "private": false,
@@ -76,7 +76,7 @@
     "{./*,typescript/**/*}.{js,jsx,ts,tsx,css,scss,md,json}": "prettier -l",
     "*.{ts,tsx}": "tslint -c tslint.json"
   },
-  "npmName": "ts-rpc",
+  "npmName": "rpc_ts",
   "sideEffects": false,
   "keywords": [
     "typescript",

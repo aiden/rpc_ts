@@ -10,7 +10,7 @@ import { getMockRpcClient } from '../mock';
 import { ModuleRpcClient } from '../../../client';
 import { expect } from 'chai';
 
-describe('ts-rpc', () => {
+describe('rpc_ts', () => {
   describe('protocol mock', () => {
     it('mocks a successful unary call', async () => {
       const serviceDefinition = {

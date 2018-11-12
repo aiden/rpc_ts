@@ -8,7 +8,7 @@
 
 import { sleep } from '../utils';
 
-describe('ts-rpc', () => {
+describe('rpc_ts', () => {
   describe('utils', () => {
     it('sleep', async () => {
       await sleep(10);

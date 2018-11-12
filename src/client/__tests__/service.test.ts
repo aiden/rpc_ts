@@ -17,7 +17,7 @@ import * as Utils from '../../utils/utils';
 import { ModuleRpcClient } from '..';
 import { ModuleRpcCommon } from '../../common';
 
-describe('ts-rpc', () => {
+describe('rpc_ts', () => {
   describe('client service', () => {
     describe('call', () => {
       let mockStream: MockStream;
