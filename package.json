@@ -22,7 +22,6 @@
     "query-string": "^6.0.0"
   },
   "devDependencies": {
-    "aiden-doc": "file:../aiden-doc",
     "@types/chai": "^4.0.0",
     "@types/express": "^4.11.1",
     "@types/fetch-mock": "^6.0.3",
@@ -67,7 +66,7 @@
     "lint": "tslint -p tsconfig.json",
     "format": "prettier --write --ignore-path .gitignore '**/*.ts'",
     "format:check": "prettier -l --list-different --ignore-path .gitignore '**/*.ts'",
-    "all": "yarn build && yarn ts && yarn ts:doc && yarn format:check && yarn lint && yarn test && yarn doc",
+    "all": "yarn build && yarn ts && yarn ts:doc && yarn format:check && yarn lint && yarn test",
     "precommit": "lint-staged",
     "extra-md-ts": "cat README.md | yarn --silent codedown Typescript > readme_code.ts",
     "doc": "typedoc --options typedoc.js src && cp -R docs typedoc",
