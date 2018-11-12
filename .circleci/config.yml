@@ -15,7 +15,7 @@ jobs:
       - persist_to_workspace:
           root: '~/repo'
           paths: '.'
-  deploy:
+  doc:
     <<: *defaults
     steps:
       - add_ssh_keys:
@@ -39,6 +39,9 @@ jobs:
       - run:
           name: Publish doc to github pages
           command: yarn doc:deploy
+  deploy:
+    <<: *defaults
+    steps:
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
@@ -54,6 +57,12 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+      - doc:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master
       - deploy:
           requires:
             - test
