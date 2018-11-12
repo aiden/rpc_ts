@@ -12,6 +12,7 @@ jobs:
       - checkout
       - run: yarn
       - run: yarn all
+      - run: yarn coverage && yarn coverage:upload
       - persist_to_workspace:
           root: '~/repo'
           paths: '.'
