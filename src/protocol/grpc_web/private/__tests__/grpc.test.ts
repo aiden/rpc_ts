@@ -3,11 +3,11 @@ import {
   getGrpcWebErrorFromMetadata,
   GrpcErrorCode,
   getMetadataFromGrpcWebError,
-} from './grpc';
-import * as ModuleRpcCommon from '../../../common/rpc_common';
+} from '../grpc';
 import { expect } from 'chai';
+import { ModuleRpcCommon } from '../../../../common';
 
-describe('ts-grpc', () => {
+describe('ts-rpc', () => {
   describe('protocol grpc', () => {
     describe('getGrpcWebErrorFromMetadata', () => {
       it('ok', () => {
@@ -70,7 +70,7 @@ describe('ts-grpc', () => {
           }).headersMap,
         ).to.deep.equal({
           'grpc-status': [GrpcErrorCode.InvalidArgument.toString()],
-          'grpc-message': ['Foo bar'],
+          'grpc-message': ['Foo%20bar'],
         });
       });
     });

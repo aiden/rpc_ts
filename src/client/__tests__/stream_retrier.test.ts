@@ -1,13 +1,19 @@
-// Ok so test here as well...
+/**
+ * @license
+ * Copyright (c) Aiden.ai
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import * as fc from 'fast-check';
-import { Stream } from './stream';
+import { Stream } from '../stream';
 import { EventEmitter } from 'events';
-import * as streamRetrier from './stream_retrier';
+import * as streamRetrier from '../stream_retrier';
 import * as sinon from 'sinon';
 import { expect } from 'chai';
-import * as Utils from '../utils/utils';
+import * as Utils from '../../utils/utils';
 
-describe('ts-grpc', () => {
+describe('ts-rpc', () => {
   describe('client stream_retrier', () => {
     let sandbox: sinon.SinonSandbox;
 
@@ -58,7 +64,7 @@ describe('ts-grpc', () => {
             await waitForRetryingStream(retryingStream);
             const expectedEvents = models.reduce(
               (acc, model) => acc.concat(model.expectedEvents),
-              [],
+              [] as any[][],
             );
             expect(events).to.deep.equal(
               expectedEvents,
@@ -99,13 +105,16 @@ describe('ts-grpc', () => {
   });
 
   it('can be canceled', async () => {
-    let stream: MockStream;
+    let stream: MockStream | undefined;
     const retryingStream = streamRetrier.retryStream(() => {
       stream = new MockStream();
       return stream;
     });
     const events = getRetryingStreamEvents(retryingStream);
     retryingStream.start();
+    if (!stream) {
+      throw new Error('stream must have been initialized by now');
+    }
     const promise = waitForRetryingStream(retryingStream);
     stream.emit('error', new Error('__error__'));
     const canceledSpy = sinon.spy();
@@ -123,25 +132,25 @@ describe('ts-grpc', () => {
 function getRetryingStreamEvents<T>(
   retryingStream: streamRetrier.RetryingStream<T>,
 ) {
-  const events = [];
-  for (const event of [
+  const events: any[][] = [];
+  for (const event of ['ready', 'complete', 'canceled'] as [
     'ready',
     'complete',
-    'canceled',
-    'message',
-    'error',
-    'retryingError',
+    'canceled'
   ]) {
-    retryingStream.on(event as any, (...args) => {
-      if (event === 'error') {
-        events.push([event, args[0].message]);
-      } else if (event === 'retryingError') {
-        events.push([event, args[0].message, ...args.slice(1)]);
-      } else {
-        events.push([event, ...args]);
-      }
+    retryingStream.on(event, () => {
+      events.push([event]);
     });
   }
+  retryingStream.on('message', message => {
+    events.push(['message', message]);
+  });
+  retryingStream.on('error', err => {
+    events.push(['error', err.message]);
+  });
+  retryingStream.on('retryingError', (err, ...args) => {
+    events.push(['retryingError', err.message, ...args]);
+  });
   return events;
 }
 

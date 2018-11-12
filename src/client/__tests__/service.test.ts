@@ -1,15 +1,23 @@
-import { Service, ServiceRetrier } from './service';
+/**
+ * @license
+ * Copyright (c) Aiden.ai
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+import { Service, ServiceRetrier } from '../service';
 import * as sinon from 'sinon';
-import { Stream } from './stream';
+import { Stream } from '../stream';
 import { EventEmitter } from 'events';
 import { AssertionError } from 'assert';
-import { ModuleRpcClient, ModuleRpcCommon } from '..';
 import { expect } from 'chai';
 import * as Rx from 'rxjs';
 import { take } from 'rxjs/operators';
-import * as Utils from '../utils/utils';
+import * as Utils from '../../utils/utils';
+import { ModuleRpcClient } from '..';
+import { ModuleRpcCommon } from '../../common';
 
-describe('ts-grpc', () => {
+describe('ts-rpc', () => {
   describe('client service', () => {
     describe('call', () => {
       let mockStream: MockStream;
@@ -116,7 +124,7 @@ describe('ts-grpc', () => {
           response: { value: 10 },
           responseContext: { qux: 'wobble' },
         };
-        let mockStream: MockStream;
+        let mockStream: MockStream | undefined;
         const streamProducer = () => {
           mockStream = new MockStream();
           return mockStream;
@@ -129,6 +137,9 @@ describe('ts-grpc', () => {
         const retrier = service.withRetry();
         const nextServiceEvent = instrumentRetrier(retrier);
         const responsePromise = retrier.service().call('unary', request);
+        if (!mockStream) {
+          throw new Error('mockStream should have been initialized by now');
+        }
         let serviceEventPromise = nextServiceEvent();
         mockStream.emit('error', new Error('__error__'));
         expect(await serviceEventPromise).to.deep.equal([
@@ -249,13 +260,13 @@ describe('ts-grpc', () => {
 
 const testServiceDefinition = {
   unary: {
-    request: null as { foo: string },
-    response: null as { value: number },
+    request: {} as { foo: string },
+    response: {} as { value: number },
   },
   stream: {
     type: ModuleRpcCommon.ServiceMethodType.serverStream,
-    request: null as { foo: string },
-    response: null as { value: number },
+    request: {} as { foo: string },
+    response: {} as { value: number },
   },
 };
 

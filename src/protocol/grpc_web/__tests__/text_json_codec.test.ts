@@ -7,13 +7,13 @@
  */
 import { expect } from 'chai';
 import * as fc from 'fast-check';
-import { TextJsonGrpcWebCodec } from './text_json_codec';
 import { grpc } from 'grpc-web-client';
-import * as Utils from '../../utils/utils';
+import { ModuleRpcProtocolGrpcWebCommon } from '../common';
+import { ModuleRpcUtils } from '../../../utils';
 
-describe('ts-grpc', () => {
-  describe('protocol text_json_codec', () => {
-    const codec = new TextJsonGrpcWebCodec();
+describe('ts-rpc', () => {
+  describe('protocol json_codec', () => {
+    const codec = new ModuleRpcProtocolGrpcWebCommon.GrpcWebJsonCodec();
 
     it('encodes/decodes requests', () => {
       fc.assert(
@@ -39,15 +39,15 @@ describe('ts-grpc', () => {
       fc.assert(
         fc.property(grpcMetadata(), metadata => {
           expect(
-            Utils.entries(
+            ModuleRpcUtils.entries(
               codec.decodeTrailer(codec.encodeTrailer(metadata)).headersMap,
             ),
           ).to.deep.equal(
-            Utils.entries(metadata.headersMap)
+            ModuleRpcUtils.entries(metadata.headersMap)
               .map(
                 ([key, values]) =>
                   [
-                    key.trim(),
+                    key.toString().trim(),
                     values.map(value => value.trim()).filter(value => !!value),
                   ] as [string, string[]],
               )

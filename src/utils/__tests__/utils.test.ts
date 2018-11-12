@@ -6,9 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { sleep } from './utils';
+import { sleep } from '../utils';
 
-describe('ts-grpc', () => {
+describe('ts-rpc', () => {
   describe('utils', () => {
     it('sleep', async () => {
       await sleep(10);

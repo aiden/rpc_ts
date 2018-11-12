@@ -11,9 +11,9 @@ import { AssertionError } from 'assert';
 import * as jose from 'node-jose';
 import * as moment from 'moment';
 import * as sinon from 'sinon';
-import * as Utils from '../../utils/utils';
-import * as ModuleJwtHandler from './jwt_handler';
-import { TokenValidationError } from './handler';
+import * as Utils from '../../../utils/utils';
+import * as ModuleJwtHandler from '../token_auth_jwt_handler';
+import { TokenValidationError } from '../token_auth_handler';
 import * as fetchMock from 'fetch-mock';
 
 const JWKS_URL = 'https://domain.test/.well-known/jwks.json';

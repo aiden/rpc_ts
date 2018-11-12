@@ -1,22 +1,31 @@
+/**
+ * @license
+ * Copyright (c) Aiden.ai
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import * as fc from 'fast-check';
 import * as express from 'express';
-import { registerGrpcWebRoutes } from './server';
-import * as Utils from '../../utils/utils';
+import { registerGrpcWebRoutes } from '../server/server';
+import * as Utils from '../../../utils/utils';
 import * as http from 'http';
-import { getGrpcWebClient } from './client';
-import { ModuleRpcCommon, ModuleRpcServer, ModuleRpcClient } from '../..';
+import { getGrpcWebClient } from '../client/client';
 import * as sinon from 'sinon';
 import * as _ from 'lodash';
 import { expect } from 'chai';
-import { EmptyServerContextConnector } from '../../context/empty/server';
-import { EmptyClientContextConnector } from '../../context/empty/client';
 import { AssertionError } from 'assert';
-import { GrpcWebCodec } from './codec';
-import { TextJsonGrpcWebCodec } from './text_json_codec';
-import { encodeUtf8 } from './private/utf8';
+import { GrpcWebCodec } from '../common/codec';
+import { GrpcWebJsonCodec } from '../common/json_codec';
+import { encodeUtf8 } from '../private/utf8';
 import { grpc } from 'grpc-web-client';
+import { ModuleRpcContextServer } from '../../../context/server';
+import { ModuleRpcContextClient } from '../../../context/client';
+import { ModuleRpcCommon } from '../../../common';
+import { ModuleRpcClient } from '../../../client';
+import { ModuleRpcServer } from '../../../server';
 
-describe('ts-grpc', () => {
+describe('ts-rpc', () => {
   describe('protocol client/server', () => {
     it('successful unary call', async () => {
       await fc.assert(
@@ -47,7 +56,7 @@ describe('ts-grpc', () => {
                 serverContextConnector(arb.requestContext, arb.responseContext),
                 {
                   useCompression: arb.useCompression,
-                  captureError: console.error,
+                  reportError: console.error,
                 },
               ),
             );
@@ -75,7 +84,7 @@ describe('ts-grpc', () => {
           },
         ),
       );
-    }).timeout(5000);
+    }).timeout(10000);
 
     it('successful server-stream call', async () => {
       await fc.assert(
@@ -131,11 +140,16 @@ describe('ts-grpc', () => {
                   .on('error', reject)
                   .start();
               });
-              expect(onMessageSpy.callCount).to.equal(arb.request.length);
+              expect(onMessageSpy.args.length).to.equal(arb.request.length);
               for (const [item, args] of _.zip(
                 arb.request,
                 onMessageSpy.args,
               )) {
+                if (!args) {
+                  throw new Error(
+                    'expected args to be defined (arrays of the same length)',
+                  );
+                }
                 expect(args[0]).to.deep.equal({
                   response: {
                     item,
@@ -150,7 +164,7 @@ describe('ts-grpc', () => {
           },
         ),
       );
-    });
+    }).timeout(20000);
 
     describe('client errors', () => {
       let server: http.Server;
@@ -171,7 +185,7 @@ describe('ts-grpc', () => {
           registerGrpcWebRoutes(
             unaryServiceDefinition,
             handler,
-            new EmptyServerContextConnector(),
+            new ModuleRpcContextServer.EmptyServerContextConnector(),
           ),
         );
         server = http.createServer(app).listen();
@@ -262,14 +276,14 @@ describe('ts-grpc', () => {
             throw new Error(errorMsg);
           },
         };
-        const captureError = sinon.spy();
+        const reportError = sinon.spy();
         app.use(
           '/api',
           registerGrpcWebRoutes(
             unaryServiceDefinition,
             handler,
-            new EmptyServerContextConnector(),
-            { captureError },
+            new ModuleRpcContextServer.EmptyServerContextConnector(),
+            { reportError },
           ),
         );
         const server = http.createServer(app).listen();
@@ -278,7 +292,7 @@ describe('ts-grpc', () => {
         try {
           const client = getGrpcWebClient(
             unaryServiceDefinition,
-            new EmptyClientContextConnector(),
+            new ModuleRpcContextClient.EmptyClientContextConnector(),
             {
               remoteAddress: `http://localhost:${serverPort}/api`,
               codec: new InvalidCodec(),
@@ -296,8 +310,8 @@ describe('ts-grpc', () => {
         } finally {
           server.close();
         }
-        expect(captureError.calledOnce).to.be.true;
-        const serverError: Error = captureError.args[0][0];
+        expect(reportError.calledOnce).to.be.true;
+        const serverError: Error = reportError.args[0][0];
         expect(serverError).to.be.instanceof(
           ModuleRpcServer.ServerTransportError,
         );
@@ -321,7 +335,7 @@ describe('ts-grpc', () => {
           registerGrpcWebRoutes(
             unaryServiceDefinition,
             handler,
-            new EmptyServerContextConnector(),
+            new ModuleRpcContextServer.EmptyServerContextConnector(),
           ),
         );
         const server = http.createServer(app).listen();
@@ -330,7 +344,7 @@ describe('ts-grpc', () => {
         try {
           const client = getGrpcWebClient(
             unaryServiceDefinition,
-            new EmptyClientContextConnector(),
+            new ModuleRpcContextClient.EmptyClientContextConnector(),
             { remoteAddress: `http://localhost:${serverPort}/api` },
           );
           await client.call('unary', {});
@@ -363,7 +377,7 @@ describe('ts-grpc', () => {
           registerGrpcWebRoutes(
             unaryServiceDefinition,
             handler,
-            new EmptyServerContextConnector(),
+            new ModuleRpcContextServer.EmptyServerContextConnector(),
           ),
         );
         const server = http.createServer(app).listen();
@@ -372,7 +386,7 @@ describe('ts-grpc', () => {
         try {
           const client = getGrpcWebClient(
             unaryServiceDefinition,
-            new EmptyClientContextConnector(),
+            new ModuleRpcContextClient.EmptyClientContextConnector(),
             { remoteAddress: `http://localhost:${serverPort}/api` },
           );
           await client.call('unary', {});
@@ -402,7 +416,7 @@ describe('ts-grpc', () => {
           registerGrpcWebRoutes(
             serverStreamServiceDefinition,
             handler,
-            new EmptyServerContextConnector(),
+            new ModuleRpcContextServer.EmptyServerContextConnector(),
           ),
         );
         const server = http.createServer(app).listen();
@@ -411,7 +425,7 @@ describe('ts-grpc', () => {
         try {
           const client = getGrpcWebClient(
             serverStreamServiceDefinition,
-            new EmptyClientContextConnector(),
+            new ModuleRpcContextClient.EmptyClientContextConnector(),
             { remoteAddress: `http://localhost:${serverPort}/api` },
           );
           const stream = client.stream('serverStream', {});
@@ -434,7 +448,7 @@ describe('ts-grpc', () => {
         } finally {
           server.close();
         }
-      });
+      }).timeout(10000);
 
       it('non-200 error code', async () => {
         const app = express();
@@ -447,7 +461,7 @@ describe('ts-grpc', () => {
         try {
           const client = getGrpcWebClient(
             unaryServiceDefinition,
-            new EmptyClientContextConnector(),
+            new ModuleRpcContextClient.EmptyClientContextConnector(),
             { remoteAddress: `http://localhost:${serverPort}/api` },
           );
           await client.nice().unary({});
@@ -474,7 +488,7 @@ describe('ts-grpc', () => {
             onMessage({});
             throw new ModuleRpcServer.ServerRpcError(
               ModuleRpcCommon.RpcErrorType.resourceExhausted,
-              null,
+              undefined,
               'transmitted',
             );
           },
@@ -484,7 +498,7 @@ describe('ts-grpc', () => {
           registerGrpcWebRoutes(
             serverStreamServiceDefinition,
             handler,
-            new EmptyServerContextConnector(),
+            new ModuleRpcContextServer.EmptyServerContextConnector(),
           ),
         );
         const server = http.createServer(app).listen();
@@ -493,7 +507,7 @@ describe('ts-grpc', () => {
         try {
           const client = getGrpcWebClient(
             serverStreamServiceDefinition,
-            new EmptyClientContextConnector(),
+            new ModuleRpcContextClient.EmptyClientContextConnector(),
             { remoteAddress: `http://localhost:${serverPort}/api` },
           );
           await ModuleRpcClient.streamAsPromise(client.nice().serverStream({}));
@@ -518,16 +532,16 @@ describe('ts-grpc', () => {
 
 const unaryServiceDefinition = {
   unary: {
-    request: null as any,
-    response: null as any,
+    request: {},
+    response: {},
   },
 };
 
 const serverStreamServiceDefinition = {
   serverStream: {
     type: ModuleRpcCommon.ServiceMethodType.serverStream,
-    request: null as any,
-    response: null as any,
+    request: {},
+    response: {},
   },
 };
 
@@ -543,7 +557,10 @@ const serverContextConnector = (
     );
   },
   async provideResponseContext() {
-    return Utils.mapValues(responseContext, (value, key) => `${key}__${value}`);
+    return Utils.mapValuesWithStringKeys(
+      responseContext,
+      (value, key) => `${key}__${value}`,
+    );
   },
 });
 
@@ -552,7 +569,10 @@ const clientContextConnector = (
   responseContext,
 ): ModuleRpcClient.ClientContextConnector<any> => ({
   async provideRequestContext() {
-    return Utils.mapValues(requestContext, (value, key) => `${key}__${value}`);
+    return Utils.mapValuesWithStringKeys(
+      requestContext,
+      (value, key) => `${key}__${value}`,
+    );
   },
   async decodeResponseContext(encodedResponseContext) {
     return _.fromPairs(
@@ -592,7 +612,7 @@ const context = () =>
   );
 
 class InvalidCodec implements GrpcWebCodec {
-  private codec = new TextJsonGrpcWebCodec();
+  private codec = new GrpcWebJsonCodec();
 
   /** @override */
   getContentType() {

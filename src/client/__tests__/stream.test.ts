@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { EventEmitter } from 'events';
-import { streamAsPromise, transformStream, Stream } from './stream';
+import { streamAsPromise, transformStream, Stream } from '../stream';
 import * as sinon from 'sinon';
 import { expect } from 'chai';
 import { AssertionError } from 'assert';
 
-describe('ts-grpc', () => {
+describe('ts-rpc', () => {
   describe('client stream', () => {
     describe('transformStream', () => {
       it('transforms', async () => {
