@@ -1,10 +1,7 @@
 {
   "name": "aiden-doc",
   "description": "Aiden themes for TypeDoc",
-  "version": "1.0.1",
-  "files": [
-    "LICENSE"
-  ],
+  "version": "1.0.3",
   "scripts": {
     "format": "echo 'SKIP'",
     "all": "yarn build:css",
