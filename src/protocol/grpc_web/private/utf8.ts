@@ -3,19 +3,21 @@
  *
  * @see https://github.com/nodejs/node/issues/20365
  *
+ * @module
+ *
  * @license
  * Copyright (c) Aiden.ai
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import * as Utils from '../../../utils/utils';
 import 'fast-text-encoding'; // text-encoding polyfill
+import { ModuleRpcUtils } from '../../../utils';
 
-const textEncoder = new (Utils.isRunUnderNode()
+const textEncoder = new (ModuleRpcUtils.isRunUnderNode()
   ? require('util').TextEncoder
   : TextEncoder)();
-const textDecoder = new (Utils.isRunUnderNode()
+const textDecoder = new (ModuleRpcUtils.isRunUnderNode()
   ? require('util').TextDecoder
   : TextDecoder)('utf-8');
 

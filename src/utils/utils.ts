@@ -1,4 +1,6 @@
 /**
+ * @ignore
+ *
  * @license
  * Copyright (c) Aiden.ai
  *
@@ -7,7 +9,6 @@
  */
 
 import * as lodash from 'lodash';
-import * as TypeUtils from './type_utils';
 import { Omit } from 'type-zoo/types';
 
 /**
@@ -21,12 +22,30 @@ export function omit<T extends object, K extends keyof T>(
 }
 
 /**
+ * Filter non null values from a map.
+ */
+export function filterNonNullValues<K extends string, V>(
+  o: { [key in K]: V | null | undefined },
+): { [key in K]: V } {
+  return lodash.reduce(
+    o,
+    (acc, value, key) => (notNull(value) ? { ...acc, [key]: value } : acc),
+    {} as any,
+  );
+}
+
+/** Type assert that a value is not null */
+export function notNull<T>(value: T | null | undefined): value is T {
+  return value !== null && value !== undefined;
+}
+
+/**
  * _.mapValues with types
  */
-export function mapValues<T extends object, V>(
+export function mapValuesWithStringKeys<T extends object, V>(
   o: T,
-  fn: (value: TypeUtils.ValueOf<T>, key: keyof T, o: T) => V,
-): { [key in keyof T]: V } {
+  fn: (value: ValueOf<T>, key: Extract<keyof T, string>, o: T) => V,
+): { [key in Extract<keyof T, string>]: V } {
   return lodash.mapValues(o, fn);
 }
 
@@ -60,12 +79,37 @@ export function entries<T>(o: T): [keyof T, T[keyof T]][] {
  * Returns true if we are in a process run under nodejs. Useful to figure out
  * if a function is being called from the backend or the frontend.
  **/
-export const isRunUnderNode = () =>
-  // We need the any cast since TS sucks ;)
-  typeof process !== 'undefined' &&
-  (process as any).release &&
-  (process as any).release.name === 'node';
+export function isRunUnderNode() {
+  /* tslint:disable strict-type-predicates */
+  return (
+    typeof process !== 'undefined' &&
+    (process as any).release &&
+    (process as any).release.name === 'node'
+  );
+  /* tslint:enable strict-type-predicates */
+}
 
+/**
+ * Same as `sleep`, but with promises.
+ */
 export async function sleep(timeInMillis: number): Promise<void> {
   return new Promise<void>(y => setTimeout(y, timeInMillis));
+}
+
+/**
+ * Opposite of keyof
+ */
+export type ValueOf<T> = T[keyof T];
+
+/**
+ * This function is used to make sure that types are exhaustive. Putting it at the end
+ * of a switch statement will only throw if x has an assignable type.
+ */
+/* istanbul ignore next */
+export function assertUnreachable(x: never, shouldThrow: boolean): never {
+  const err = new Error(x);
+  if (shouldThrow) {
+    throw err;
+  }
+  return null as never;
 }

@@ -1,7 +1,7 @@
 /**
- * @module
- *
  * Deal with method URLs
+ *
+ * @module
  */
 
 export type FullMethodParts = {

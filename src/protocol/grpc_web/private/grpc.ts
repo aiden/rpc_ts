@@ -1,15 +1,22 @@
 /**
  * gRPC-related definitions.
  *
+ * @module
+ *
  * @license
  * Copyright (c) Aiden.ai
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import * as ModuleRpcCommon from '../../../common/rpc_common';
 import * as _ from 'lodash';
+import * as express from 'express';
 import { grpc } from 'grpc-web-client';
+import { decodeHeaderValue, encodeHeaderValue } from './headers';
+import { ModuleRpcCommon } from '../../../common';
+import { ModuleRpcServer } from '../../../server';
+import { errorTypesToHttpStatuses } from './http_status';
+import { HttpStatus } from '../../private/http_status';
 
 /**
  * The error message is optional and usually absent for security reasons,
@@ -66,6 +73,7 @@ export const errorTypesToGrpcStatuses: {
     GrpcErrorCode.ResourceExhausted,
   [ModuleRpcCommon.RpcErrorType.failedPrecondition]:
     GrpcErrorCode.FailedPrecondition,
+  [ModuleRpcCommon.RpcErrorType.unimplemented]: GrpcErrorCode.Unimplemented,
   [ModuleRpcCommon.RpcErrorType.internal]: GrpcErrorCode.Internal,
   [ModuleRpcCommon.RpcErrorType.unavailable]: GrpcErrorCode.Unavailable,
   [ModuleRpcCommon.RpcErrorType.unauthenticated]: GrpcErrorCode.Unauthenticated,
@@ -90,8 +98,36 @@ export function getGrpcWebErrorFromMetadata(
     errorType:
       grpcStatusesToErrorTypes[grpcStatus] ||
       ModuleRpcCommon.RpcErrorType.unknown,
-    message: grpcMessage && grpcMessage.length > 0 ? grpcMessage[0] : '',
+    message: grpcMessage ? grpcMessage.map(decodeHeaderValue).join(',') : '',
   };
+}
+
+/** Get a GrpcWebError and an HTTP status from an Error */
+export function getGrpcWebErrorFromError(
+  err: Error,
+): { status: number; grpcWebError: GrpcWebError } {
+  // We give the `SeverRpcError` a special treatment that gives more info to
+  // the client.  For other kinds of errors, a '500 Internal Server Error' HTTP
+  // status is sent back.
+  let status: number;
+  let grpcWebError: GrpcWebError;
+  if (err instanceof ModuleRpcServer.ServerRpcError) {
+    grpcWebError = { errorType: err.errorType };
+    // We do not transmit the `err.message` because it is a security issue,
+    // only the `err.unsafeTransmittedMessage` (which should have been sanitized).
+    if (err.unsafeTransmittedMessage) {
+      grpcWebError.message = err.unsafeTransmittedMessage;
+    }
+    status =
+      errorTypesToHttpStatuses[err.errorType] ||
+      /* istanbul ignore next */ HttpStatus.internalServerError;
+  } else {
+    status = HttpStatus.internalServerError;
+    grpcWebError = {
+      errorType: ModuleRpcCommon.RpcErrorType.internal,
+    };
+  }
+  return { status, grpcWebError };
 }
 
 /** Get the metadata from a GrpcWebError */
@@ -106,8 +142,28 @@ export function getMetadataFromGrpcWebError(
       /* istanbul ignore next */ GrpcErrorCode.Unknown
     ).toString(),
   );
-  map.set(grpcHeaders.message, error.message);
+  if (error.message) {
+    map.set(grpcHeaders.message, encodeHeaderValue(error.message));
+  }
   return new grpc.Metadata(map);
+}
+
+/**
+ * Send an HTTP error response.
+ *
+ * This fails if the HTTP headers have already been sent (e.g., when an error occurs
+ * in the middle of sending the HTTP body).
+ */
+export function sendHttpErrorResponse(
+  status: number,
+  errorMetadata: grpc.Metadata,
+  resp: express.Response,
+) {
+  resp.status(status);
+  errorMetadata.forEach((name, value) => {
+    resp.setHeader(name, value);
+  });
+  resp.end();
 }
 
 function getStatusFromMetadata(headers: grpc.Metadata): number | null {
