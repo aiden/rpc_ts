@@ -1,6 +1,6 @@
 # Documentation themes and utilities for aiden.ai
 
-[![CircleCI](https://circleci.com/gh/aiden/ts-rpc-chat/tree/master.svg?style=svg)](https://circleci.com/gh/aiden/ts-rpc-chat/tree/master) [![typescript](./docs/typescript.svg)](https://aleen42.github.io/badges/src/typescript.svg) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![CircleCI](https://circleci.com/gh/aiden/ts-rpc-chat/tree/master.svg?style=svg)](https://circleci.com/gh/aiden/ts-rpc-chat/tree/master) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## License
 
