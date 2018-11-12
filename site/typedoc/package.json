@@ -1,7 +1,7 @@
 {
   "name": "aiden-doc",
   "description": "Aiden themes for TypeDoc",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "files": [
     "LICENSE"
   ],
