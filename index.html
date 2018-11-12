@@ -157,7 +157,7 @@ rpc().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;
 					<li>Bidirectional streams, requests and responses can be sent at arbitrary points in time.</li>
 				</ul>
 				<p>Unary RPCs and server streams can be implemented using half duplexes (think of &quot;walkie-talkies&quot; where the two parties to the communication cannot communicate at the same time), client and bidirectional streams require a full duplex communication (where simultaneous communication is possible). This has implications for the transportation layer used. For example, client and bidirectional streams cannot be implemented in HTTP/1.1 and, whereas the HTTP2 RFC provides a full duplex, the current browser interface to HTTP2 allows only for a half duplex (in the browser, full duplexes can be implemented using WebSocket). That&#39;s why for, now, gRPC-Web, including our implementation, only supports unary calls and server streams.</p>
-				<p>Go to the <a href=".src/examples/server_stream">server_stream</a> example to see how server streams are implemented with rpc_ts.</p>
+				<p>Go to the <a href="./src/examples/server_stream">server_stream</a> example to see how server streams are implemented with rpc_ts.</p>
 				<h2 id="license">License</h2>
 				<p>rpc_ts is licensed under the MIT License.</p>
 			</div>
