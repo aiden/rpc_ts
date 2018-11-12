@@ -5,15 +5,15 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import * as ModuleRpcCommon from '../../src/common/rpc_common';
+import { ModuleRpcCommon } from '../../common';
 
 export type NumberService = typeof numberServiceDefinition;
 
 /** Defines the banking service, giving all the methods and the request and response types. */
 export const numberServiceDefinition = {
   increment: {
-    request: null as { value: number },
-    response: null as {
+    request: {} as { value: number },
+    response: {} as {
       value: number;
     },
   },
@@ -24,8 +24,8 @@ export const numberServiceDefinition = {
     // This property indicates that the method serves a stream of messages
     // rather than a unary response.
     type: ModuleRpcCommon.ServiceMethodType.serverStream,
-    request: null as { max: number; sleepMs: number },
-    response: null as {
+    request: {} as { max: number; sleepMs: number },
+    response: {} as {
       counter: number;
     },
   },

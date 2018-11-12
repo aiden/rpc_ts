@@ -11,8 +11,8 @@ export type BankingService = typeof bankingServiceDefinition;
 export const bankingServiceDefinition = {
   /** Get the balance for the authenticated user. */
   getBalance: {
-    request: null as {},
-    response: null as {
+    request: {},
+    response: {} as {
       value: number;
     },
   },
@@ -21,10 +21,10 @@ export const bankingServiceDefinition = {
    * user must have sufficient funds.
    */
   transfer: {
-    request: null as {
+    request: {} as {
       toUserId: string;
       amount: number;
     },
-    response: null as {},
+    response: {},
   },
 };

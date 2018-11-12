@@ -13,7 +13,8 @@ import {
   AuthClientContextConnector,
 } from './auth_context';
 import * as http from 'http';
-import { getRpcClient, registerRpcRoutes } from '../../src';
+import { ModuleRpcProtocolServer } from '../../protocol/server';
+import { ModuleRpcProtocolClient } from '../../protocol/client';
 
 main().catch(
   /* istanbul ignore next */
@@ -42,9 +43,13 @@ function setupServer() {
 
   app.use(
     '/api',
-    registerRpcRoutes(bankingServiceDefinition, getBankingHandler(), {
-      serverContextConnector: new AuthServerContextConnector('u1'),
-    }),
+    ModuleRpcProtocolServer.registerRpcRoutes(
+      bankingServiceDefinition,
+      getBankingHandler(),
+      {
+        serverContextConnector: new AuthServerContextConnector('u1'),
+      },
+    ),
   );
 
   const server = http.createServer(app).listen();
@@ -55,10 +60,13 @@ function setupServer() {
 }
 
 async function clientInteraction(remoteAddress: string) {
-  const client = getRpcClient(bankingServiceDefinition, {
-    remoteAddress,
-    clientContextConnector: new AuthClientContextConnector('u1'),
-  }).nice();
+  const client = ModuleRpcProtocolClient.getRpcClient(
+    bankingServiceDefinition,
+    {
+      remoteAddress,
+      clientContextConnector: new AuthClientContextConnector('u1'),
+    },
+  ).nice();
 
   const balanceResponseBefore = await client.getBalance({});
   console.log('Balance is', balanceResponseBefore.value);
@@ -74,10 +82,13 @@ async function clientInteraction(remoteAddress: string) {
 
   // If the user is not expected, an unauthenticated error is thrown
   {
-    const unauthenticatedClient = getRpcClient(bankingServiceDefinition, {
-      remoteAddress,
-      clientContextConnector: new AuthClientContextConnector('u2'),
-    }).nice();
+    const unauthenticatedClient = ModuleRpcProtocolClient.getRpcClient(
+      bankingServiceDefinition,
+      {
+        remoteAddress,
+        clientContextConnector: new AuthClientContextConnector('u2'),
+      },
+    ).nice();
 
     try {
       await unauthenticatedClient.getBalance({});

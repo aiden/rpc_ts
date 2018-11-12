@@ -5,7 +5,8 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { ModuleRpcServer, ModuleRpcCommon } from '../../src';
+import { ModuleRpcCommon } from '../../common';
+import { ModuleRpcServer } from '../../server';
 import { BankingService } from './service';
 import { AuthRequestContext } from './auth_context';
 
@@ -68,7 +69,7 @@ export const getBankingHandler = (): BankingHandler => {
       if (!toUser) {
         throw new ModuleRpcServer.ServerRpcError(
           ModuleRpcCommon.RpcErrorType.notFound,
-          null,
+          undefined,
           `'to' user not found`,
         );
       }
@@ -76,7 +77,7 @@ export const getBankingHandler = (): BankingHandler => {
       if (fromUser.balance < request.amount) {
         throw new ModuleRpcServer.ServerRpcError(
           ModuleRpcCommon.RpcErrorType.failedPrecondition,
-          null,
+          undefined,
           `'from' user has insufficient funds`,
         );
       }

@@ -6,14 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 import * as express from 'express';
-import { EmptyServerContextConnector } from '../../src/context/empty/server';
-import { EmptyClientContextConnector } from '../../src/context/empty/client';
-import { getGrpcWebClient } from '../../src/protocol/grpc_web/client';
+import { getGrpcWebClient } from '../../protocol/grpc_web/client/client';
 import { numberServiceDefinition, NumberService } from './service';
 import * as http from 'http';
 import { getNumberHandler } from './handler';
-import { ModuleRpcClient, ModuleRpcCommon, registerRpcRoutes } from '../../src';
+import { ModuleRpcClient } from '../../client';
+import { ModuleRpcCommon } from '../../common';
 import { AssertionError } from 'assert';
+import { ModuleRpcContextServer } from '../../context/server';
+import { ModuleRpcContextClient } from '../../context/client';
+import { ModuleRpcProtocolServer } from '../../protocol/server';
 
 main().catch(
   /* istanbul ignore next */
@@ -40,9 +42,13 @@ function setupServer() {
 
   app.use(
     '/api',
-    registerRpcRoutes(numberServiceDefinition, getNumberHandler(), {
-      serverContextConnector: new EmptyServerContextConnector(),
-    }),
+    ModuleRpcProtocolServer.registerRpcRoutes(
+      numberServiceDefinition,
+      getNumberHandler(),
+      {
+        serverContextConnector: new ModuleRpcContextServer.EmptyServerContextConnector(),
+      },
+    ),
   );
 
   const server = http.createServer(app).listen();
@@ -55,7 +61,7 @@ function setupServer() {
 async function clientInteraction(remoteAddress: string) {
   const client = getGrpcWebClient(
     numberServiceDefinition,
-    new EmptyClientContextConnector(),
+    new ModuleRpcContextClient.EmptyClientContextConnector(),
     { remoteAddress },
   ).nice();
 

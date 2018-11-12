@@ -5,7 +5,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { ModuleRpcServer } from '../../src';
+import { ModuleRpcServer } from '../../server';
 import { NumberService } from './service';
 
 export type NumberHandler = ModuleRpcServer.ServiceHandlerFor<NumberService>;

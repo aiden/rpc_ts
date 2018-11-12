@@ -5,7 +5,9 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { ModuleRpcClient, ModuleRpcCommon, ModuleRpcServer } from '../../src';
+import { ModuleRpcClient } from '../../client';
+import { ModuleRpcCommon } from '../../common';
+import { ModuleRpcServer } from '../../server';
 
 /**
  * This is the type of the request context that results from context decoding by the client
