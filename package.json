@@ -84,6 +84,7 @@
     "RPC",
     "API",
     "isomorphic",
-    "gRPC-Web"
+    "gRPC-Web",
+    "real-time"
   ]
 }

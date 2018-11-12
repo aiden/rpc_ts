@@ -59,6 +59,8 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+            branches:
+              ignore: gh-pages
       - doc:
           requires:
             - test
