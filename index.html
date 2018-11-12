@@ -62,7 +62,7 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="rpc_ts-remote-procedure-calls-in-typescript-made-simple">rpc_ts: Remote Procedure Calls in TypeScript made simple</h1>
+				<h1 id="rpc_ts-remote-procedure-calls-in-typescript-made-simple-">rpc_ts: Remote Procedure Calls in TypeScript made simple 👌</h1>
 				<p><a href="https://circleci.com/gh/aiden/rpc_ts/tree/master"><img src="https://circleci.com/gh/aiden/rpc_ts/tree/master.svg?style=svg" alt="CircleCI"></a> <a href="https://coveralls.io/github/aiden/rpc_ts?branch=master"><img src="https://coveralls.io/repos/github/aiden/rpc_ts/badge.svg?branch=master" alt="Coverage Status"></a> <a href="https://badge.fury.io/js/rpc_ts"><img src="https://badge.fury.io/js/rpc_ts.svg" alt="npm version"></a> <a href="https://aleen42.github.io/badges/src/typescript.svg"><img src="./docs/typescript.svg" alt="typescript"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a> <a href="https://github.com/prettier/prettier"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" alt="code style: prettier"></a></p>
 				<p><code>rpc_ts</code> is a framework for doing typesafe <a href="https://en.wikipedia.org/wiki/Remote_procedure_call">Remote Procedure Calls (RPC)</a> in TypeScript. It uses no <a href="https://en.wikipedia.org/wiki/Domain-specific_language">Domain-Specific Language</a> such as <a href="https://developers.google.com/protocol-buffers/">Protocol Buffers</a> or <a href="https://thrift.apache.org/">Apache Thrift</a>: the services are all defined using the powerful TypeScript type system. This approach is particularly suitable for shortening the development cycle of isomorphic web applications that rely on TypeScript for both frontend and backend development.</p>
 				<p><code>rpc_ts</code> supports both unary calls and server-side streaming and is fully compatible with the <a href="https://github.com/grpc/grpc-web">grpc-web+json</a> protocol (an adaptation of the popular gRPC protocol for the web). It has been designed with a relentless focus on modularity, simplicity, and robustness, and does not require the use of an intermediate gRPC proxy.</p>
@@ -159,7 +159,7 @@ rpc().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;
 				<p>Unary RPCs and server streams can be implemented using half duplexes (think of &quot;walkie-talkies&quot; where the two parties to the communication cannot communicate at the same time), client and bidirectional streams require a full duplex communication (where simultaneous communication is possible). This has implications for the transportation layer used. For example, client and bidirectional streams cannot be implemented in HTTP/1.1 and, whereas the HTTP2 RFC provides a full duplex, the current browser interface to HTTP2 allows only for a half duplex (in the browser, full duplexes can be implemented using WebSocket). That&#39;s why for, now, gRPC-Web, including our implementation, only supports unary calls and server streams.</p>
 				<p>Go to the <a href=".src/examples/server_stream">server_stream</a> example to see how server streams are implemented with <code>rpc_ts</code>.</p>
 				<h2 id="license">License</h2>
-				<p><code>rpc_ts</code> is licensed under the MIT License.</p>
+				<p>rpc_ts is licensed under the MIT License.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
