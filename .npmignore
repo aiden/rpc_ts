@@ -2,3 +2,5 @@
 /circle.yml
 /tsconfig.json
 /tslint.json
+/typedoc
+/docs

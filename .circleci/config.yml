@@ -21,6 +21,9 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
+          name: Publish doc to github pages
+          command: yarn doc:deploy
+      - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
       - run:

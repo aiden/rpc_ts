@@ -18,7 +18,7 @@ describe('rpc_ts', () => {
       }).timeout(10000);
     }
 
-    it('the code in the README.md compiles and runs @ossOnly', async () => {
+    it('the code in the README.md compiles and runs', async () => {
       const projectRoot = path.resolve(__dirname, '../../..');
       await run(
         path.resolve(projectRoot, 'readme_code.ts'),
