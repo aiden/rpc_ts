@@ -71,7 +71,7 @@
     "precommit": "lint-staged",
     "extra-md-ts": "cat README.md | yarn --silent codedown Typescript > readme_code.ts",
     "doc": "typedoc --options typedoc.js src && cp -R docs typedoc",
-    "doc:deploy": "yarn doc && yarn gh-pages -d typedoc"
+    "doc:deploy": "yarn doc && yarn gh-pages -d typedoc -m '[ci skip] Updates'"
   },
   "lint-staged": {
     "{./*,typescript/**/*}.{js,jsx,ts,tsx,css,scss,md,json}": "prettier -l",
