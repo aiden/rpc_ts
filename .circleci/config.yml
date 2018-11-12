@@ -35,7 +35,7 @@ jobs:
             git config --global user.email "$GH_EMAIL"
             git config --global user.name "$GH_NAME"
 
-            mkdir ~/.ssh/ && echo -e "Host github.com\n\tUserKnownHostsFile $TEMPFILE\n" > ~/.ssh/config
+            echo -e "  UserKnownHostsFile $TEMPFILE" >> ~/.ssh/config
       - run:
           name: Publish doc to github pages
           command: yarn doc:deploy
