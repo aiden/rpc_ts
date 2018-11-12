@@ -274,10 +274,10 @@ accepts@~1.3.5:
     mime-types "~2.1.18"
     negotiator "0.6.1"
 
-aiden-doc@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/aiden-doc/-/aiden-doc-1.0.0.tgz#5ade8c70efc45be2867c2fb5e0587953b059972d"
-  integrity sha512-VM4yKq9LhIJ8eUiPg5owHLUKPmKZSjWgSjVi0X0GmR5KCeqHI3yjHUvEnJjZ1Zsqm5DzSadkOg5QOI0ZXdmX1g==
+aiden-doc@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/aiden-doc/-/aiden-doc-1.0.1.tgz#831d6b12a64a4c2685652cec333eef3b0e833586"
+  integrity sha512-kSmovj4Nnqo3cM/hUmk5nmmkKBHzCqjsSlRQ+WpepV4xHpU7SaLiZHwVeu2BqbNoQ15H1PgPdH6dHgU0Y4yTuA==
 
 ansi-regex@^2.0.0:
   version "2.1.1"

@@ -22,7 +22,7 @@
     "query-string": "^6.0.0"
   },
   "devDependencies": {
-    "aiden-doc": "^1.0.0",
+    "aiden-doc": "^1.0.1",
     "@types/chai": "^4.0.0",
     "@types/express": "^4.11.1",
     "@types/fetch-mock": "^6.0.3",
