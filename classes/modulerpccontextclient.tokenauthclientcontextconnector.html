@@ -1,0 +1,477 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>TokenAuthClientContextConnector | rpc_ts</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">rpc_ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/modulerpccontextclient.html">ModuleRpcContextClient</a>
+				</li>
+				<li>
+					<a href="modulerpccontextclient.tokenauthclientcontextconnector.html">TokenAuthClientContextConnector</a>
+				</li>
+			</ul>
+			<h1>Class TokenAuthClientContextConnector</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Provide a client context connector that adds an &#39;authorization&#39; header.</p>
+					</div>
+					<p>The bearer token to put can be given and refreshed through the <code>authenticate</code> method
+						(when initialized, the <code>TokenAuthClientContextConnector</code> operates without any token
+						and so no &#39;authorization&#39; header is added).  Additionally, it is possible to specify
+						an optional <code>refreshTokenHandler</code> that is automatically called <code>expiryDateOffsetMs</code>
+					milliseconds before the current token expires.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">TokenAuthClientContextConnector</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/modulerpcclient.clientcontextconnector.html" class="tsd-signature-type">ClientContextConnector</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/modulerpccontextcommon.tokenauthresponsecontext.html" class="tsd-signature-type">TokenAuthResponseContext</a><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="modulerpccontextclient.tokenauthclientcontextconnector.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="modulerpccontextclient.tokenauthclientcontextconnector.html#authenticate" class="tsd-kind-icon">authenticate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="modulerpccontextclient.tokenauthclientcontextconnector.html#clearautorefresh" class="tsd-kind-icon">clear<wbr>Auto<wbr>Refresh</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="modulerpccontextclient.tokenauthclientcontextconnector.html#decoderesponsecontext" class="tsd-kind-icon">decode<wbr>Response<wbr>Context</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="modulerpccontextclient.tokenauthclientcontextconnector.html#forcerefreshtoken" class="tsd-kind-icon">force<wbr>Refresh<wbr>Token</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="modulerpccontextclient.tokenauthclientcontextconnector.html#providerequestcontext" class="tsd-kind-icon">provide<wbr>Request<wbr>Context</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Token<wbr>Auth<wbr>Client<wbr>Context<wbr>Connector<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="modulerpccontextclient.tokenauthclientcontextconnector.html" class="tsd-signature-type">TokenAuthClientContextConnector</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Token<wbr>Auth<wbr>Client<wbr>Context<wbr>Connector<span class="tsd-signature-symbol">(</span>refreshTokenHandler<span class="tsd-signature-symbol">: </span><a href="../modules/modulerpccontextclient.html#refreshtokenhandler" class="tsd-signature-type">RefreshTokenHandler</a>, expiryDateOffsetMs<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, reportRefreshError<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="modulerpccontextclient.tokenauthclientcontextconnector.html" class="tsd-signature-type">TokenAuthClientContextConnector</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/aiden/rpc_ts/blob/6b4153b/src/context/client/token_auth.ts#L37">context/client/token_auth.ts:37</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Constructs a token auth client context connector.
+									The initial token must be provided with <a href="modulerpccontextclient.tokenauthclientcontextconnector.html#authenticate">TokenAuthClientContextConnector.authenticate</a>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="modulerpccontextclient.tokenauthclientcontextconnector.html" class="tsd-signature-type">TokenAuthClientContextConnector</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/aiden/rpc_ts/blob/6b4153b/src/context/client/token_auth.ts#L44">context/client/token_auth.ts:44</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Constructs a token auth client context connector with a
+										handler that will be called to refresh the token when it expires.
+									The initial token must be provided with <a href="modulerpccontextclient.tokenauthclientcontextconnector.html#authenticate">TokenAuthClientContextConnector.authenticate</a>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>refreshTokenHandler: <a href="../modules/modulerpccontextclient.html#refreshtokenhandler" class="tsd-signature-type">RefreshTokenHandler</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Given the refresh token of the current token info,
+											returns a new token info in order to extend the life time of the authentication.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> expiryDateOffsetMs: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The refresh token handler will be called <code>expiryDateOffsetMs</code>
+											milliseconds before the token expires.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> reportRefreshError: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Reports an error that occurred during the refresh (with
+												auto refresh on, the refreshing occurred within a <code>setTimeout</code> and so in a different
+											execution context).</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="modulerpccontextclient.tokenauthclientcontextconnector.html" class="tsd-signature-type">TokenAuthClientContextConnector</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="authenticate" class="tsd-anchor"></a>
+					<h3>authenticate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">authenticate<span class="tsd-signature-symbol">(</span>tokenInfo<span class="tsd-signature-symbol">: </span><a href="../interfaces/modulerpccontextcommon.tokeninfo.html" class="tsd-signature-type">TokenInfo</a>, autoRefresh<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/aiden/rpc_ts/blob/6b4153b/src/context/client/token_auth.ts#L78">context/client/token_auth.ts:78</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Provides an initial token info.</p>
+								</div>
+								<p>This function also sets up a <code>setInterval</code> to refresh the token periodically,
+								unless <code>autoRefresh</code> is set to <code>false</code>.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tokenInfo: <a href="../interfaces/modulerpccontextcommon.tokeninfo.html" class="tsd-signature-type">TokenInfo</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> autoRefresh: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="clearautorefresh" class="tsd-anchor"></a>
+					<h3>clear<wbr>Auto<wbr>Refresh</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">clear<wbr>Auto<wbr>Refresh<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/aiden/rpc_ts/blob/6b4153b/src/context/client/token_auth.ts#L117">context/client/token_auth.ts:117</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Clear the auto refresh.</p>
+								</div>
+								<p>If the function is not called when one is finished with the connector,
+								the auto refresh keeps happening in the background.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="decoderesponsecontext" class="tsd-anchor"></a>
+					<h3>decode<wbr>Response<wbr>Context</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">decode<wbr>Response<wbr>Context<span class="tsd-signature-symbol">(</span>_encodedResponseContext<span class="tsd-signature-symbol">: </span><a href="../interfaces/modulerpccommon.encodedcontext.html" class="tsd-signature-type">EncodedContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/modulerpccontextcommon.tokenauthresponsecontext.html" class="tsd-signature-type">TokenAuthResponseContext</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/modulerpcclient.clientcontextconnector.html">ClientContextConnector</a>.<a href="../interfaces/modulerpcclient.clientcontextconnector.html#decoderesponsecontext">decodeResponseContext</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/aiden/rpc_ts/blob/6b4153b/src/context/client/token_auth.ts#L174">context/client/token_auth.ts:174</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>_encodedResponseContext: <a href="../interfaces/modulerpccommon.encodedcontext.html" class="tsd-signature-type">EncodedContext</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/modulerpccontextcommon.tokenauthresponsecontext.html" class="tsd-signature-type">TokenAuthResponseContext</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="forcerefreshtoken" class="tsd-anchor"></a>
+					<h3>force<wbr>Refresh<wbr>Token</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">force<wbr>Refresh<wbr>Token<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/aiden/rpc_ts/blob/6b4153b/src/context/client/token_auth.ts#L125">context/client/token_auth.ts:125</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Forces a token refresh.  This function does nothing if no refresh handler or
+									no refresh token was specified.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="providerequestcontext" class="tsd-anchor"></a>
+					<h3>provide<wbr>Request<wbr>Context</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">provide<wbr>Request<wbr>Context<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/modulerpccommon.encodedcontext.html" class="tsd-signature-type">EncodedContext</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/modulerpcclient.clientcontextconnector.html">ClientContextConnector</a>.<a href="../interfaces/modulerpcclient.clientcontextconnector.html#providerequestcontext">provideRequestContext</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/aiden/rpc_ts/blob/6b4153b/src/context/client/token_auth.ts#L147">context/client/token_auth.ts:147</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/modulerpccommon.encodedcontext.html" class="tsd-signature-type">EncodedContext</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/modulerpcclient.html">Module<wbr>Rpc<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/modulerpccommon.html">Module<wbr>Rpc<wbr>Common</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/modulerpccontextclient.html">Module<wbr>Rpc<wbr>Context<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/modulerpccontextcommon.html">Module<wbr>Rpc<wbr>Context<wbr>Common</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/modulerpccontextserver.html">Module<wbr>Rpc<wbr>Context<wbr>Server</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/modulerpcprotocolclient.html">Module<wbr>Rpc<wbr>Protocol<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/modulerpcprotocolgrpcwebclient.html">Module<wbr>Rpc<wbr>Protocol<wbr>Grpc<wbr>Web<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/modulerpcprotocolgrpcwebcommon.html">Module<wbr>Rpc<wbr>Protocol<wbr>Grpc<wbr>Web<wbr>Common</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/modulerpcprotocolgrpcwebserver.html">Module<wbr>Rpc<wbr>Protocol<wbr>Grpc<wbr>Web<wbr>Server</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/modulerpcprotocolmock.html">Module<wbr>Rpc<wbr>Protocol<wbr>Mock</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/modulerpcprotocolserver.html">Module<wbr>Rpc<wbr>Protocol<wbr>Server</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/modulerpcserver.html">Module<wbr>Rpc<wbr>Server</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="modulerpccontextclient.compositeclientcontextconnector.html" class="tsd-kind-icon">Composite<wbr>Client<wbr>Context<wbr>Connector</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="modulerpccontextclient.emptyclientcontextconnector.html" class="tsd-kind-icon">Empty<wbr>Client<wbr>Context<wbr>Connector</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="modulerpccontextclient.timestampclientcontextconnector.html" class="tsd-kind-icon">Timestamp<wbr>Client<wbr>Context<wbr>Connector</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+						<a href="modulerpccontextclient.tokenauthclientcontextconnector.html" class="tsd-kind-icon">Token<wbr>Auth<wbr>Client<wbr>Context<wbr>Connector</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="modulerpccontextclient.tokenauthclientcontextconnector.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="modulerpccontextclient.tokenauthclientcontextconnector.html#authenticate" class="tsd-kind-icon">authenticate</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="modulerpccontextclient.tokenauthclientcontextconnector.html#clearautorefresh" class="tsd-kind-icon">clear<wbr>Auto<wbr>Refresh</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="modulerpccontextclient.tokenauthclientcontextconnector.html#decoderesponsecontext" class="tsd-kind-icon">decode<wbr>Response<wbr>Context</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="modulerpccontextclient.tokenauthclientcontextconnector.html#forcerefreshtoken" class="tsd-kind-icon">force<wbr>Refresh<wbr>Token</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="modulerpccontextclient.tokenauthclientcontextconnector.html#providerequestcontext" class="tsd-kind-icon">provide<wbr>Request<wbr>Context</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/modulerpccontextclient.html#compositeclientcontextconnectorsfor" class="tsd-kind-icon">Composite<wbr>Client<wbr>Context<wbr>Connectors<wbr>For</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/modulerpccontextclient.html#refreshtokenhandler" class="tsd-kind-icon">Refresh<wbr>Token<wbr>Handler</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
