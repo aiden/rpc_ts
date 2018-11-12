@@ -1,4 +1,4 @@
-# rpc_ts: Remote Procedure Calls in TypeScript made simple
+# rpc_ts: Remote Procedure Calls in TypeScript made simple 👌
 
 [![CircleCI](https://circleci.com/gh/aiden/rpc_ts/tree/master.svg?style=svg)](https://circleci.com/gh/aiden/rpc_ts/tree/master) [![Coverage Status](https://coveralls.io/repos/github/aiden/rpc_ts/badge.svg?branch=master)](https://coveralls.io/github/aiden/rpc_ts?branch=master) [![npm version](https://badge.fury.io/js/rpc_ts.svg)](https://badge.fury.io/js/rpc_ts) [![typescript](./docs/typescript.svg)](https://aleen42.github.io/badges/src/typescript.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
@@ -127,4 +127,4 @@ Go to the [server_stream](.src/examples/server_stream) example to see how server
 
 ## License
 
-`rpc_ts` is licensed under the MIT License.
+rpc_ts is licensed under the MIT License.
