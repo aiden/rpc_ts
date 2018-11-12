@@ -1,0 +1,35 @@
+{
+  "name": "aiden-doc",
+  "description": "Aiden themes for TypeDoc",
+  "version": "1.0.0",
+  "files": [
+    "LICENSE"
+  ],
+  "scripts": {
+    "format": "echo 'SKIP'",
+    "all": "yarn build:css",
+    "build:css": "node-sass typedoc_theme/assets/css/main.sass typedoc_theme/assets/css/main.css",
+    "build:css:watch": "node-sass --watch typedoc_theme/assets/css/main.sass typedoc_theme/assets/css/main.css",
+    "doc": "echo 'SKIPPED'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aiden/aiden-doc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aiden/aiden-doc/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 4"
+  },
+  "devDependencies": {
+    "node-sass": "^4.9.0"
+  },
+  "keywords": [
+    "typescript",
+    "documentation",
+    "generator"
+  ],
+  "dependencies": {}
+}

@@ -1,0 +1,17 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:latest
+
+jobs:
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: yarn
+      - run: yarn all
+      - persist_to_workspace:
+          root: '~/repo'
+          paths: '.'
