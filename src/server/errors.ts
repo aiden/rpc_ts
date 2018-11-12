@@ -1,23 +1,32 @@
 /**
+ * @module ModuleRpcServer
+ *
  * @license
  * Copyright (c) Aiden.ai
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import * as ModuleRpcCommon from '../common/rpc_common';
+import { ModuleRpcCommon } from '../common';
+import { BaseError } from 'make-error';
 
-/** Base class for all server errors */
-export abstract class ServerError extends Error {}
+/** Base class for all the server errors. */
+export abstract class ServerError extends BaseError {}
 
-/** The handler did not respect the protocol */
+/**
+ * The handler did not respect the protocol.
+ */
 export class HandlerProtocolError extends ServerError {
+  /**
+   * @param url The URL (`<remote address>/<method name>`)
+   * that did not respect the transport protocol.
+   */
   constructor(readonly url: string, readonly message: string) {
     super(`${url}: ${message}`);
   }
 }
 
-/** There has been an error at the transport layer */
+/** There has been an error in the transport layer. */
 export class ServerTransportError extends ServerError {
   constructor(readonly cause: Error) {
     super(`Server transport error: ${cause.stack}`);
@@ -26,7 +35,7 @@ export class ServerTransportError extends ServerError {
 
 /**
  * An error sent by the RPC handler or the context provider.  Note that RPC clients
- * throw a different error (`ModuleRpcClient.ClientRpcError`).  We do this
+ * throw a different error ([[ModuleRpcClient.ClientRpcError]]).  We do this
  * to ensure that no RPC server mistakenly rethrow the RPC error of an upstream
  * service.
  */

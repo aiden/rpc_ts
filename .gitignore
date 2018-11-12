@@ -3,3 +3,6 @@
 /es
 /coverage
 /.nyc_output
+/readme_code.ts
+/typedoc
+*.log

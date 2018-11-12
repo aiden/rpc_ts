@@ -6,23 +6,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 import * as _ from 'lodash';
-import * as ModuleRpcCommon from '../../../common/rpc_common';
+import { HttpStatus } from '../../private/http_status';
+import { ModuleRpcCommon } from '../../../common';
 
 /** Exhaustively associate error types to HTTP status codes. */
 export const errorTypesToHttpStatuses: {
   [errorType in ModuleRpcCommon.RpcErrorType]: number
 } = {
-  [ModuleRpcCommon.RpcErrorType.unknown]: 500, // Internal Server Error
-  [ModuleRpcCommon.RpcErrorType.canceled]: 500, // Internal Server Error
-  [ModuleRpcCommon.RpcErrorType.invalidArgument]: 400, // Bad Request
-  [ModuleRpcCommon.RpcErrorType.notFound]: 404, // Not Found
-  [ModuleRpcCommon.RpcErrorType.alreadyExists]: 409, // Conflict
-  [ModuleRpcCommon.RpcErrorType.resourceExhausted]: 429, // Too Many Requests
-  [ModuleRpcCommon.RpcErrorType.permissionDenied]: 403, // Forbidden
-  [ModuleRpcCommon.RpcErrorType.failedPrecondition]: 400, // Bad Request
-  [ModuleRpcCommon.RpcErrorType.internal]: 500, // Internal Server Error
-  [ModuleRpcCommon.RpcErrorType.unavailable]: 503, // Service Unavailable
-  [ModuleRpcCommon.RpcErrorType.unauthenticated]: 401, // Unauthorized
+  [ModuleRpcCommon.RpcErrorType.unknown]: HttpStatus.internalServerError,
+  [ModuleRpcCommon.RpcErrorType.canceled]: HttpStatus.internalServerError,
+  [ModuleRpcCommon.RpcErrorType.invalidArgument]: HttpStatus.badRequest,
+  [ModuleRpcCommon.RpcErrorType.notFound]: HttpStatus.notFound,
+  [ModuleRpcCommon.RpcErrorType.alreadyExists]: HttpStatus.conflict,
+  [ModuleRpcCommon.RpcErrorType.resourceExhausted]: HttpStatus.tooManyRequests,
+  [ModuleRpcCommon.RpcErrorType.permissionDenied]: HttpStatus.forbidden,
+  [ModuleRpcCommon.RpcErrorType.failedPrecondition]: HttpStatus.badRequest,
+  [ModuleRpcCommon.RpcErrorType.unimplemented]: HttpStatus.notImplemented,
+  [ModuleRpcCommon.RpcErrorType.internal]: HttpStatus.internalServerError,
+  [ModuleRpcCommon.RpcErrorType.unavailable]: HttpStatus.serviceUnavailable,
+  [ModuleRpcCommon.RpcErrorType.unauthenticated]: HttpStatus.unauthorized,
 };
 
 /**

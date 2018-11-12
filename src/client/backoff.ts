@@ -1,7 +1,7 @@
 /**
- * @module
- *
  * Simple exponential backoff strategy.
+ *
+ * @module ModuleRpcClient
  *
  * @license
  * Copyright (c) Aiden.ai
@@ -10,25 +10,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export type BackoffOptions = {
+/** Options for an exponential backoff. */
+export interface BackoffOptions {
   exponentialBackoffBase: number;
   constantBackoffMs: number;
   maxBackoffMs: number;
   maxRetries: number;
-};
+}
 
+/** Default options for an exponential backoff. */
 export const DEFAULT_BACKOFF_OPTIONS: BackoffOptions = {
   exponentialBackoffBase: 2,
   constantBackoffMs: 500,
-  maxBackoffMs: 5000,
+  maxBackoffMs: 3000,
   maxRetries: -1,
 };
 
+/**
+ * Gets the number of milliseconds to elapse for a given number of retries
+ * and a backoff schedule.
+ */
 export function getBackoffMs(options: BackoffOptions, retries: number) {
   let backoffMs =
     Math.pow(options.exponentialBackoffBase, retries) *
     options.constantBackoffMs;
-  if (options.maxBackoffMs > 0 && backoffMs < options.maxBackoffMs) {
+  if (options.maxBackoffMs > 0 && backoffMs > options.maxBackoffMs) {
     backoffMs = options.maxBackoffMs;
   }
   return backoffMs;

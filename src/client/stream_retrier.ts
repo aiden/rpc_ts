@@ -1,7 +1,7 @@
 /**
- * @module
- *
  * Fault tolerance for a series of `Stream` (the "raw" value returned by an RPC).
+ *
+ * @module ModuleRpcClient
  *
  * @license
  * Copyright (c) Aiden.ai
@@ -19,12 +19,21 @@ import { Stream } from './stream';
 import { sleep } from '../utils/utils';
 
 /**
- * Retry a series of streams.
+ * Retries a series of streams.
  *
+ * @typeparam Message The type of the message transmitted by the stream.
  * @param getStream A stream provider.  The stream provider is called until a
  * stream emits a 'complete' or 'canceled' event, or the maximum number of retries,
  * as per the exponential backoff schedule, has been reached.
  * @param backoffOptions Options for the exponential backoff.
+ *
+ * @return A stream that is in effect a "concatenation" of all the streams initiated
+ * by `getStream`, with special events emitted to inform on the retrying process.
+ *
+ * @example ```Typescript
+ * const stream = retryStream(() => streamFromArray([1, 2, 3], new Error('error)));
+ * stream.on('message', console.log).start();
+ * ```
  */
 export function retryStream<Message>(
   getStream: () => Stream<Message>,
@@ -36,6 +45,9 @@ export function retryStream<Message>(
   });
 }
 
+/**
+ * A "concatenation" of all the streams initiated by [[retryStream]].
+ */
 export interface RetryingStream<Message> extends Stream<Message> {
   start(): this;
   cancel(): this;
@@ -46,12 +58,12 @@ export interface RetryingStream<Message> extends Stream<Message> {
    * In addition to the events from the `Stream` interface, the following
    * events are emitted:
    *
-   * - `retryingError`: When an error occured, with the following parameters:
+   * - `retryingError`: When an error occurred, with the following parameters:
    *   - `err`: The error that occurred
    *   - `retriesSinceLastReady`: The number of retries since a stream emitted
    * the `ready` event.
    *   - `abandoned`: Whether the retrying stream gave up because of this error.
-   * - `error`: When an error occured that made the retrying stream give up.
+   * - `error`: When an error occurred that made the retrying stream give up.
    */
   on(event: 'ready' | 'complete' | 'canceled', callback: () => void): this;
   on(event: 'message', callback: (message: Message) => void): this;
@@ -93,7 +105,7 @@ class RetryingStreamImpl<Message> extends events.EventEmitter
    * If a stream (provided by the stream provider) is currently open, the
    * `cancel()` function of this stream.
    */
-  private cancelCurrentStream: () => void | null;
+  private cancelCurrentStream: (() => void) | undefined;
 
   /**
    * The number of retries since a stream emitted the `ready` event.
@@ -175,7 +187,7 @@ class RetryingStreamImpl<Message> extends events.EventEmitter
       await new Promise<void>(accept => {
         this.attempt(stream, accept);
       });
-      this.cancelCurrentStream = null;
+      this.cancelCurrentStream = undefined;
     }
   }
 

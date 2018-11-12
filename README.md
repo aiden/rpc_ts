@@ -1,158 +1,130 @@
-# api_framework
+# rpc_ts: Remote Procedure Calls in TypeScript made simple
 
-[![CircleCI](https://circleci.com/gh/aiden/ts-grpc/tree/master.svg?style=svg)](https://circleci.com/gh/aiden/ts-grpc/tree/master)
+[![CircleCI](https://circleci.com/gh/aiden/rpc_ts/tree/master.svg?style=svg)](https://circleci.com/gh/aiden/rpc_ts/tree/master) [![typescript](./docs/typescript.svg)](https://aleen42.github.io/badges/src/typescript.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-TODO: Rework after article.
+`rpc_ts` is a framework for doing typesafe [Remote Procedure Calls (RPC)](https://en.wikipedia.org/wiki/Remote_procedure_call) in TypeScript. It uses no [Domain-Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language) such as [Protocol Buffers](https://developers.google.com/protocol-buffers/) or [Apache Thrift](https://thrift.apache.org/): the services are all defined using the powerful TypeScript type system. This approach is particularly suitable for shortening the development cycle of isomorphic web applications that rely on TypeScript for both frontend and backend development.
 
-`api_framework` is a framework for doing typesafe [_Remote Procedure Calls (RPC)_](https://en.wikipedia.org/wiki/Remote_procedure_call) in TypeScript. It uses no [_Domain-Specific Language_](https://en.wikipedia.org/wiki/Domain-specific_language) (and in that differs from RPC frameworks that serialize their messages using [Protocol Buffers](https://developers.google.com/protocol-buffers/) and [Apache Thrift](https://thrift.apache.org/)): the services are all defined using TypeScript. This approach is particularly suitable for shortening the development cycle of isomorphic web applications that rely on TypeScript for both frontend and backend development.
+`rpc_ts` supports both unary calls and server-side streaming and is fully compatible with the [grpc-web+json](https://github.com/grpc/grpc-web) protocol (an adaptation of the popular gRPC protocol for the web). It has been designed with a relentless focus on modularity, simplicity, and robustness, and does not require the use of an intermediate gRPC proxy.
 
-## Example
+## Examples
 
-_example.ts_
+### Chat room
+
+[![Chat room](docs/rpc_ts_chat-demo.gif)](https://github.com/aiden/rpc_ts_chat)
+
+The [chat room](https://github.com/aiden/rpc_ts_chat) example showcases error handling and real-time with `rpc_ts`, and also best practices.
+
+### Primer
+
+This is how a minimal RPC service with one procedure, `getHello`, looks like:
 
 ```Typescript
+import { ModuleRpcCommon } from 'rpc_ts/lib/common';
+import { ModuleRpcServer } from 'rpc_ts/lib/server';
+import { ModuleRpcProtocolServer } from 'rpc_ts/lib/protocol/server';
+import { ModuleRpcProtocolClient } from 'rpc_ts/lib/protocol/client';
+
+// Definition of the RPC service
 const helloServiceDefinition = {
-  getLocalHello: {
-    request: null as {
-      language: string;
-    },
-    response: null as {
-      text: string;
-    },
+  getHello: {
+    request: {} as { language: string },
+    response: {} as { text: string },
   },
 };
 
-/* ... Some piping to get the client object (see below) ... */
+// Implementation of an RPC server
+import * as express from 'express';
+import * as http from 'http';
+const app = express();
+app.use(ModuleRpcProtocolServer.registerRpcRoutes(helloServiceDefinition, {
+  async getHello({ language }) {
+    if (language === 'Spanish') return { text: 'Hola' };
+    throw new ModuleRpcServer.ServerRpcError(
+      ModuleRpcCommon.RpcErrorType.notFound,
+      `language '${language}' not found`,
+    );
+  },
+}));
+const server = http.createServer(app).listen();
 
-const { response: balanceResponseBefore } = await client.getBalance({});
-console.log('Balance is', balanceResponseBefore.value);
+// Now let's do a Remote Procedure Call
+async function rpc() {
+  const { text } = await ModuleRpcProtocolClient.getRpcClient(helloServiceDefinition, {
+    remoteAddress: `http://localhost:${server.address().port}`
+  }).nice().getHello({ language: 'Spanish' });
+  // (Notice that, with TypeScript typing, it is not possible to mess up the
+  // type of the request: for instance, `.getHello({ lang: 'Spanish' })`
+  // will error.)
 
-console.log('Transfering...');
-await client.transfer({
-  toUserId: 'u2',
-  amount: balanceResponseBefore.value / 2,
+  console.log('Hello:', text);
+}
+
+rpc().then(() => server.close()).catch(err => {
+  console.error(err);
+  process.exit(1);
 });
-
-const { response: balanceResponseAfter } = await client.getBalance({});
-console.log('Now balance is', balanceResponseAfter.value);
 ```
 
-## Justification
+## Why rpc_ts?
 
-_TODO: update after blog article._
+Bootstrapping an HTTP REST API over JSON is extremely simple in dynamic languages such as Python and JavaScript. With the right framework, it is possible to write a client/server interaction in a few lines of codes. This simplicity comes from that the conversion to and from untyped JSON feels natural, but also that no explicit contract is specified between the client and the user.
 
-Remote procedure calls is not a new thing, before the gRPC craze you had CORBA, SOAP & co. gRPC and Finagle are the two most popular RPC frameworks developed by the "cool" companies (resp. by Google and Twitter), whereas the aforementioned RPCs feel too Oracle/IBM-like for some people. Speaking of RPCs instead of REST API just means having strongly typed definitions in a domain-specific language and a way to call a wrapper function in your choice language that handles the transportation mechanism. The problem with both gRPC and Finagle is that the transportation layer is not HTTP REST-based, but extremely custom. Messages are not JSON-serialized but transmitted in binary form (protocol buffers for gRPC, Apache Thrift for Finagle), and communication does not occur via HTTP but with a custom transportation layer that is akin to HTTP2 for connection multiplexing. So lots of performance, but clearly a huge machinery to put in place. Another problem is that these frameworks are made for server-to-server communication, not for communicating with browsers. For gRPC, you need a server-side adapter such as web-gRPC. So it gets out of hand very quickly.
+On the other side of the spectrum, both gRPC and Thrift are built around Interface Definition Languages that provide such a contract. They have also been developed with performance in mind, and their primary application is compiled languages with static typing such as C++ and Java, even though they are also available in Python, JavaScript, and other dynamic languages. However,
 
-In contrast, this implementation leverages Typescript instead of a domain-specific language. It makes sense in the context of a nodejs web app, as Typescript types allow to fully exploit server-client isomorphism. Moreover, it is flexible enough to accommodate any transportation protocol.
+1.  The IDLs must be translated to clients and server stubs in the target languages, adding an additional building step.
 
-Currently, it means that the client/server architecture is typesafe as long as they are compiled from the same codebase and share the same _service definition._ In the future, it would be best to implement on top of that I/O boundary type checks (checking that when you serialize/deserialize your JSON you end up with the right fields).
+2.  The service definition lives in at least two languages, sometimes three: the IDL, the server-side language and the client-side language (if they are different).
+
+3.  The very rigid IDL type system fights against, rather than helps, the manually-typed constructs and tends to [contaminate more and more of the code base](http://reasonablypolymorphic.com/blog/protos-are-wrong/). This is especially saddening with regards to TypeScript and its well-crafted system of [algebraic data types](https://en.wikipedia.org/wiki/Algebraic_data_type).
+
+We believe that `rpc_ts` fills an important gap in the RPC ecosystem: it provides a hassle-free way to define APIs in an expressive language, TypeScript, so that we can build isomorphic applications faster.
+
+## The protocol
+
+The protocol we implement is gRPC-Web with a JSON codec (a.k.a, `grpc-web+json`), as introduced [here](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md). So we are not reinventing anything here, we are just making the whole process simpler.
+
+## Other projects
+
+The [gRPC-Web reference implementation of a JavaScript client](https://github.com/grpc/grpc-web), based on a Protocol Buffer codec, is now [generally available](https://www.cncf.io/blog/2018/10/24/grpc-web-is-going-ga/). There also exists a [TypeScript-first implementation](https://github.com/improbable-eng/grpc-web) of a gRPC-Web client, again with Protocol Buffers, and a Golang server.
+
+Our implementation, to the best of our knowledge, is the first implementation of a gRPC-Web server in TypeScript, and the first implementation of gRPC-Web which can work with arbitrary codecs, including JSON, and the first that does not necessitate compiling the service definition from a foreign Interface Definition Language.
+
+## Runtime type checks
+
+In the context of an isomorphic web application running on Node.js, `rpc_ts` is typesafe as long as both the client and the server are compiled from the same codebase and share the same service definition. This is a real shortcoming for public APIs as well as a security issue. Fortunately, the TypeScript compiler can be very easily plugged into. We are using such runtime type checking internally and are also in the process of open sourcing it so that this I/O boundary can be addressed.
 
 ## Concepts
 
-A _service_ handles Remote Procedure Calls (RPCs), or _methods,_ taking _requests_ and giving back _responses._ A service has two implementations: a _client_, and a _server_ (the server delegates the actual execution to a _handler_). The actual _transportation protocol_, from client to server, back to client, is abstracted away. [`http_json`](./protocol/http_json) is a lightweight protocol that is provided as part of this package. Other transportation protocols that are compatible with this library include [gRPC](https://grpc.io/) and [finagle-thrift](https://twitter.github.io/finagle/guide/Protocols.html).
+A _service_ handles Remote Procedure Calls (RPCs), or methods, taking requests and giving back responses.
 
-The requests and responses are augmented with _contexts_ (either _request contexts_ or _response contexts_). Contexts are added by _context connectors_ and contain meta information that pertain to the remote nature of the procedure call. A rule of thumb is that a piece of information belongs to a context if it wouldn't make sense to include it in the request or response of a procedure call that occured locally, within the same OS process. Additionally, context connectors can abort an RPC if some precondition is not met. Context connectors can be used to:
+A service has two implementations: a _client,_ and a _server_ (the server delegates the actual execution to a _handler_). The actual _transportation protocol,_ linking the client to the server, is abstracted away by the RPC system. This transportation protocol needs to serialize/encode and deserialize/decode the requests and responses from their in-memory representation, suitable for manipulation by the clients and handlers, to an encoded representation that can be transmitted on the wire. This process, handled by a _codec,_ must be fast to provide high throughput and must produce small encoded messages to limit network latency.
+
+### Contexts
+
+The requests and responses are augmented with _contexts_ (either _request contexts_ or _response contexts_). Contexts are added by _context connectors_ and contain meta information that pertains to the remote nature of the procedure call. A rule of thumb is that a piece of information belongs to a context if it wouldn't make sense to include it in the request or response of a procedure call that occurred locally, within the same OS process. Additionally, context connectors can abort an RPC if some precondition is not met. Context connectors can be used to:
 
 - ensure that the requester is properly authenticated and authorized,
 - inject user data concerning the requester (such as user ID, user locale, time zone, or perhaps user preferences in general),
 - inject identifiers for [distributed tracing](http://opentracing.io/documentation/),
 - provide timestamping to deal with out-of-order responses.
 
-## Detailed Example
-
-A complete example of an RPC system implemented using this framework can be found in [`./examples/simple`](./examples/simple).
-
-## API
-
-### Service definitions
-
-Services are all defined as maps of method names to method definitions. The casting of null values is a trick that allows the library to provide proper typing:
-
-```Typescript
-const myServiceDefinition = {
-  myMethod: {
-    request: null as { /** Request type */ },
-    response: null as { /** Response type */ },
-  },
-};
-```
-
-Both the request and response types have to be object types.
-
-### Protocols
-
-#### `http_json` transportation protocol
-
-The service methods are all implemented by the server as `POST` routes on an Express router, and the requests and responses are JSON-serialized. Accordingly, `http_json` clients use the `fetch` API, available in modern browsers and through a [polyfill](https://github.com/github/fetch). The fetch API understands HTTP2 as well, allowing the whole transportation to occur on a single TCP connection with HTTP2 frames.
-
-#### `getHttpJsonRpcClient`
-
-Return an RPC client for the `http_json` protocol.
-
-```Typescript
-function getHttpJsonRpcClient<
-  serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
-  ResponseContext
->(
-  serviceDefinition: serviceDefinition,
-  clientContextConnector: ModuleRpcClient.ClientContextConnector<
-    ResponseContext
-  >,
-  options: HttpJsonClientOptions,
-): ModuleRpcCommon.Service<serviceDefinition, ResponseContext>;
-```
-
-Arguments:
-
-- `serviceDefinition`: The service definition.
-- `clientContextConnector`: The client context connector to provide an encoded request context and decode the encoded response context coming from the server.
-- `options`: Transport options.
-  - `remoteAddress`: The remote address to connect to (example: https://domain.test:8000).
-
-#### `registerHttpJsonRpcRoutes`
-
-Register the API routes of an RPC service for the `http_json` protocol.
-
-```Typescript
-function registerHttpJsonRpcRoutes<
-  serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
-  RequestContext
->(
-  serviceDefinition: serviceDefinition,
-  serviceHandler: ModuleRpcServer.ServiceHandlerFor<
-    serviceDefinition,
-    RequestContext
-  >,
-  serverContextConnector: ModuleRpcServer.ServerContextConnector<
-    RequestContext
-  >,
-  options: HttpJsonServerOptions = {},
-);
-```
-
-Arguments:
-
-- `serviceDefinition`: The service definition.
-- `serverContextConnector`: The server context connector to provide an encoded response context and decode the encoded request context coming from the client.
-- `options`: Transport options.
-  - `router`: The Express router to add the routes to.
-  - `captureError`: A function to capture errors that occurred during RPCs.
-
-### Context connectors
-
 Context connectors are always paired (there is always a client-side and a server-side context connectors for the same feature).
 
-The context connectors that are provided here are:
+Go to the [context](./src/examples/context) example to see how it works in the context of authentication.
 
-- `empty` (`EmptyClientContextConnector` and `EmptyServerContextConnector`): Provide empty request and response contexts.
-- `composite` (`CompositeClientContextConnector` and `CompositeServerContextConnector`): Compose multiple context connectors (both client and server side). The resulting contexts are maps of the composed contexts, indexed by arbitrary context names.
-- `timestamp` (`TimestampClientContextConnector` and `TimestampServerContextConnector`): Provide a response context containing a timestamp. Provide an empty request context.
-- `token_auth` (`TokenAuthClientContextConnector` and `TokenAuthServerContextConnector`): Provide a request context with an authentication token. Provide an empty response context.
+### Unary calls and server streams
 
-## Redux
+RPCs can be classified according to how requests and responses intermingle during the call:
 
-A Redux package is also provided to remove the boilerplate from invoking RPCs within the confine of Redux.
+- Unary RPCs: a single request is followed by a single response;
+- Server streams: a single request is followed by multiple responses (they can be sent at different points in time);
+- Client streams: multiple requests are followed by a single response;
+- Bidirectional streams, requests and responses can be sent at arbitrary points in time.
 
-On top of some utility functions to ease the writing of reducers in general (`createReducer`, `composeReducers`, `combineReducers`, ...), the package provides a Redux middleware that dispatches multiple actions corresponding to the lifecycle events of an RPC (it is called, it starts, it succeeds, it fails), and a reducer creator that make "subscribing" to these events pretty easy.
+Unary RPCs and server streams can be implemented using half duplexes (think of "walkie-talkies" where the two parties to the communication cannot communicate at the same time), client and bidirectional streams require a full duplex communication (where simultaneous communication is possible). This has implications for the transportation layer used. For example, client and bidirectional streams cannot be implemented in HTTP/1.1 and, whereas the HTTP2 RFC provides a full duplex, the current browser interface to HTTP2 allows only for a half duplex (in the browser, full duplexes can be implemented using WebSocket). That's why for, now, gRPC-Web, including our implementation, only supports unary calls and server streams.
 
-An example of using RPC with Redux is provided in [`./examples/redux`](./examples/redux).
+Go to the [server_stream](.src/examples/server_stream) example to see how server streams are implemented with `rpc_ts`.
+
+## License
+
+`rpc_ts` is licensed under the MIT License.

@@ -1,36 +1,46 @@
 /**
+ * @module ModuleRpcClient
+ *
  * @license
  * Copyright (c) Aiden.ai
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import * as ModuleRpcCommon from '../common/rpc_common';
+import { ModuleRpcCommon } from '../common';
 import { ClientProtocolError, ClientRpcError } from './errors';
 import { BackoffOptions } from './backoff';
 import { StreamProducer, Stream, transformStream } from './stream';
-import { mapValues } from '../utils/utils';
+import { mapValuesWithStringKeys } from '../utils/utils';
 import * as events from 'events';
 import { retryStream } from './stream_retrier';
 
 /**
- * Implementation a service from a `StreamProducer`.  The `StreamProducer`
- * is provided by a streaming protocol, for instance through `getGrpcWebClient()` in the
- * case of the `grpc_web` protocol.
+ * Implements a service from a [[StreamProducer]].  The StreamProducer
+ * is provided by a streaming protocol, for instance through [[getGrpcWebClient]] in the
+ * case of the gRPC-Web protocol.
  *
- * @see getGrpcWebClient()
+ * @typeparam serviceDefinition The definition of the service, enumerating all the
+ * methods and their request and response types.
+ * @typeparam ResponseContext The type of the response context that is transmitted along
+ * with the response to the client.
  */
 export class Service<
   serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
   ResponseContext
-> implements Service<serviceDefinition, ResponseContext> {
+> {
+  /**
+   * @param serviceDefinition The definition of the service.
+   * @param streamProducer A handler that produces a stream of [[ResponseWithContext]]
+   * objects given a method name and an RPC request to which the transportation is delegated.
+   */
   constructor(
     readonly serviceDefinition: serviceDefinition,
     private readonly streamProducer: StreamProducer,
   ) {}
 
   /**
-   * Retrieve a server stream from a method using a request.
+   * Retrieves a server stream from a method using a request.
    *
    * @return An object containing the response of the RPC and the context of
    * the response (meta-information).  The response context contains the information
@@ -42,10 +52,7 @@ export class Service<
     request:
       | ModuleRpcCommon.RequestFor<serviceDefinition, method>
       | (() => ModuleRpcCommon.RequestFor<serviceDefinition, method>),
-  ): Stream<{
-    response: ModuleRpcCommon.ResponseFor<serviceDefinition, method>;
-    responseContext: ResponseContext;
-  }> {
+  ): Stream<ResponseWithContext<serviceDefinition, method, ResponseContext>> {
     return this.streamProducer<
       ModuleRpcCommon.RequestFor<serviceDefinition, method>,
       {
@@ -56,7 +63,7 @@ export class Service<
   }
 
   /**
-   * Call a unary method on a request.
+   * Calls a unary method on a request.
    *
    * The underlying server stream is retrieved and transformed into a promise.
    *
@@ -65,8 +72,10 @@ export class Service<
    * that is related to the "remote" aspect of the procedure call: it would be empty if
    * the call were to be made within the same OS process.
    *
-   * @throws ClientProtocolError if the remote implementation was not that of a unary method.
-   * @throws Error if errors were encountered during the streaming.
+   * @throws [[ClientProtocolError]] if the remote implementation was not that of a unary method.
+   * @throws `Error` if errors were encountered during the streaming.
+   *
+   * @see [[streamAsPromise]]
    */
   call<method extends ModuleRpcCommon.UnaryMethodsFor<serviceDefinition>>(
     method: method,
@@ -74,10 +83,9 @@ export class Service<
       | ModuleRpcCommon.RequestFor<serviceDefinition, method>
       | (() => ModuleRpcCommon.RequestFor<serviceDefinition, method>),
   ) {
-    return new Promise<{
-      response: ModuleRpcCommon.ResponseFor<serviceDefinition, method>;
-      responseContext: ResponseContext;
-    }>((accept, reject) => {
+    return new Promise<
+      ResponseWithContext<serviceDefinition, method, ResponseContext>
+    >((accept, reject) => {
       let message: {
         response: ModuleRpcCommon.ResponseFor<serviceDefinition, method>;
         responseContext: ResponseContext;
@@ -118,7 +126,8 @@ export class Service<
   }
 
   /**
-   * Return a service wrapped with a given retry policy.
+   * Returns a service wrapped with a given retry policy that applies to all
+   * the methods of this service.
    *
    * @param backoffOptions Options for the exponential backoff.
    */
@@ -129,7 +138,7 @@ export class Service<
   }
 
   /**
-   * Return a "nicer" service interface with which it is possible to call RPCs
+   * Return a "nice" service interface with which it is possible to call RPCs
    * as "normal" JavaScript functions.
    *
    * @example ```TypeScript
@@ -149,36 +158,56 @@ export class Service<
    * ```
    */
   nice(): NiceService<serviceDefinition> {
-    return mapValues(this.serviceDefinition, (methodDefinition, method) => {
-      if (
-        methodDefinition.type === ModuleRpcCommon.ServiceMethodType.serverStream
-      ) {
-        return request =>
-          transformStream(
-            this.stream(method, request),
-            ({ response }) => response,
-          );
-      } else {
-        return async request => {
-          // Any-cast is the simplest way since it is difficult to type assert
-          // the fact that it is a unary method.
-          const { response } = await this.call(method as any, request);
-          return response;
-        };
-      }
-    }) as any;
+    return mapValuesWithStringKeys(
+      this.serviceDefinition,
+      (methodDefinition, method) => {
+        if (
+          methodDefinition.type ===
+          ModuleRpcCommon.ServiceMethodType.serverStream
+        ) {
+          return request =>
+            transformStream(
+              this.stream(method, request),
+              ({ response }) => response,
+            );
+        } else {
+          return async request => {
+            // Any-cast is the simplest way since it is difficult to type assert
+            // the fact that it is a unary method.
+            const { response } = await this.call(method as any, request);
+            return response;
+          };
+        }
+      },
+    ) as any;
   }
 }
 
 /**
- * The type of a "nice" service derived from a service definition.  Services abstract away
- * remote procedure calls.  Each method in a service is asynchronous, accepts a
- * request and returns a response and and response context.
+ * A response with a response context for a given service method.
+ *
+ * @see [[Service.stream]]
+ */
+export interface ResponseWithContext<
+  serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
+  method extends ModuleRpcCommon.MethodsFor<serviceDefinition>,
+  ResponseContext
+> {
+  response: ModuleRpcCommon.ResponseFor<serviceDefinition, method>;
+  responseContext: ResponseContext;
+}
+
+/**
+ * "Nice" service derived from a service definition.
+ *
+ * @see [[Service.nice]]
  */
 export type NiceService<
   serviceDefinition extends ModuleRpcCommon.ServiceDefinition
 > = {
-  [method in keyof serviceDefinition]: serviceDefinition[method] extends {
+  [method in ModuleRpcCommon.MethodsFor<
+    serviceDefinition
+  >]: serviceDefinition[method] extends {
     type: typeof ModuleRpcCommon.ServiceMethodType.serverStream;
   }
     ? ServerStreamMethod<serviceDefinition, method>
@@ -188,7 +217,7 @@ export type NiceService<
 /** A unary method typed as part of a "nice" service. */
 export interface UnaryMethod<
   serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
-  method extends keyof serviceDefinition
+  method extends ModuleRpcCommon.MethodsFor<serviceDefinition>
 > {
   (request: ModuleRpcCommon.RequestFor<serviceDefinition, method>): Promise<
     ModuleRpcCommon.ResponseFor<serviceDefinition, method>
@@ -198,7 +227,7 @@ export interface UnaryMethod<
 /** A server-stream method typed as part of a "nice" service. */
 export interface ServerStreamMethod<
   serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
-  method extends keyof serviceDefinition
+  method extends ModuleRpcCommon.MethodsFor<serviceDefinition>
 > {
   (
     request:
