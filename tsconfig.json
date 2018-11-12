@@ -1,25 +1,54 @@
 {
-  "version": "2.8.2",
+  "version": "3.1.6",
   "compilerOptions": {
-    "rootDir": "./",
+    "outDir": "./build",
+    "rootDir": "./src",
     "target": "es2017",
     "alwaysStrict": true,
     "sourceMap": true,
     "skipLibCheck": true,
-    "baseUrl": "./",
     "pretty": true,
-    "plugins": [{ "name": "tslint-language-service" }],
-    "typeRoots": ["./node_modules/@types", "./node_modules"],
-    "types": ["node", "mocha"],
-    "lib": ["es7", "es2017", "dom"],
+    "plugins": [
+      {
+        "name": "tslint-language-service"
+      }
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules"
+    ],
+    "types": [
+      "node",
+      "mocha"
+    ],
+    "lib": [
+      "es7",
+      "es2017",
+      "dom"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "paths": {
+      "ts-rpc/*": [
+        "./*"
+      ],
+      "ts-rpc": [
+        "./"
+      ]
+    }
   },
-  "exclude": ["./node_modules"],
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "./node_modules"
+  ],
   "compileOnSave": true,
   "watch": true
 }
