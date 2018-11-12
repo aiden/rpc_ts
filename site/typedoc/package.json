@@ -1,7 +1,7 @@
 {
   "name": "aiden-doc",
   "description": "Aiden themes for TypeDoc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "files": [
     "LICENSE"
   ],
@@ -10,8 +10,7 @@
     "all": "yarn build:css",
     "build:css": "node-sass typedoc_theme/assets/css/main.sass typedoc_theme/assets/css/main.css",
     "build:css:watch": "node-sass --watch typedoc_theme/assets/css/main.sass typedoc_theme/assets/css/main.css",
-    "doc": "echo 'SKIPPED'",
-    "postinstall": "yarn build:css"
+    "doc": "echo 'SKIPPED'"
   },
   "repository": {
     "type": "git",
