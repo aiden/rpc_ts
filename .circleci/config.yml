@@ -18,6 +18,9 @@ jobs:
   deploy:
     <<: *defaults
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - '3c:79:d1:ec:94:08:24:a0:e6:3c:91:96:dc:ce:18:8a'
       - attach_workspace:
           at: ~/repo
       - run:
@@ -29,7 +32,10 @@ jobs:
             TEMPFILE=$(mktemp)
             echo "$HOSTKEY" > $TEMPFILE
 
-            ssh -o "UserKnownHostsFile $TEMPFILE" $@
+            git config --global user.email "$GH_EMAIL"
+            git config --global user.name "$GH_NAME"
+
+            mkdir ~/.ssh/ && echo -e "Host github.com\n\tUserKnownHostsFile $TEMPFILE\n" > ~/.ssh/config
       - run:
           name: Publish doc to github pages
           command: yarn doc:deploy
