@@ -10,7 +10,8 @@
     "all": "yarn build:css",
     "build:css": "node-sass typedoc_theme/assets/css/main.sass typedoc_theme/assets/css/main.css",
     "build:css:watch": "node-sass --watch typedoc_theme/assets/css/main.sass typedoc_theme/assets/css/main.css",
-    "doc": "echo 'SKIPPED'"
+    "doc": "echo 'SKIPPED'",
+    "postinstall": "yarn build:css"
   },
   "repository": {
     "type": "git",
