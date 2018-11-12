@@ -123,7 +123,7 @@ RPCs can be classified according to how requests and responses intermingle durin
 
 Unary RPCs and server streams can be implemented using half duplexes (think of "walkie-talkies" where the two parties to the communication cannot communicate at the same time), client and bidirectional streams require a full duplex communication (where simultaneous communication is possible). This has implications for the transportation layer used. For example, client and bidirectional streams cannot be implemented in HTTP/1.1 and, whereas the HTTP2 RFC provides a full duplex, the current browser interface to HTTP2 allows only for a half duplex (in the browser, full duplexes can be implemented using WebSocket). That's why for, now, gRPC-Web, including our implementation, only supports unary calls and server streams.
 
-Go to the [server_stream](.src/examples/server_stream) example to see how server streams are implemented with rpc_ts.
+Go to the [server_stream](./src/examples/server_stream) example to see how server streams are implemented with rpc_ts.
 
 ## License
 
