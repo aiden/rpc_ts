@@ -45,6 +45,26 @@ export class ServerRpcError extends ServerError {
     message?: string,
     public readonly unsafeTransmittedMessage?: string,
   ) {
-    super(message ? `${errorType}: ${message}` : errorType);
+    super(
+      formatServerRpcErrorMessage(errorType, message, unsafeTransmittedMessage),
+    );
   }
+}
+
+/** @visibleForTesting */
+export function formatServerRpcErrorMessage(
+  errorType: ModuleRpcCommon.RpcErrorType,
+  message?: string,
+  unsafeTransmittedMessage?: string,
+): string {
+  let output = `${errorType || '<unknown RPC error type>'}`;
+  if (message) {
+    output += `: ${message}`;
+    if (unsafeTransmittedMessage) {
+      output += `; transmitted to client: ${unsafeTransmittedMessage}`;
+    }
+  } else if (unsafeTransmittedMessage) {
+    output += `: transmitted to client: ${unsafeTransmittedMessage}`;
+  }
+  return output;
 }
