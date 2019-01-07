@@ -89,7 +89,7 @@
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">'express'</span>;
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> http <span class="hljs-keyword">from</span> <span class="hljs-string">'http'</span>;
 <span class="hljs-keyword">const</span> app = express();
-app.use(ModuleRpcProtocolServer.registerRpcRoutes(helloServiceDefinition, {
+<span class="hljs-keyword">const</span> handler: ModuleRpcServer.ServiceHandlerFor&lt;<span class="hljs-keyword">typeof</span> helloServiceDefinition&gt; = {
   <span class="hljs-keyword">async</span> getHello({ language }) {
     <span class="hljs-keyword">if</span> (language === <span class="hljs-string">'Spanish'</span>) <span class="hljs-keyword">return</span> { text: <span class="hljs-string">'Hola'</span> };
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ModuleRpcServer.ServerRpcError(
@@ -97,7 +97,8 @@ app.use(ModuleRpcProtocolServer.registerRpcRoutes(helloServiceDefinition, {
       <span class="hljs-string">`language '<span class="hljs-subst">${language}</span>' not found`</span>,
     );
   },
-}));
+};
+app.use(ModuleRpcProtocolServer.registerRpcRoutes(helloServiceDefinition, handler));
 <span class="hljs-keyword">const</span> server = http.createServer(app).listen();
 
 <span class="hljs-comment">// Now let's do a Remote Procedure Call</span>
