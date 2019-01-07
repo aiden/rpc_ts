@@ -36,7 +36,7 @@ const helloServiceDefinition = {
 import * as express from 'express';
 import * as http from 'http';
 const app = express();
-app.use(ModuleRpcProtocolServer.registerRpcRoutes(helloServiceDefinition, {
+const handler: ModuleRpcServer.ServiceHandlerFor<typeof helloServiceDefinition> = {
   async getHello({ language }) {
     if (language === 'Spanish') return { text: 'Hola' };
     throw new ModuleRpcServer.ServerRpcError(
@@ -44,7 +44,8 @@ app.use(ModuleRpcProtocolServer.registerRpcRoutes(helloServiceDefinition, {
       `language '${language}' not found`,
     );
   },
-}));
+};
+app.use(ModuleRpcProtocolServer.registerRpcRoutes(helloServiceDefinition, handler));
 const server = http.createServer(app).listen();
 
 // Now let's do a Remote Procedure Call
