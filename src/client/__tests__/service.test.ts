@@ -293,7 +293,7 @@ function instrumentRetrier<
   retrier: ServiceRetrier<serviceDefinition, ResponseContext>,
 ): () => Promise<any> {
   const sub = new Rx.Subject();
-  const cb = event => (...args) => {
+  const cb = (event: any) => (...args: any[]) => {
     sub.next([
       event,
       ...args.map(arg => (arg instanceof Error ? arg.message : arg)),

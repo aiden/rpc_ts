@@ -39,7 +39,7 @@ export function registerRpcRoutes<
   serviceDefinition: serviceDefinition,
   serviceHandler: ModuleRpcServer.ServiceHandlerFor<serviceDefinition>,
   options?: RpcServerOptions,
-);
+): Router;
 export function registerRpcRoutes<
   serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
   RequestContext
@@ -54,7 +54,7 @@ export function registerRpcRoutes<
       RequestContext
     >;
   },
-);
+): Router;
 export function registerRpcRoutes<
   serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
   RequestContext

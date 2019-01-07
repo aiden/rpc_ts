@@ -16,7 +16,7 @@ describe('rpc_ts', () => {
     describe('transformStream', () => {
       it('transforms', async () => {
         const source = new MockStream<number>();
-        const result = transformStream(source, n => n * 2);
+        const result = transformStream(source, (n: number) => n * 2);
         const onMessage = sinon.spy();
         const onError = sinon.spy();
         result.on('message', onMessage);
@@ -46,7 +46,7 @@ describe('rpc_ts', () => {
 
       it('error emitted by source stream', async () => {
         const source = new MockStream<number>();
-        const result = transformStream(source, n => n * 2);
+        const result = transformStream(source, (n: number) => n * 2);
         const onMessage = sinon.spy();
         const onError = sinon.spy();
         result.on('message', onMessage);

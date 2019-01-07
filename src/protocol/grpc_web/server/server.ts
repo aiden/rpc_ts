@@ -285,7 +285,10 @@ async function processServerStream<
   try {
     // Actually handle the request and stream the messages.
     await new Promise<void>((resolve, reject) => {
-      const callbacks = {
+      const callbacks: ModuleRpcServer.ServerStreamMethodHandlerCallbacks<
+        serviceDefinition,
+        method
+      > = {
         onReady: c => {
           try {
             // Check that onReady is called at the appropriate time

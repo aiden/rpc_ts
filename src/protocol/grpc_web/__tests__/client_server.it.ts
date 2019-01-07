@@ -40,7 +40,10 @@ describe('rpc_ts', () => {
           }),
           async arb => {
             const app = express();
-            const handler = {
+            const handler: ModuleRpcServer.ServiceHandlerFor<
+              typeof unaryServiceDefinition,
+              any
+            > = {
               async unary(request, requestContext) {
                 return {
                   fooRequest: request,
@@ -98,9 +101,12 @@ describe('rpc_ts', () => {
           }),
           async arb => {
             const app = express();
-            const handler = {
+            const handler: ModuleRpcServer.ServiceHandlerFor<
+              typeof serverStreamServiceDefinition,
+              any
+            > = {
               async serverStream(
-                request,
+                request: any[],
                 { onReady, onMessage },
                 requestContext,
               ) {
@@ -172,7 +178,10 @@ describe('rpc_ts', () => {
 
       beforeEach(() => {
         const app = express();
-        const handler = {
+        const handler: ModuleRpcServer.ServiceHandlerFor<
+          typeof unaryServiceDefinition,
+          any
+        > = {
           async unary(request, requestContext) {
             return {
               fooRequest: request,
@@ -406,8 +415,10 @@ describe('rpc_ts', () => {
 
       it('server dies during transmission', async () => {
         const app = express();
-        const handler = {
-          async serverStream(_request, { onReady }, _requestContext) {
+        const handler: ModuleRpcServer.ServiceHandlerFor<
+          typeof serverStreamServiceDefinition
+        > = {
+          async serverStream(_request, { onReady }) {
             onReady(() => {});
           },
         };
@@ -482,7 +493,9 @@ describe('rpc_ts', () => {
 
       it('error is sent in the trailers if headers have already been sent', async () => {
         const app = express();
-        const handler = {
+        const handler: ModuleRpcServer.ServiceHandlerFor<
+          typeof serverStreamServiceDefinition
+        > = {
           async serverStream(_request, { onReady, onMessage }) {
             onReady(() => {});
             onMessage({});
@@ -546,8 +559,8 @@ const serverStreamServiceDefinition = {
 };
 
 const serverContextConnector = (
-  requestContext,
-  responseContext,
+  requestContext: any,
+  responseContext: any,
 ): ModuleRpcServer.ServerContextConnector<any> => ({
   async decodeRequestContext(encodedRequestContext) {
     return _.fromPairs(
@@ -565,8 +578,8 @@ const serverContextConnector = (
 });
 
 const clientContextConnector = (
-  requestContext,
-  responseContext,
+  requestContext: any,
+  responseContext: any,
 ): ModuleRpcClient.ClientContextConnector<any> => ({
   async provideRequestContext() {
     return Utils.mapValuesWithStringKeys(

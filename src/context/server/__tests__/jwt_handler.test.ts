@@ -8,6 +8,7 @@
 
 import { expect } from 'chai';
 import { AssertionError } from 'assert';
+// @ts-ignore
 import * as jose from 'node-jose';
 import * as moment from 'moment';
 import * as sinon from 'sinon';

@@ -29,7 +29,7 @@ export interface GrpcWebCodec<Message = any> {
   encodeRequest(method: string, message: Message): Uint8Array;
 
   /** Decodes a request for the RPC method `method`. */
-  decodeRequest(method: string, message: Uint8Array);
+  decodeRequest(method: string, message: Uint8Array): Message;
 
   /**
    * Encodes a message (part of the RPC response) for the RPC method `method`.
