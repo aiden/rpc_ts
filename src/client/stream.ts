@@ -143,13 +143,13 @@ class ArrayStream<T> extends EventEmitter implements Stream<T> {
  */
 export function transformStream<T, U>(
   source: Stream<T>,
-  fn: (T) => U,
+  fn: (t: T) => U,
 ): Stream<U> {
   return new TransformingStream<T, U>(source, fn);
 }
 
 class TransformingStream<T, U> extends EventEmitter implements Stream<U> {
-  constructor(private readonly source: Stream<T>, fn: (T) => U) {
+  constructor(private readonly source: Stream<T>, fn: (t: T) => U) {
     super();
     source.on('message', message => {
       try {

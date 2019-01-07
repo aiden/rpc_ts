@@ -165,13 +165,13 @@ export class Service<
           methodDefinition.type ===
           ModuleRpcCommon.ServiceMethodType.serverStream
         ) {
-          return request =>
+          return (request: any) =>
             transformStream(
               this.stream(method, request),
               ({ response }) => response,
             );
         } else {
-          return async request => {
+          return async (request: any) => {
             // Any-cast is the simplest way since it is difficult to type assert
             // the fact that it is a unary method.
             const { response } = await this.call(method as any, request);
@@ -270,16 +270,19 @@ export interface ServiceRetrier<
    */
   on(
     event: 'serviceReady' | 'serviceComplete',
-    callback: (method, request) => void,
+    callback: <method extends ModuleRpcCommon.MethodsFor<serviceDefinition>>(
+      method: method,
+      request: ModuleRpcCommon.RequestFor<serviceDefinition, method>,
+    ) => void,
   ): this;
   on(
     event: 'serviceError',
-    callback: (
+    callback: <method extends ModuleRpcCommon.MethodsFor<serviceDefinition>>(
       err: Error,
       retriesSinceLastReady: number,
       abandoned: boolean,
-      method,
-      request,
+      method: method,
+      request: ModuleRpcCommon.RequestFor<serviceDefinition, method>,
     ) => void,
   ): this;
 }

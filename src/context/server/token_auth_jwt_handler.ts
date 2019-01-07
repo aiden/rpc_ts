@@ -24,6 +24,10 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+/** */
+
+// @ts-ignore
 import * as jose from 'node-jose';
 import { AuthClaimsHandler, TokenValidationError } from './token_auth_handler';
 
@@ -67,7 +71,7 @@ export function getJwtAuthClaimsHandler<AuthClaims>(
   const verify: { [keyId: string]: any } = {};
 
   function getKey(jwks: any, keyId: string): any {
-    const key = jwks.keys.find(key => key.kid === keyId);
+    const key = jwks.keys.find((key: any) => key.kid === keyId);
     if (!key) {
       throw new TokenValidationError(`cannot find key ${keyId} in JWKS`);
     }

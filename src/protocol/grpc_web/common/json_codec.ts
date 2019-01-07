@@ -53,7 +53,7 @@ export class GrpcWebJsonCodec implements GrpcWebCodec {
   }
 
   /** @override */
-  decodeRequest(_method: string, message: Uint8Array) {
+  decodeRequest(_method: string, message: Uint8Array): any {
     return JSON.parse(decodeUtf8(message));
   }
 
