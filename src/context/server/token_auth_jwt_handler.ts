@@ -92,7 +92,9 @@ export function getJwtAuthClaimsHandler<AuthClaims>(
       const sections = token.split('.');
       jwt = JSON.parse(jose.util.base64url.decode(sections[0]));
     } catch (err) {
-      throw new TokenValidationError('cannot parse token');
+      // The token is garbled, so it is fine to pass it in the error message.
+      // We do not chain the error stack as the error is meaningless in this case.
+      throw new TokenValidationError(`cannot parse token \'${token}\'`);
     }
     const verify = await getVerify(jwt.kid);
     let result: any;

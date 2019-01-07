@@ -146,7 +146,11 @@ export class TokenAuthClientContextConnector
 
   async provideRequestContext(): Promise<ModuleRpcCommon.EncodedContext> {
     if (!this.tokenInfo) {
-      return {};
+      // The principal has not been authenticated, let's not bother even sending
+      // a request to the server.
+      throw new ModuleRpcClient.RequestContextError(
+        'principal has not yet been authenticated',
+      );
     }
     if (
       this.tokenInfo.expiryDate &&
@@ -158,16 +162,23 @@ export class TokenAuthClientContextConnector
       )
     ) {
       if (!this.refreshTokenHandler || !this.tokenInfo.refreshToken) {
-        return {};
+        throw new ModuleRpcClient.RequestContextError(
+          'session has expired and no refresh token was provided',
+        );
       }
       this.tokenInfo = await this.refreshTokenHandler(
         this.tokenInfo.refreshToken,
       );
     }
+    const token = this.tokenInfo.token;
+    if (!token) {
+      throw new ModuleRpcClient.RequestContextError(
+        'unexpected shape of tokenInfo: token field is missing',
+      );
+    }
     return {
-      [ModuleRpcContextCommon.tokenAuthContextKeys.authorization]: `Bearer ${
-        this.tokenInfo.token
-      }`,
+      [ModuleRpcContextCommon.tokenAuthContextKeys
+        .authorization]: `Bearer ${token}`,
     };
   }
 
