@@ -58,18 +58,18 @@
     padding-bottom: 40px
 
     a
-        display: block
-        padding-top: 6px
-        padding-bottom: 6px
+        display: inline-block
+        padding-top: 0px
+        padding-bottom: 0px
 
     ul
         +INDENTS(6, 5, 20)
 
     > ul
-        border-bottom: 1px solid $COLOR_PANEL_DIVIDER
+        // border-bottom: 1px solid $COLOR_PANEL_DIVIDER
 
     li
-        border-top: 1px solid $COLOR_PANEL_DIVIDER
+        // border-top: 1px solid $COLOR_PANEL_DIVIDER
 
         &.current > a
             font-weight: bold
@@ -90,6 +90,22 @@
                 font-style: normal
                 font-size: 200%
 
+    // Adds counter to the module list
+    .module-list
+      counter-reset: item
+      list-style-type: none
+      padding-left: 0
+      display: flex
+      flex-direction: column
+
+      .tsd-kind-external-module
+          display: inline-flex
+          padding-top: 6px
+          padding-bottom: 6px
+
+      .module-item-number::before
+          content: counter(item, decimal-leading-zero) "\00a0\00a0\00a0\00a0\00a0\00a0\00a0"
+          counter-increment: item
 
 // Secondary part of the navigation containing the table of contents
 // of the current module.

@@ -5,11 +5,12 @@
         </li>
     {{else}}
         {{#if isGlobals}}
-            <li class="globals {{#if isInPath}}current{{/if}} {{cssClasses}}">
+            <!-- <li class="globals {{#if isInPath}}current{{/if}} {{cssClasses}}">
                 <a href="{{relativeURL url}}"><em>{{{wbr title}}}</em></a>
-            </li>
+            </li> -->
         {{else}}
             <li class="{{#if isInPath}}current{{/if}} {{cssClasses}}">
+                <div class="module-item-number"></div>
                 <a href="{{relativeURL url}}">{{{wbr title}}}</a>
                 {{#if isInPath}}
                     {{#if children}}
