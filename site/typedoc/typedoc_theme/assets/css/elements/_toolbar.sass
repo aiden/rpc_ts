@@ -45,6 +45,28 @@
         &:first-child
             width: 100%
 
+    .link-container
+      display: flex
+      padding: 0
+      margin: 0
+      justify-content: flex-end
+      list-style: none
+      position: absolute
+      font-family: $FONT_FAMILY_MONO
+      width: calc(100% - 30px);
+
+      .link-item
+        padding: 0px 30px
+        font-size: 0.8em
+
+      #github-link
+        border: 1px solid #ffffff
+        border-radius: 22px
+        transition: opacity 0.1s, background-color 0.2s
+        &:hover
+          background-color: #ffffff36
+
+
 %TSD_WIDGET_ICON
     &:before
         content: ''
