@@ -30,12 +30,15 @@ html.default
             visibility: hidden
             background-color: $COLOR_PANEL
             transform: translate(100%,0)
+            border-right: 1px solid #ffffff
+
 
             > *:last-child
                 padding-bottom: 20px
 
         .leave-at-xs-sm
             display: none
+
 
         .link-container
             width: 100%
@@ -92,9 +95,11 @@ html.default
                 visibility: visible
                 transform: translate(0,0)
 
+    +size-max-content
+        #vertical-line
+            width: calc(30% - 40px)
+
 .tsd-page-title
-    padding: 70px 0 20px 0
-    margin: 0 0 40px 0
     font-weight: $FONT_WEIGHT_LIGHT
     // background: url("../images/page_title_background.svg")
     // box-shadow: 0 0 5px rgba(#000, 0.35)

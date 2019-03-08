@@ -28,8 +28,14 @@
         &
             @content
 
+// For white vertical line
+=size-max-content
+    @media (max-width: $MAX_CONTENT_WIDTH)
+        &
+            @content
+              
 .container
-    max-width: 1200px
+    max-width: $MAX_CONTENT_WIDTH
     margin: 0 auto
     padding: 0 40px
     margin-top: 20px
