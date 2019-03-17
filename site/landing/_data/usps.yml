@@ -1,10 +1,13 @@
 - title: Clean APIs
+  position: side
   description: Typescript language across the board. Type safe contracts.
 
 
 - title: Hassle free
+  position: middle
   description: No proxies, no IDL. Easy maintenance and fast iterations.
 
 
 - title: Based on industry standard
+  position: side
   description: Implements gRPC-Web, created by Google.

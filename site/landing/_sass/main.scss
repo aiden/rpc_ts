@@ -14,7 +14,6 @@ body {
 
 #hero-section {
   background-color: #F3F3F3;
-  padding-bottom: 30px;
 
   .display-3 {
     font-weight: 500;
@@ -33,9 +32,20 @@ body {
 
   .ups-section {
     color: $COLOR_BACKGROUND;
+
+    .usp-container {
+      border-top: #fff solid 1px;
+    }
+
+    .middle {
+      border-left: none;
+      border-right: none;
+    }
+
     .usp-title {
       font-size: 1.4em;
     }
+
     .usp-description {
       font-family: $FONT_FAMILY_MONO;
       font-size: 0.8em;
@@ -51,7 +61,7 @@ body {
   .codeBlock {
         margin-bottom: 50px;
   }
-  
+
   h3 {
     font-weight: 400;
   }
@@ -106,7 +116,6 @@ body {
     justify-content: left;
     margin-bottom: 50px;
   }
-
 }
 
 
@@ -120,6 +129,15 @@ body {
 @media (min-width: 768px) {
   .display-3 {
     font-size: 3.2em;
+  }
+
+  #hero-section{
+    .ups-section {
+      .middle {
+        border-left: #fff solid 1px;
+        border-right: #fff solid 1px;
+      }
+    }
   }
 }
 

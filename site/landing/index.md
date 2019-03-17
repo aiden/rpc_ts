@@ -3,8 +3,6 @@ layout: home
 ---
 
 
-
-
 <div id="hero-section" class="container-fluid">
   <div class="row gutter">
     <div class="text-center main-text">
@@ -20,7 +18,7 @@ layout: home
 
   <div class="row gutter ups-section">
     {% for item in site.data.usps %}
-      <div class="col-sm">
+      <div class="col-md p-md-4 py-3 usp-container {{ item.position }}">
         <p class="usp-title">{{ item.title }}</p>
         <p class="usp-description">{{ item.description }}</p>
       </div>
@@ -48,6 +46,11 @@ layout: home
         </div>
 
       {% endfor %}
+
+      <div class="row gutter button-container">
+        {% include button.html color="blue" url="/docs" text="Get Started" %}
+      </div>
+
     </div>
   </div>
 </div>
