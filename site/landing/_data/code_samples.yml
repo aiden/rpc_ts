@@ -1,0 +1,35 @@
+- section: Downloading rpc_ts using npm
+  description:
+  language: shell
+  code: npm i rpc_ts
+
+- section: RPC Service Definition
+  description:
+  language: TypeScript
+  code: |
+      const helloService = {
+          getHello: {
+          request: {} as { language: string },
+          response: {} as { text: string },
+        },
+      };
+
+- section: Server Side Implementation
+  description:
+  language: TypeScript
+  code: |
+      app.use(ModuleRpcProtocolServer.registerRpcRoutes(helloService, {
+        async getHello({ language }) {
+          if (language === 'Spanish') return { text: 'Hola' };
+        },
+      }));
+
+- section: Client Side Remote Procedure Call
+  description: With TypeScript typing, it is not possible to mess up the type of the request.
+  language: TypeScript
+  code: |
+      async function rpc() {
+        const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
+          remoteAddress: `http://localhost:3000`
+        }).nice().getHello({ language: 'Spanish' });
+      }

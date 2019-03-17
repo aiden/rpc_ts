@@ -1,0 +1,76 @@
+body {
+  font-family: 'Theinhardt', sans-serif
+}
+
+.highlight{
+  font-family: 'Reno Mono', monospace // Menlo, Monaco, Consolas, 'Courier New', monospace
+}
+
+
+.navbar {
+  background-color:  #f3f3f3;
+  color: #034BDA;
+}
+
+#hero-section {
+  background-color: #F3F3F3;
+
+
+  .display-3 {
+    font-weight: 500;
+    max-width: 825px;
+  }
+
+  .main-text {
+    margin: 50px auto;
+  }
+
+  .lead {
+    max-width: 520px;
+    margin: 30px auto;
+    line-height: 40px;
+  }
+}
+
+.gutter {
+  max-width: 1200px;
+  margin: auto;
+}
+
+
+@media (max-width: 576px) {
+  .display-3 {
+    font-size: 2.5em;
+  }
+  #hero-section {
+    .lead {
+      line-height: 25px;
+    }
+  }
+}
+
+
+@media (min-width: 576px) {
+  .display-3 {
+    font-size: 3.2em;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .display-3 {
+    font-size: 3.2em;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .display-3 {
+    font-size: 3.6em;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+
+}
