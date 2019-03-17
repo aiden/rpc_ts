@@ -10,9 +10,11 @@ layout: home
     <div class="text-center main-text">
       <h1 class="display-3">Remote Procedure Calls in Typescript made simple</h1>
       <p class="lead">rpc_ts provides a hassle-free way to define APIs in TypeScript, to build isomorphic applications faster.</p>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Get Started</a>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Github</a>
     </div>
+  </div>
+  <div class="row gutter button-container">
+    {% include button.html color="blue" url="/docs" text="Get Started" %}
+    {% include button.html color="white" url="https://github.com/aiden/rpc_ts" text="Github" %}
   </div>
 
 

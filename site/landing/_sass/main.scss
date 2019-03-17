@@ -15,14 +15,13 @@ body {
 #hero-section {
   background-color: #F3F3F3;
 
-
   .display-3 {
     font-weight: 500;
     max-width: 660px;
   }
 
   .main-text {
-    margin: 50px auto;
+    margin: 50px auto 0px auto;
   }
 
   .lead {
@@ -42,23 +41,29 @@ body {
     }
   }
 
-
-
 }
+
 
 .gutter {
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
+}
+
+.button-container {
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
 
 @media (max-width: 576px) {
   .display-3 {
     font-size: 2.5em;
+    text-align: left;
   }
   #hero-section {
     .lead {
-      line-height: 25px;
+      text-align: left;
+      line-height: 30px;
     }
   }
 }
