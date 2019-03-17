@@ -25,5 +25,18 @@ footer{
       color: white;
     }
 
+    .col-content {
+      border-left: none;
+    }
+
+  }
+}
+
+
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .col-content {
+    border-left: #fff solid 1px !important;
   }
 }
