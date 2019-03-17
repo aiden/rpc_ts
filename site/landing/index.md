@@ -29,16 +29,25 @@ layout: home
 </div>
 
 
-<div>
-  <p> test</p>
-  {% for item in site.data.code_samples %}
-
-    <p>{{ item.section }}</p>
-    <div class="codeBlock">
-      {% highlight TypeScript %}
-        {{ item.code }}
-      {% endhighlight %}
+<div id="quicklook-section" class="container-fluid">
+  <div class="row gutter">
+    <div class="col-md-4">
+      <h3>A Quick Look</h3>
     </div>
 
-  {% endfor %}
+    <div class="col-md-8">
+      {% for item in site.data.code_samples %}
+
+        <p class="section-title">{{ item.section }}</p>
+        <p class="section-sub-title">{{ item.description }}</p>
+
+        <div class="codeBlock">
+          {% highlight TypeScript %}
+            {{ item.code }}
+          {% endhighlight %}
+        </div>
+
+      {% endfor %}
+    </div>
+  </div>
 </div>

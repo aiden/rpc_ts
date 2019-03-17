@@ -1,11 +1,11 @@
 - section: Downloading rpc_ts using npm
   description:
   language: shell
-  code: npm i rpc_ts
+  code: |
+      npm i rpc_ts
 
 - section: RPC Service Definition
   description:
-  language: TypeScript
   code: |
       const helloService = {
           getHello: {
@@ -13,7 +13,8 @@
           response: {} as { text: string },
         },
       };
-
+  language: TypeScript
+  
 - section: Server Side Implementation
   description:
   language: TypeScript
