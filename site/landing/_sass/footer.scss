@@ -1,0 +1,31 @@
+footer{
+  background-color: $MAIN_BLUE;
+
+  &#aiden-footer{
+    background-color: $MAIN_BLUE;
+    color: $MAIN_WHITE;
+    height: 200px;
+    position: relative;
+
+
+    #footer-copy {
+      background-color: $SECONDARY_BLUE;
+      padding: 15px 0px 15px 40px;
+      border-radius: 30px;
+      font-family: $FONT_FAMILY_MONO;
+      margin-top: 72px;
+      display: flex;
+      align-items: center;
+    }
+
+    #footer-icon{
+      margin-right: 30px
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+  }
+}
