@@ -18,7 +18,7 @@ body {
 
   .display-3 {
     font-weight: 500;
-    max-width: 825px;
+    max-width: 660px;
   }
 
   .main-text {
@@ -30,6 +30,20 @@ body {
     margin: 30px auto;
     line-height: 40px;
   }
+
+  .ups-section {
+    color: $COLOR_BACKGROUND;
+    .usp-title {
+      font-size: 1.4em;
+    }
+    .usp-description {
+      font-family: $FONT_FAMILY_MONO;
+      font-size: 0.8em;
+    }
+  }
+
+
+
 }
 
 .gutter {

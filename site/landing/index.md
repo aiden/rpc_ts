@@ -16,11 +16,11 @@ layout: home
   </div>
 
 
-  <div class="row gutter">
+  <div class="row gutter ups-section">
     {% for item in site.data.usps %}
       <div class="col-sm">
-        <p>{{ item.title }}</p>
-        <p>{{ item.description }}</p>
+        <p class="usp-title">{{ item.title }}</p>
+        <p class="usp-description">{{ item.description }}</p>
       </div>
     {% endfor %}
   </div>
