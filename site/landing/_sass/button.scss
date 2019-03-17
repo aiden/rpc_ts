@@ -6,6 +6,7 @@
     width: 200px;
     border-radius: 25px;
     text-align: center;
+    margin-bottom: 0px;
   }
 }
 
@@ -20,5 +21,13 @@
     p {
       background-color: $MAIN_WHITE;
       color: $MAIN_BLUE;
+    }
+}
+
+.button-clear {
+    p {
+      background-color: none;
+      color: $MAIN_BLUE;
+      border: 0.5px #fff solid;
     }
 }
