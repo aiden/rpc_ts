@@ -6,10 +6,6 @@ body {
   font-family: 'Reno Mono', monospace // Menlo, Monaco, Consolas, 'Courier New', monospace
 }
 
-.background-gray {
-  background-color: $MAIN_GRAY;
-}
-
 
 .navbar {
   background-color:  #f3f3f3;
@@ -59,9 +55,8 @@ body {
 }
 
 
-.quicklook-section {
-  padding-top: 70px;
-  padding-bottom: 70px;
+#quicklook-section {
+  margin-top: 75px;
 
   .codeBlock {
         margin-bottom: 50px;

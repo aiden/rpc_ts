@@ -27,7 +27,7 @@ layout: home
 </div>
 
 
-<div id="quicklook-section" class="container-fluid">
+<div class="quicklook-section container-fluid">
   <div class="row gutter">
     <div class="col-md-4">
       <h3>A Quick Look</h3>

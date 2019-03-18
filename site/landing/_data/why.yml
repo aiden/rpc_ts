@@ -1,0 +1,21 @@
+- title: Remote Procedure Calls in TypeScript made simple
+  color: gray
+  reason: |
+          rpc_ts is a framework for doing typesafe Remote Procedure Calls (RPC) in TypeScript. It uses no Domain-Specific Language such as Protocol Buffers or Apache Thrift: the services are all defined using the powerful TypeScript type system. This approach is particularly suitable for shortening the development cycle of isomorphic web applications that rely on TypeScript for both frontend and backend development.
+
+          rpc_ts supports both unary calls and server-side streaming and is fully compatible with the grpc-web+json protocol (an adaptation of the popular gRPC protocol for the web). It has been designed with a relentless focus on modularity, simplicity, and robustness, and does not require the use of an intermediate gRPC proxy.
+
+
+- title: Our Thoughts
+  reason: |
+          Bootstrapping an HTTP REST API over JSON is extremely simple in dynamic languages such as Python and JavaScript. With the right framework, it is possible to write a client/server interaction in a few lines of codes. This simplicity comes from that the conversion to and from untyped JSON feels natural, but also that no explicit contract is specified between the client and the user.
+
+          On the other side of the spectrum, both gRPC and Thrift are built around Interface Definition Languages that provide such a contract. They have also been developed with performance in mind, and their primary application is compiled languages with static typing such as C++ and Java, even though they are also available in Python, JavaScript, and other dynamic languages. However,
+  subreason1: The IDLs must be translated to clients and server stubs in the target languages, adding an additional building step.
+  subreason2: The very rigid IDL type system fights against, rather than helps, the "native" type constructs and tends to contaminate more and more of the code base. This is especially saddening with regards to TypeScript and its well-crafted system of algebraic data types (algebraic data types are very cool).
+  subreason3: "We believe that rpc_ts fills an important gap in the RPC ecosystem: it provides a hassle-free way to define APIs in an expressive language, TypeScript, so that we can build isomorphic applications faster."
+
+- title: Our Thoughts
+  color: gray
+  reason: |
+          The protocol we implement is gRPC-Web with a JSON codec (a.k.a, grpc-web+json), as introduced here. So we are not reinventing anything here, we are just making the whole process simpler (🤞).
