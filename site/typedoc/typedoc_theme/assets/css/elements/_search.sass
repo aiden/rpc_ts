@@ -55,26 +55,28 @@
 
         li
             padding: 0 10px
-            background-color: $COLOR_BACKGROUND
+            background-color: #fff
 
         li:nth-child(even)
-            background-color: $COLOR_PANEL
+            background-color: #fff
 
         li.state
             display: none
 
         li.current,
         li:hover
-            background-color: $COLOR_PANEL_DIVIDER
+            background-color: #F3F3F3
 
         a
             display: block
+            color: $COLOR_BLACK
 
             &:before
                 top: 10px
 
         span.parent
-            color: $COLOR_TEXT_ASIDE
+            // color: $COLOR_TEXT_ASIDE
+            color: $COLOR_BACKGROUND
             font-weight: $FONT_WEIGHT_NORMAL
 
     &.has-focus
