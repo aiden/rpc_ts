@@ -15,6 +15,8 @@ module.exports = {
   excludeNotExported: true,
   excludePrivate: true,
   listInvalidSymbolLinks: true,
+  hideGenerator: true,
+  readme: path.resolve('docs/primer.md'),
   theme: path.resolve(
     path.dirname(require.resolve('aiden-doc' + '/package.json')),
     'typedoc_theme',
