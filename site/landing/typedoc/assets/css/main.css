@@ -1558,7 +1558,7 @@ pre {
   border-radius: 20px;
   padding: 20px; }
 
-.tsd-typography #primer ~ p > code {
+.tsd-typography p > code {
   background-color: #2066F1;
   padding: 5px;
   border-radius: 10px; }
@@ -1597,6 +1597,8 @@ pre {
       padding-bottom: 20px; }
   html.default .leave-at-xs-sm {
     display: none; }
+  html.default .nav-bar-container {
+    padding: 0 20px; }
   html.default .link-container {
     width: 100%; }
   html.default .overlay {
@@ -1971,8 +1973,7 @@ footer {
   position: relative; }
   .tsd-member .tsd-anchor + h3 {
     margin-top: 0;
-    margin-bottom: 0;
-    border-bottom: none; }
+    font-weight: 500; }
 
 .tsd-navigation {
   padding: 0 0 0 0;
@@ -2403,13 +2404,13 @@ ul.tsd-type-parameters {
 .tsd-widget {
   display: inline-block;
   overflow: hidden;
-  opacity: 0.6;
+  opacity: 1;
   height: 40px;
   transition: opacity 0.1s, background-color 0.2s;
   vertical-align: bottom;
   cursor: pointer; }
   .tsd-widget:hover {
-    opacity: 0.8; }
+    opacity: 1; }
   .tsd-widget.active {
     opacity: 1;
     background-color: #fff; }
