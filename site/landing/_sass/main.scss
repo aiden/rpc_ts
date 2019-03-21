@@ -1,5 +1,11 @@
+@font-face {
+  font-family: "Reno Mono";
+  src: url("../assets/fonts/RenoMono.otf");
+}
+
 body {
-  font-family: 'Theinhardt', sans-serif
+  // font-family: 'Theinhardt', 'Source Sans Pro', sans-serif;
+  font-family: 'Theinhardt', 'Source Sans Pro', sans-serif;
 }
 
 .highlight{
@@ -20,8 +26,8 @@ body {
   background-color: #F3F3F3;
 
   .display-3 {
-    font-weight: 500;
-    max-width: 660px;
+    font-weight: 600;
+    max-width: 685px;
   }
 
   .main-text {

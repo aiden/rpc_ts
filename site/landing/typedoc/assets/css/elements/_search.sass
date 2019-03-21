@@ -1,0 +1,100 @@
+#tsd-search
+    transition: background-color 0.2s
+    border-radius: 20px
+
+    .title
+        position: relative
+        z-index: 2
+        font-weight: 600
+        font-size: 1.5em
+        &:hover
+          text-decoration: none
+
+    .field
+        position: absolute
+        left: 0
+        top: 0
+        right: 40px
+        height: 40px
+
+        input
+            box-sizing: border-box
+            position: relative
+            top: -50px
+            z-index: 1
+            width: 100%
+            padding: 0 10px
+            opacity: 0
+            outline: 0
+            border: 0
+            background: transparent
+            color: #000
+            border-radius: 20px
+
+        label
+            position: absolute
+            overflow: hidden
+            right: -40px
+            background-color: white
+            border-radius: 20px
+            opacity: 1
+
+    .field input,
+    .title
+        transition: opacity 0.2s
+
+    .results
+        position: absolute
+        visibility: hidden
+        top: 40px
+        width: 100%
+        margin: 0
+        padding: 0
+        list-style: none
+        box-shadow: 0 0 4px rgba(#000, 0.25)
+
+        li
+            padding: 0 10px
+            background-color: #fff
+
+        li:nth-child(even)
+            background-color: #fff
+
+        li.state
+            display: none
+
+        li.current,
+        li:hover
+            background-color: #F3F3F3
+
+        a
+            display: block
+            color: $COLOR_BLACK
+
+            &:before
+                top: 10px
+
+        span.parent
+            // color: $COLOR_TEXT_ASIDE
+            color: $COLOR_BACKGROUND
+            font-weight: $FONT_WEIGHT_NORMAL
+
+    &.has-focus
+        background-color: $COLOR_SEARCH_BAR_BACKGROUND
+
+        .field input
+            top: 0
+            opacity: 1
+
+        .title
+            z-index: 0
+            opacity: 0
+
+        .results
+            visibility: visible
+
+    &.loading .results li.state.loading
+        display: block
+
+    &.failure .results li.state.failure
+        display: block

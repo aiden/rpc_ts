@@ -11,7 +11,7 @@ layout: home
     </div>
   </div>
   <div class="row gutter button-container">
-    {% include button.html color="blue" url="/docs" text="Get Started" %}
+    {% include button.html color="blue" url="/typedoc" text="Get Started" %}
     {% include button.html color="white" url="https://github.com/aiden/rpc_ts" text="Github" %}
   </div>
 
@@ -48,7 +48,7 @@ layout: home
       {% endfor %}
 
       <div class="row gutter button-container">
-        {% include button.html color="blue" url="/docs" text="Get Started" %}
+        {% include button.html color="blue" url="/typedoc" text="Get Started" %}
       </div>
 
     </div>
