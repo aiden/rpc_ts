@@ -29,11 +29,11 @@ layout: home
 
 <div class="quicklook-section container-fluid">
   <div class="row gutter">
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <h3>A Quick Look</h3>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-lg-8">
       {% for item in site.data.code_samples %}
 
         <p class="section-title">{{ item.section }}</p>
