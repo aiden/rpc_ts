@@ -1,8 +1,14 @@
+.navbar {
+  background-color:  #f3f3f3;
+  color: #034BDA;
+}
+
+
 .nav-link {
   color: $MAIN_BLUE;
   text-decoration: none;
   font-family: $FONT_FAMILY_MONO;
-  padding: 0px 30px;
+  padding: 10px 30px;
 }
 
 .navbar-nav {
@@ -10,10 +16,19 @@
   font-size: 0.8em;
 }
 
+button:focus {outline:0;}
 
 .navbar-brand {
-  font-weight: 600;
-  padding-bottom: 20px;
+  font-weight: 700;
+  font-size: 1.5em;
   padding-left: 10px;
   color: #115CF1;
+}
+
+.navbar-toggler-icon {
+  background-image: url("../images/menu.svg");
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {padding-left: 0px}
 }

@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Reno Mono";
-  src: url("../assets/fonts/RenoMono.otf");
+  src: url("../fonts/RenoMono.otf");
 }
 
 body {
@@ -16,17 +16,11 @@ body {
   background-color: $MAIN_GRAY;
 }
 
-
-.navbar {
-  background-color:  #f3f3f3;
-  color: #034BDA;
-}
-
 #hero-section {
   background-color: #F3F3F3;
 
   .display-3 {
-    font-weight: 600;
+    font-weight: 700;
     max-width: 685px;
   }
 
@@ -111,7 +105,12 @@ body {
 }
 
 
+// Styling for under 576 px
 @media (max-width: 576px) {
+  #hero-section .main-text {
+    margin: 20px auto 0px auto;
+  }
+
   .display-3 {
     font-size: 2.5em;
     text-align: left;
