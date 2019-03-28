@@ -83,7 +83,7 @@ describe('jwt_handler', () => {
   describe('fails authentication if the claims are bogus', () => {
     const validClaims = {
       aud: 'foo',
-      exp: moment()
+      exp: moment.utc()
         .add(1, 'month')
         .unix(),
       sub: '1234',
@@ -131,7 +131,7 @@ describe('jwt_handler', () => {
       await ensureFailForBogusClaims(
         {
           ...validClaims,
-          exp: moment()
+          exp: moment.utc()
             .subtract(1, 'month')
             .unix(),
         },
