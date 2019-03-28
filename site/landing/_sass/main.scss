@@ -1,16 +1,19 @@
 @font-face {
-  font-family: "Reno Mono";
-  src: url("../fonts/RenoMono.otf");
+  font-family: 'Reno Mono';
+  src: url('../fonts/RenoMono.otf');
 }
 
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  background: #ffffff;
+  color: #212529;
 }
 
 .highlight,
 pre,
 code {
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+  background-color: transparent;
 }
 
 .background-gray {
@@ -19,6 +22,8 @@ code {
 
 #hero-section {
   background-color: #f3f3f3;
+  overflow: hidden;
+  padding: 0;
 
   .display-3 {
     font-weight: 700;
@@ -35,12 +40,12 @@ code {
     line-height: 40px;
   }
 
+  .usp-container {
+    border-top: #fff solid 1px;
+  }
+
   .ups-section {
     color: $COLOR_BACKGROUND;
-
-    .usp-container {
-      border-top: #fff solid 1px;
-    }
 
     .middle {
       border-left: none;
@@ -68,11 +73,17 @@ code {
 
   h3 {
     font-weight: 400;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+    margin-top: 0;
   }
 
   .section-title {
     font-weight: 200;
     font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
 
   code {

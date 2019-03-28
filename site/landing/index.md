@@ -2,7 +2,6 @@
 layout: home
 ---
 
-
 <div id="hero-section" class="container-fluid">
   <div class="row gutter">
     <div class="text-center main-text">
@@ -12,28 +11,30 @@ layout: home
   </div>
   <div class="row gutter button-container">
     {% include button.html color="blue" url="/typedoc" text="Get Started" %}
-    {% include button.html color="white" url="https://github.com/aiden/rpc_ts" text="Github" %}
+    {% include button.html color="white" url="https://github.com/aiden/rpc_ts" text="Github" target="_blank" %}
   </div>
 
-
-  <div class="row gutter ups-section">
-    {% for item in site.data.usps %}
-      <div class="col-md p-md-4 py-3 usp-container {{ item.position }}">
-        <p class="usp-title">{{ item.title }}</p>
-        <p class="usp-description">{{ item.description }}</p>
+  <div class="row">
+    <div class="container-fluid usp-container">
+      <div class="row gutter ups-section">
+        {% for item in site.data.usps %}
+          <div class="col-md p-md-4 py-3 {{ item.position }}">
+            <p class="usp-title">{{ item.title }}</p>
+            <p class="usp-description">{{ item.description }}</p>
+          </div>
+        {% endfor %}
       </div>
-    {% endfor %}
+    </div>
   </div>
 </div>
 
-
 <div class="quicklook-section container-fluid">
   <div class="row gutter">
-    <div class="col-lg-4">
+    <div class="col-lg-4 p-lg-4">
       <h3>A Quick Look</h3>
     </div>
 
-    <div class="col-lg-8">
+    <div class="col-lg-8 p-lg-4">
       {% for item in site.data.code_samples %}
 
         <p class="section-title">{{ item.section }}</p>
@@ -52,5 +53,6 @@ layout: home
       </div>
 
     </div>
+
   </div>
 </div>

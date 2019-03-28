@@ -484,15 +484,15 @@ ul.tsd-descriptions > li > :last-child > :last-child,
 ul.tsd-descriptions > li > :last-child > :last-child > :last-child {
   margin-bottom: 0; }
 
-.container {
+.container-typedoc {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 40px; }
+  padding: 0 1.5rem; }
   @media (max-width: 640px) {
-    .container {
+    .container-typedoc {
       padding: 0 20px; } }
 
-.container-main {
+.container-typedoc-main {
   padding-bottom: 200px; }
 
 .row {
@@ -1660,10 +1660,10 @@ h3, h4, .tsd-index-panel h3, h5 {
 .tsd-type-parameters-title, .tsd-parameters-title, .tsd-returns-title, .tsd-index-section h3 {
   font-weight: 500; }
 
-html.minimal .container {
+html.minimal .container-typedoc {
   margin: 0; }
 
-html.minimal .container-main {
+html.minimal .container-typedoc-main {
   padding-top: 50px;
   padding-bottom: 0; }
 
@@ -1697,7 +1697,7 @@ html.minimal #tsd-filter .tsd-filter-group {
 
 html.minimal footer {
   background-color: transparent; }
-  html.minimal footer .container {
+  html.minimal footer .container-typedoc {
     padding: 0; }
 
 html.minimal .tsd-generator {
@@ -1829,7 +1829,7 @@ footer {
     height: 200px;
     z-index: -1;
     position: relative; }
-    footer#aiden-footer .container, footer#aiden-footer .col-4, footer#aiden-footer .col-8 {
+    footer#aiden-footer .container-typedoc, footer#aiden-footer .col-4, footer#aiden-footer .col-8 {
       height: 200px; }
     footer#aiden-footer .col-8 {
       float: left; }
@@ -2361,7 +2361,11 @@ ul.tsd-type-parameters {
       padding: 0px 30px;
       font-size: 0.8em; }
       .tsd-page-toolbar .link-container .link-item.current {
-        border-bottom: #ffffff 3px solid; }
+        padding: 0 15px; }
+        .tsd-page-toolbar .link-container .link-item.current a {
+          border-bottom: #ffffff 3px solid;
+          display: block;
+          padding: 0 15px; }
     .tsd-page-toolbar .link-container #github-link {
       border: 1px solid #ffffff;
       border-radius: 22px;
