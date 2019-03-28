@@ -21,31 +21,34 @@
 }
 
 .button-blue {
-    p {
-      background-color: $MAIN_BLUE;
-      color: $MAIN_WHITE;
-      &:hover {
-        background-color: #2066F1
-      }
+  p {
+    background-color: $MAIN_BLUE;
+    color: $MAIN_WHITE;
+    &:hover {
+      background-color: #2066f1;
     }
+  }
 }
 
-
 .button-white {
-    p {
-      background-color: $MAIN_WHITE;
-      color: $MAIN_BLUE;
+  p {
+    background-color: $MAIN_WHITE;
+    color: $MAIN_BLUE;
 
-      &:hover {background-color: #fbfbfb}
+    &:hover {
+      background-color: #fbfbfb;
     }
+  }
 }
 
 .button-clear {
-    p {
-      background-color: none;
-      color: $MAIN_BLUE;
-      border: 0.5px #fff solid;
+  p {
+    background-color: none;
+    color: $MAIN_BLUE;
+    border: 0.5px #fff solid;
 
-      &:hover {background-color: #f9f9f9}
+    &:hover {
+      background-color: #f9f9f9;
     }
+  }
 }

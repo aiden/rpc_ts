@@ -16,6 +16,11 @@ code {
   background-color: transparent;
 }
 
+a {
+  color: #115cf1;
+  text-decoration: underline;
+}
+
 .background-gray {
   background-color: $MAIN_GRAY;
 }
@@ -67,16 +72,15 @@ code {
   padding-top: 70px;
   padding-bottom: 70px;
 
-  .codeBlock {
-    margin-bottom: 50px;
+  p.section-title {
+    margin-top: 50px;
   }
 
   h3 {
     font-weight: 400;
     font-size: 1.75rem;
-    margin-bottom: 0.5rem;
     line-height: 1.2;
-    margin-top: 0;
+    margin-top: 50px;
   }
 
   .section-title {
@@ -86,19 +90,31 @@ code {
     margin-bottom: 1rem;
   }
 
-  code {
-    margin-left: -100px;
-  }
-
   .highlight {
     background-color: #f3f3f3;
-    border-radius: 40px;
+    border-radius: 20px;
   }
 
   pre {
-    padding-top: 40px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: 20px;
+    overflow-x: scroll;
+  }
+
+  code {
+    white-space: pre;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+  }
+
+  a.btn {
+    text-decoration: none;
+  }
+
+  img.github {
+    width: 25px;
+    vertical-align: top;
   }
 }
 

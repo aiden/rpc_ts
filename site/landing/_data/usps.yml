@@ -1,13 +1,11 @@
-- title: Clean APIs
+- title: TypeScript-native
   position: side
-  description: Typescript language across the board. Type safe contracts.
+  description: Clean API contracts written in TypeScript.  Ideal for modern isomorphic web applications.
 
-
-- title: Hassle free
+- title: Hassle-free
   position: middle
-  description: No proxies, no IDL. Easy maintenance and fast iterations.
+  description: No Domain Specific Language, no code generation, no proxy. Improve the developer experience without compromising correctness.
 
-
-- title: Based on industry standard
+- title: Based on proven technologies
   position: side
-  description: Implements gRPC-Web, created by Google.
+  description: Implements the <a href="https://grpc.io/blog/grpc-web-ga">gRPC-Web+json protocol</a>.
