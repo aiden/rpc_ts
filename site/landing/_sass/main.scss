@@ -4,12 +4,13 @@
 }
 
 body {
-  // font-family: 'Theinhardt', 'Source Sans Pro', sans-serif;
-  font-family: 'Theinhardt', 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
-.highlight{
-  font-family: 'Reno Mono', monospace // Menlo, Monaco, Consolas, 'Courier New', monospace
+.highlight,
+pre,
+code {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .background-gray {
@@ -17,7 +18,7 @@ body {
 }
 
 #hero-section {
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
 
   .display-3 {
     font-weight: 700;
@@ -55,16 +56,14 @@ body {
       font-size: 0.8em;
     }
   }
-
 }
-
 
 .quicklook-section {
   padding-top: 70px;
   padding-bottom: 70px;
 
   .codeBlock {
-        margin-bottom: 50px;
+    margin-bottom: 50px;
   }
 
   h3 {
@@ -81,7 +80,7 @@ body {
   }
 
   .highlight {
-    background-color: #F3F3F3;
+    background-color: #f3f3f3;
     border-radius: 40px;
   }
 
@@ -92,8 +91,6 @@ body {
   }
 }
 
-
-
 .gutter {
   max-width: 1200px;
   margin: 0 auto;
@@ -103,7 +100,6 @@ body {
   justify-content: center;
   margin-bottom: 50px;
 }
-
 
 // Styling for under 576 px
 @media (max-width: 576px) {
@@ -128,7 +124,6 @@ body {
   }
 }
 
-
 @media (min-width: 576px) {
   .display-3 {
     font-size: 3.2em;
@@ -141,7 +136,7 @@ body {
     font-size: 3.2em;
   }
 
-  #hero-section{
+  #hero-section {
     .ups-section {
       .middle {
         border-left: #fff solid 1px;
@@ -160,5 +155,4 @@ body {
 
 // Extra large devices (large desktops, 1200px and up)
 @media (max-width: 1200px) {
-
 }
