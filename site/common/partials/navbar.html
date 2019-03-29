@@ -1,14 +1,14 @@
-<header>
+<header id="site-navbar">
     <div class="tsd-page-toolbar">
         <div class="container-typedoc">
             <div class="table-wrap">
                 <div class="table-cell" id="tsd-search" data-index="{% raw %}{{relativeURL "assets/js/search.js"}}{% endraw %}" data-base="{% raw %}{{relativeURL "./"}}{% endraw %}">
                     <div class="field">
                         <ul class="link-container">
-                          <li class="link-item leave-at-xs-sm {% if page.url == "/why.html" %}current{% endif %}"><a href="/why">Why rpc_ts?</a></li>
-                          <li class="link-item leave-at-xs-sm"><a href="/#examples">Examples</a></li>
-                          <li class="link-item leave-at-xs-sm {% if page.url == "typedoc" %}current{% endif %}"><a href="/typedoc">Documentation</a></li>
-                          <li class="link-item leave-at-xs-sm"><a href="/#articles">Articles</a></li>
+                          <li class="link-item leave-at-xs-sm"><a class="nav-link" href="#examples">Examples</a></li>
+                          <li class="link-item leave-at-xs-sm"><a class="nav-link" href="#why">Why rpc_ts?</a></li>
+                          <li class="link-item leave-at-xs-sm"><a class="nav-link" href="#articles">Articles</a></li>
+                          <li class="link-item leave-at-xs-sm {% if page.url == "typedoc" %}current{% endif %}"><a href="/typedoc">Reference</a></li>
                           <a href="https://github.com/aiden/rpc_ts" target="_blank"><li class="link-item" id="github-link">
                             <img src="/assets/images/github{% if github_reverse %}_reverse{% endif %}.svg" />
                             GitHub
@@ -23,7 +23,7 @@
                         <li class="state failure">The search index is not available</li>
                     </ul>
 
-                    <a href="/" class="title {% if page.url == "/" %}current{% endif %}">rpc_ts</a>
+                    <a href="#top" class="title {% if page.url == "/" %}current{% endif %}">rpc_ts</a>
                 </div>
 
                 <div class="table-cell" id="tsd-widgets">

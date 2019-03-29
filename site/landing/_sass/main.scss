@@ -36,7 +36,7 @@ a {
   }
 
   .main-text {
-    margin: 50px auto 0px auto;
+    margin: 100px auto 0px auto;
   }
 
   .lead {
@@ -66,6 +66,23 @@ a {
       font-size: 0.8em;
     }
   }
+}
+
+p.quote {
+  font-size: 140%;
+  font-style: italic;
+  font-weight: 200;
+  padding-left: 16px;
+  border-left: 2px solid #212529;
+  margin-left: -18px;
+}
+
+.why p {
+  max-width: 800px;
+}
+
+p.emphasis {
+  font-weight: 600;
 }
 
 .quicklook-section {
