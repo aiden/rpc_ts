@@ -1,0 +1,36 @@
+<header id="site-navbar">
+    <div class="tsd-page-toolbar">
+        <div class="container-typedoc">
+            <div class="table-wrap">
+                <div class="table-cell" id="tsd-search" data-index="{% raw %}{{relativeURL "assets/js/search.js"}}{% endraw %}" data-base="{% raw %}{{relativeURL "./"}}{% endraw %}">
+                    <div class="field">
+                        <ul class="link-container">
+                          <li class="link-item leave-at-xs-sm"><a class="nav-link" href="{% if page.url == "typedoc" %}/rpc_ts/{% endif %}#examples">Examples</a></li>
+                          <li class="link-item leave-at-xs-sm"><a class="nav-link" href="{% if page.url == "typedoc" %}/rpc_ts/{% endif %}#why">Why rpc_ts?</a></li>
+                          <li class="link-item leave-at-xs-sm"><a class="nav-link" href="{% if page.url == "typedoc" %}/rpc_ts/{% endif %}#articles">Articles</a></li>
+                          <li class="link-item leave-at-xs-sm"><a href="/rpc_ts/typedoc/modules/modulerpcclient.html" class="nav-link {% if page.url == "typedoc" %}active{% endif %}">Reference</a></li>
+                          <a href="https://github.com/aiden/rpc_ts" target="_blank"><li class="link-item" id="github-link">
+                            <img src="/rpc_ts/assets/images/github.svg" />
+                            GitHub
+                          </li></a>
+                        </ul>
+                        <label for="tsd-search-field" class="tsd-widget search no-caption leave-at-xs-sm" style="{% if page.url != "typedoc" %}visibility: hidden{% endif %}">Search</label>
+                        <input id="tsd-search-field" type="text" height="40" />
+                    </div>
+
+                    <ul class="results">
+                        <li class="state loading">Preparing search index...</li>
+                        <li class="state failure">The search index is not available</li>
+                    </ul>
+
+                    <a href="{% if page.url == "typedoc" %}/rpc_ts/{% endif %}#top" class="title {% if page.url == "/" %}current{% endif %}">rpc_ts</a>
+                </div>
+
+                <div class="table-cell" id="tsd-widgets">
+                    <!-- <div id="header-github-button">Github</div> -->
+                    <a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -27,9 +27,8 @@ export class TimestampServerContextConnector
     // TODO: probably better to get the time from MySQL
     // (e.g. `SELECT UTC_TIMESTAMP() FROM DUAL;`).
     return {
-      [ModuleRpcContextCommon.timestampContextKeys.serverTimestamp]: moment()
-        .utc()
-        .format(),
+      [ModuleRpcContextCommon.timestampContextKeys
+        .serverTimestamp]: moment.utc().format(),
     };
   }
 }

@@ -1,0 +1,20 @@
+.why-reason {
+  white-space: pre-wrap;
+}
+
+.why-subreasons-container{
+  counter-reset: item;
+  list-style-type: none;
+  font-family: $FONT_FAMILY_MONO;
+  padding: 0;
+  font-size: 0.9em;
+}
+
+.why-subreasons-item {
+  padding: 15px 0px;
+}
+
+.why-subreasons-item::before {
+  content: counter(item) "\00a0\00a0";
+  counter-increment: item;
+}

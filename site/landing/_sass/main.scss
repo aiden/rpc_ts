@@ -1,0 +1,206 @@
+@font-face {
+  font-family: 'Reno Mono';
+  src: url('../fonts/RenoMono.otf');
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  background: #ffffff;
+  color: #212529;
+}
+
+.highlight,
+pre,
+code {
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+  background-color: transparent;
+}
+
+a {
+  color: #115cf1;
+  text-decoration: underline;
+}
+
+.background-gray {
+  background-color: $MAIN_GRAY;
+}
+
+#hero-section {
+  background-color: #f3f3f3;
+  overflow: hidden;
+  padding: 0;
+
+  .display-3 {
+    font-weight: 700;
+    max-width: 685px;
+  }
+
+  .main-text {
+    margin: 100px auto 0px auto;
+  }
+
+  .lead {
+    max-width: 520px;
+    margin: 30px auto;
+    line-height: 40px;
+  }
+
+  .usp-container {
+    border-top: #fff solid 1px;
+  }
+
+  .ups-section {
+    color: $COLOR_BACKGROUND;
+
+    .middle {
+      border-left: none;
+      border-right: none;
+    }
+
+    .usp-title {
+      font-size: 1.4em;
+    }
+
+    .usp-description {
+      font-family: $FONT_FAMILY_MONO;
+      font-size: 0.8em;
+    }
+  }
+}
+
+p.quote {
+  font-size: 140%;
+  font-style: italic;
+  font-weight: 200;
+  padding-left: 16px;
+  border-left: 2px solid #212529;
+  margin-left: -18px;
+}
+
+.why p {
+  max-width: 800px;
+}
+
+p.emphasis {
+  font-weight: 600;
+}
+
+.quicklook-section {
+  padding-top: 70px;
+  padding-bottom: 70px;
+
+  p.section-title {
+    margin-top: 50px;
+  }
+
+  h3 {
+    font-weight: 400;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin-top: 50px;
+  }
+
+  .section-title {
+    font-weight: 200;
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .highlight {
+    background-color: #f3f3f3;
+    border-radius: 20px;
+  }
+
+  pre {
+    padding: 20px;
+    overflow-x: scroll;
+  }
+
+  code {
+    white-space: pre;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+  }
+
+  a.btn {
+    text-decoration: none;
+  }
+
+  img.github {
+    width: 25px;
+    vertical-align: top;
+  }
+}
+
+.gutter {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.button-container {
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+// Styling for under 576 px
+@media (max-width: 576px) {
+  #hero-section .main-text {
+    margin: 20px auto 0px auto;
+  }
+
+  .display-3 {
+    font-size: 2.5em;
+    text-align: left;
+  }
+  #hero-section {
+    .lead {
+      text-align: left;
+      line-height: 30px;
+    }
+  }
+
+  .button-container {
+    justify-content: left;
+    margin-bottom: 50px;
+  }
+}
+
+@media (min-width: 576px) {
+  .display-3 {
+    font-size: 3.2em;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .display-3 {
+    font-size: 3.2em;
+  }
+
+  #hero-section {
+    .ups-section {
+      .middle {
+        border-left: #fff solid 1px;
+        border-right: #fff solid 1px;
+      }
+    }
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .display-3 {
+    font-size: 3.6em;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {
+}
+
+h5.card-title {
+  margin-top: 0;
+}

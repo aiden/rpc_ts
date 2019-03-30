@@ -5,10 +5,9 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const path = require('path');
 
 module.exports = {
-  out: 'typedoc',
+  out: 'site/landing/typedoc',
   exclude: '**/__tests__/**,**/examples/**,**/private/**,**/utils/**',
   mode: 'modules',
   excludeExternals: true,
@@ -17,8 +16,5 @@ module.exports = {
   listInvalidSymbolLinks: true,
   hideGenerator: true,
   readme: path.resolve('docs/primer.md'),
-  theme: path.resolve(
-    path.dirname(require.resolve('aiden-doc' + '/package.json')),
-    'typedoc_theme',
-  ),
+  theme: 'site/typedoc/typedoc_theme',
 };

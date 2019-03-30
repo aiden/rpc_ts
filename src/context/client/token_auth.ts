@@ -88,7 +88,7 @@ export class TokenAuthClientContextConnector
           return;
         }
 
-        const duration = moment().diff(
+        const duration = moment.utc().diff(
           moment(this.tokenInfo.expiryDate).subtract(
             this.expiryDateOffsetMs,
             'ms',
@@ -154,7 +154,7 @@ export class TokenAuthClientContextConnector
     }
     if (
       this.tokenInfo.expiryDate &&
-      moment().isAfter(
+      moment.utc().isAfter(
         moment(this.tokenInfo.expiryDate).subtract(
           this.expiryDateOffsetMs,
           'ms',
