@@ -88,12 +88,14 @@ export class TokenAuthClientContextConnector
           return;
         }
 
-        const duration = moment.utc().diff(
-          moment(this.tokenInfo.expiryDate).subtract(
-            this.expiryDateOffsetMs,
-            'ms',
-          ),
-        );
+        const duration = moment
+          .utc()
+          .diff(
+            moment(this.tokenInfo.expiryDate).subtract(
+              this.expiryDateOffsetMs,
+              'ms',
+            ),
+          );
         this.timeout = setTimeout(async () => {
           try {
             await this.refreshToken();
@@ -154,12 +156,14 @@ export class TokenAuthClientContextConnector
     }
     if (
       this.tokenInfo.expiryDate &&
-      moment.utc().isAfter(
-        moment(this.tokenInfo.expiryDate).subtract(
-          this.expiryDateOffsetMs,
-          'ms',
-        ),
-      )
+      moment
+        .utc()
+        .isAfter(
+          moment(this.tokenInfo.expiryDate).subtract(
+            this.expiryDateOffsetMs,
+            'ms',
+          ),
+        )
     ) {
       if (!this.refreshTokenHandler || !this.tokenInfo.refreshToken) {
         throw new ModuleRpcClient.RequestContextError(
