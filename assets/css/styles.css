@@ -1,0 +1,259 @@
+@charset "UTF-8";
+@import url(vs.css);
+@font-face {
+  font-family: 'Reno Mono';
+  src: url("../fonts/RenoMono.otf"); }
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  background: #ffffff;
+  color: #212529; }
+
+.highlight,
+pre,
+code {
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+  background-color: transparent; }
+
+a {
+  color: #115cf1;
+  text-decoration: underline; }
+
+.background-gray {
+  background-color: #f3f3f3; }
+
+#hero-section {
+  background-color: #f3f3f3;
+  overflow: hidden;
+  padding: 0; }
+  #hero-section .display-3 {
+    font-weight: 700;
+    max-width: 685px; }
+  #hero-section .main-text {
+    margin: 100px auto 0px auto; }
+  #hero-section .lead {
+    max-width: 520px;
+    margin: 30px auto;
+    line-height: 40px; }
+  #hero-section .usp-container {
+    border-top: #fff solid 1px; }
+  #hero-section .ups-section {
+    color: #115cf1; }
+    #hero-section .ups-section .middle {
+      border-left: none;
+      border-right: none; }
+    #hero-section .ups-section .usp-title {
+      font-size: 1.4em; }
+    #hero-section .ups-section .usp-description {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 0.8em; }
+
+p.quote {
+  font-size: 140%;
+  font-style: italic;
+  font-weight: 200;
+  padding-left: 16px;
+  border-left: 2px solid #212529;
+  margin-left: -18px; }
+
+.why p {
+  max-width: 800px; }
+
+p.emphasis {
+  font-weight: 600; }
+
+.quicklook-section {
+  padding-top: 70px;
+  padding-bottom: 70px; }
+  .quicklook-section p.section-title {
+    margin-top: 50px; }
+  .quicklook-section h3 {
+    font-weight: 400;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin-top: 50px; }
+  .quicklook-section .section-title {
+    font-weight: 200;
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 1rem; }
+  .quicklook-section .highlight {
+    background-color: #f3f3f3;
+    border-radius: 20px; }
+  .quicklook-section pre {
+    padding: 20px;
+    overflow-x: scroll; }
+  .quicklook-section code {
+    white-space: pre; }
+  .quicklook-section h5 {
+    font-size: 1.25rem; }
+  .quicklook-section a.btn {
+    text-decoration: none; }
+  .quicklook-section img.github {
+    width: 25px;
+    vertical-align: top; }
+
+.gutter {
+  max-width: 1200px;
+  margin: 0 auto; }
+
+.button-container {
+  justify-content: center;
+  margin-bottom: 50px; }
+
+@media (max-width: 576px) {
+  #hero-section .main-text {
+    margin: 20px auto 0px auto; }
+
+  .display-3 {
+    font-size: 2.5em;
+    text-align: left; }
+
+  #hero-section .lead {
+    text-align: left;
+    line-height: 30px; }
+
+  .button-container {
+    justify-content: left;
+    margin-bottom: 50px; } }
+@media (min-width: 576px) {
+  .display-3 {
+    font-size: 3.2em; } }
+@media (min-width: 768px) {
+  .display-3 {
+    font-size: 3.2em; }
+
+  #hero-section .ups-section .middle {
+    border-left: #fff solid 1px;
+    border-right: #fff solid 1px; } }
+@media (min-width: 992px) {
+  .display-3 {
+    font-size: 3.6em; } }
+h5.card-title {
+  margin-top: 0; }
+
+.bg-primary {
+  background-color: #115cf1 !important; }
+
+.btn-light {
+  color: #115cf1; }
+
+.btn-primary {
+  background-color: #115cf1;
+  border-color: #115cf1; }
+
+.button {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  margin: 10px 15px; }
+  .button:hover {
+    text-decoration: none; }
+  .button p {
+    padding: 14px 0px 10px 0px;
+    width: 200px;
+    border-radius: 25px;
+    text-align: center;
+    margin-bottom: 0px;
+    transition: background-color 0.3s ease; }
+    .button p:hover {
+      text-decoration: none; }
+
+.button-blue p {
+  background-color: #115cf1;
+  color: #fff; }
+  .button-blue p:hover {
+    background-color: #2066f1; }
+
+.button-white p {
+  background-color: #fff;
+  color: #115cf1; }
+  .button-white p:hover {
+    background-color: #fbfbfb; }
+
+.button-clear p {
+  background-color: none;
+  color: #115cf1;
+  border: 0.5px #fff solid; }
+  .button-clear p:hover {
+    background-color: #f9f9f9; }
+
+footer {
+  background-color: #115cf1; }
+  footer#aiden-footer {
+    background-color: #115cf1;
+    color: #fff;
+    position: relative; }
+    footer#aiden-footer #footer-copy {
+      background-color: #2066f1;
+      padding: 15px 0px 15px 40px;
+      border-radius: 30px;
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      margin: 72px 0px;
+      display: flex;
+      align-items: center; }
+    footer#aiden-footer #footer-icon {
+      margin-right: 30px; }
+    footer#aiden-footer a {
+      text-decoration: none;
+      color: white; }
+    footer#aiden-footer .col-content {
+      border-left: none; }
+
+@media (min-width: 768px) {
+  .col-content {
+    border-left: #fff solid 1px !important; } }
+.why-reason {
+  white-space: pre-wrap; }
+
+.why-subreasons-container {
+  counter-reset: item;
+  list-style-type: none;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  padding: 0;
+  font-size: 0.9em; }
+
+.why-subreasons-item {
+  padding: 15px 0px; }
+
+.why-subreasons-item::before {
+  content: counter(item) "  ";
+  counter-increment: item; }
+
+.tsd-page-toolbar {
+  background: #f3f3f3;
+  color: #115cf1;
+  margin-bottom: 0; }
+  .tsd-page-toolbar .tsd-widget.search {
+    visibility: hidden; }
+  .tsd-page-toolbar .nav-link {
+    display: inline;
+    padding: 0; }
+  .tsd-page-toolbar a {
+    color: #115cf1; }
+  .tsd-page-toolbar a.nav-link {
+    padding: 0 15px;
+    display: block; }
+  .tsd-page-toolbar .link-item {
+    padding: 0 15px; }
+  .tsd-page-toolbar a.active {
+    border-bottom: #115cf1 3px solid; }
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 83px;
+  background: #f3f3f3;
+  border-bottom: 1px solid #ffffff;
+  transition: all 0.4s ease; }
+  header #tsd-search .title {
+    font-size: 2.5rem;
+    transition: all 0.4s ease; }
+  header .tsd-page-toolbar {
+    transition: all 0.4s ease; }
+  header.shrink {
+    height: 50px; }
+    header.shrink .tsd-page-toolbar {
+      padding-top: 3px; }
+    header.shrink #tsd-search .title {
+      font-size: 1.5rem; }
