@@ -1,10 +1,10 @@
 #tsd-search
     transition: background-color 0.2s
-    border-radius: 20px
+    border-radius: 20px 20px 0 0
 
     .title
         position: relative
-        z-index: 2
+        z-index: 10002
         font-weight: 600
         font-size: 1.5em
         &:hover
@@ -16,19 +16,20 @@
         top: 0
         right: 40px
         height: 40px
+        border-radius: 20px 0 0 20px
 
         input
             box-sizing: border-box
             position: relative
             top: -50px
-            z-index: 1
+            z-index: 10001
             width: 100%
             padding: 0 10px
             opacity: 0
             outline: 0
             border: 0
             background: transparent
-            color: #000
+            color: $COLOR_TEXT
             border-radius: 20px
 
         label
@@ -69,29 +70,36 @@
 
         a
             display: block
-            color: $COLOR_BLACK
+            color: $COLOR_TEXT
 
             &:before
                 top: 10px
 
         span.parent
-            // color: $COLOR_TEXT_ASIDE
-            color: $COLOR_BACKGROUND
+            color: $COLOR_TEXT_ASIDE
             font-weight: $FONT_WEIGHT_NORMAL
 
     &.has-focus
-        background-color: $COLOR_SEARCH_BAR_BACKGROUND
+        .field
+            background-color: $COLOR_SEARCH_BAR_BACKGROUND
 
         .field input
             top: 0
             opacity: 1
 
+        .link-container
+            display: none
+
         .title
-            z-index: 0
+            z-index: 9999
             opacity: 0
 
         .results
             visibility: visible
+
+        .tsd-widget.search
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
 
     &.loading .results li.state.loading
         display: block

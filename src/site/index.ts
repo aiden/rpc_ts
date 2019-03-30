@@ -39,7 +39,6 @@ async function generateTypeDocTemplates() {
 
   const navbar = await engine.renderFile('common/partials/navbar.html', {
     page: { url: 'typedoc' },
-    github_reverse: true,
   });
   fs.writeFileSync('site/typedoc/typedoc_theme/partials/header.hbs', navbar);
 }

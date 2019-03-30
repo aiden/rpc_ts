@@ -83,7 +83,7 @@ const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
           <h5 class="card-title">rpc_ts_primer</h5>
           <p class="card-text">A minimal, functional example for rpc_ts.</p>
           <a href="https://github.com/aiden/rpc_ts_primer" class="btn btn-primary" target="_blank">
-            <img class="github" src="/assets/images/github_reverse.svg" />
+            <img class="github" src="assets/images/github_reverse.svg" />
             GitHub
           </a>
         </div>
@@ -95,7 +95,7 @@ const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
           <h5 class="card-title">rpc_ts_chat</h5>
           <p class="card-text">Example chat room with rpc_ts (real-time, React+Redux).</p>
           <a href="https://github.com/aiden/rpc_ts_chat" class="btn btn-light" target="_blank">
-            <img class="github" src="/assets/images/github.svg" />
+            <img class="github" src="assets/images/github.svg" />
             GitHub
           </a>
         </div>
@@ -107,7 +107,7 @@ const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
           <h5 class="card-title">rpc_ts_aws_cognito</h5>
           <p class="card-text">Example authentication for rpc_ts with AWS Cognito.</p>
           <a href="#" class="btn btn-primary disabled" target="_blank">
-            <img class="github" src="/assets/images/github_reverse.svg" />
+            <img class="github" src="assets/images/github_reverse.svg" />
             Coming soon
           </a>
         </div>
