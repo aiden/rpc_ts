@@ -40,6 +40,7 @@ jobs:
       - run:
           name: Install bundler and gems
           command: |
+            apt-get install ruby ruby-dev
             cd site/landing
             gem install bundler
             bundle install
