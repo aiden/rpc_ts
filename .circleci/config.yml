@@ -38,6 +38,12 @@ jobs:
 
             echo -e "  UserKnownHostsFile $TEMPFILE" >> ~/.ssh/config
       - run:
+          name: Install bundler and gems
+          command: |
+            cd site/landing
+            gem install bundler
+            bundle install
+      - run:
           name: Publish doc to github pages
           command: yarn doc:deploy
   deploy:
