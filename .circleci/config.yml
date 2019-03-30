@@ -43,7 +43,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install -yq ruby ruby-dev
             cd site/landing
-            gem install bundler
+            sudo gem install bundler
             bundle install
       - run:
           name: Publish doc to github pages
