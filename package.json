@@ -38,11 +38,14 @@
     "fast-check": "^1.5.0",
     "fetch-mock": "^6.5.0",
     "gh-pages": "^2.0.1",
+    "liquidjs": "^8.0.2",
     "mocha": "^4",
+    "node-sass": "^4.11.0",
     "nyc": "^13.0.1",
     "prettier": "^1.13.7",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.2",
+    "shelljs": "^0.8.3",
     "sinon": "^4.0.1",
     "ts-node": "^4",
     "tsconfig-paths": "^3.5.0",
@@ -73,8 +76,9 @@
     "all": "yarn build && yarn ts && yarn ts:doc && yarn format:check && yarn lint && yarn test && yarn doc",
     "precommit": "lint-staged",
     "extra-md-ts": "cat README.md | yarn --silent codedown Typescript > readme_code.ts",
-    "doc": "typedoc --options typedoc.js src && cp -R docs typedoc",
-    "doc:deploy": "yarn doc && yarn gh-pages -d typedoc -m '[ci skip] Updates'"
+    "doc": "ts-node src/site/index.ts",
+    "doc:serve": "yarn doc && (cd site/landing && bundle exec jekyll serve)",
+    "doc:deploy": "yarn doc && yarn gh-pages -d site/landing/_site -m '[ci skip] Updates'"
   },
   "lint-staged": {
     "{./*,typescript/**/*}.{js,jsx,ts,tsx,css,scss,md,json}": "prettier -l",

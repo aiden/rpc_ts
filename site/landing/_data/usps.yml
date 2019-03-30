@@ -1,0 +1,11 @@
+- title: TypeScript-native
+  position: side
+  description: Clean API contracts written in TypeScript.  Ideal for modern <a href="https://en.wikipedia.org/wiki/Isomorphic_JavaScript" target="_blank">isomorphic web applications</a>.
+
+- title: Hassle-free
+  position: middle
+  description: No <a href="https://en.wikipedia.org/wiki/Domain-specific_language" target="_blank">Domain Specific Language</a>, no code generation, no proxy. Improve the developer experience without compromising correctness.
+
+- title: Based on proven technologies
+  position: side
+  description: Implements the <a href="https://grpc.io/blog/grpc-web-ga" target="_blank">gRPC-Web+json protocol</a>.

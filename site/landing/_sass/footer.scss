@@ -1,0 +1,42 @@
+footer{
+  background-color: $MAIN_BLUE;
+
+  &#aiden-footer{
+    background-color: $MAIN_BLUE;
+    color: $MAIN_WHITE;
+    position: relative;
+
+    #footer-copy {
+      background-color: $SECONDARY_BLUE;
+      padding: 15px 0px 15px 40px;
+      border-radius: 30px;
+      font-family: $FONT_FAMILY_MONO;
+      margin: 72px 0px;
+      display: flex;
+      align-items: center;
+    }
+
+    #footer-icon{
+      margin-right: 30px;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    .col-content {
+      border-left: none;
+    }
+
+  }
+}
+
+
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .col-content {
+    border-left: #fff solid 1px !important;
+  }
+}
