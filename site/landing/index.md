@@ -127,7 +127,7 @@ const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
       <p>rpc_ts was developed with agility first and foremost in mind. It does not explicitly address scalability or performance (although this should not be a problem, really), but helps writing Minimal Viable web apps, decreasing time to market, and improving the developer experience without compromising correctness.</p>
       <p>rpc_ts was made for the startup engineer who recognizes that using one language is always preferable to using many, that proven technologies should be favoured over new, shiny ones, and that messing with the toolchain to enable code generation with custom DSLs (Domain-Specific Languages) is a time pit.</p>
       <p class="emphasis">We believe that rpc_ts fills an important gap in the RPC ecosystem: it provides a hassle-free way to define APIs in an expressive language, TypeScript, so that we can build isomorphic applications faster. 🏖</p>
-      <p>For more info about this positioning, including a comparison with other technologies, see our <a href="#" class="disabled" target="_blank">open-sourcing announcement</a>.</p>
+      <p>For more info about this positioning, including a comparison with other technologies, see our open-sourcing announcement <i>(coming soon)</i>.</p>
     </div>
   </div>
 

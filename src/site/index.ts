@@ -1,3 +1,14 @@
+/**
+ * @module ModuleRpcServer
+ * @ignore
+ *
+ * @license
+ * Copyright (c) Aiden.ai
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import * as shell from 'shelljs';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -11,10 +22,10 @@ main()
   });
 
 async function main() {
-  shell.exec('yarn typedoc --options typedoc.js src');
   shell.exec(
     'yarn node-sass site/typedoc/typedoc_theme/assets/css/main.sass site/typedoc/typedoc_theme/assets/css/main.css',
   );
+  shell.exec('yarn typedoc --options typedoc.js src');
   shell.cp('-R', 'docs', 'site/landing/typedoc');
   await generateTypeDocTemplates();
   shell.exec('bundle exec jekyll build', { cwd: 'site/landing' });
