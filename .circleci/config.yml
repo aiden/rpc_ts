@@ -40,8 +40,8 @@ jobs:
       - run:
           name: Install bundler and gems
           command: |
-            apt-get update
-            apt-get install -yq ruby ruby-dev
+            sudo apt-get update
+            sudo apt-get install -yq ruby ruby-dev
             cd site/landing
             gem install bundler
             bundle install
