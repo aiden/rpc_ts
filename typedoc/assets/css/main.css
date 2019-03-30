@@ -2109,10 +2109,10 @@ footer {
 
 #tsd-search {
   transition: background-color 0.2s;
-  border-radius: 20px; }
+  border-radius: 20px 20px 0 0; }
   #tsd-search .title {
     position: relative;
-    z-index: 2;
+    z-index: 10002;
     font-weight: 600;
     font-size: 1.5em; }
     #tsd-search .title:hover {
@@ -2122,19 +2122,20 @@ footer {
     left: 0;
     top: 0;
     right: 40px;
-    height: 40px; }
+    height: 40px;
+    border-radius: 20px 0 0 20px; }
     #tsd-search .field input {
       box-sizing: border-box;
       position: relative;
       top: -50px;
-      z-index: 1;
+      z-index: 10001;
       width: 100%;
       padding: 0 10px;
       opacity: 0;
       outline: 0;
       border: 0;
       background: transparent;
-      color: #000;
+      color: #212529;
       border-radius: 20px; }
     #tsd-search .field label {
       position: absolute;
@@ -2171,18 +2172,23 @@ footer {
       #tsd-search .results a:before {
         top: 10px; }
     #tsd-search .results span.parent {
-      color: #ffffff;
+      color: #115cf1;
       font-weight: 400; }
-  #tsd-search.has-focus {
+  #tsd-search.has-focus .field {
     background-color: #ffffff; }
-    #tsd-search.has-focus .field input {
-      top: 0;
-      opacity: 1; }
-    #tsd-search.has-focus .title {
-      z-index: 0;
-      opacity: 0; }
-    #tsd-search.has-focus .results {
-      visibility: visible; }
+  #tsd-search.has-focus .field input {
+    top: 0;
+    opacity: 1; }
+  #tsd-search.has-focus .link-container {
+    display: none; }
+  #tsd-search.has-focus .title {
+    z-index: 9999;
+    opacity: 0; }
+  #tsd-search.has-focus .results {
+    visibility: visible; }
+  #tsd-search.has-focus .tsd-widget.search {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; }
   #tsd-search.loading .results li.state.loading {
     display: block; }
   #tsd-search.failure .results li.state.failure {
