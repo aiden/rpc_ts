@@ -14,5 +14,7 @@ module.exports = {
   excludeNotExported: true,
   excludePrivate: true,
   listInvalidSymbolLinks: true,
+  hideGenerator: true,
+  readme: path.resolve('docs/primer.md'),
   theme: 'site/typedoc/typedoc_theme',
 };
