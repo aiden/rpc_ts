@@ -160,8 +160,8 @@ const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
         <div class="card-body">
           <h5 class="card-title">Open sourcing rpc_ts, an RPC framework for TypeScript.</h5>
           <p class="card-text">rpc_ts is a framework for type-safe Remote Procedure Calls (RPC) in TypeScript. In this post, I'm going to compare our design to other solutions out there and go through the rationale for coming up with rpc_ts.</p>
-          <a href="#" class="btn btn-light disabled">
-            Coming soon
+          <a href="https://medium.com/@aiden_ai/open-sourcing-rpc-ts-an-rpc-framework-for-typescript-255073f1fe9b" class="btn btn-light" target="_blank">
+            Read more
           </a>
         </div>
       </div>
