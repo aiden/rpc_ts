@@ -1,5 +1,6 @@
 /**
- * @module ModuleRpcServer
+ * Build up the documentation for rpc_ts.
+ *
  * @ignore
  *
  * @license
@@ -41,4 +42,10 @@ async function generateTypeDocTemplates() {
     page: { url: 'typedoc' },
   });
   fs.writeFileSync('site/typedoc/typedoc_theme/partials/header.hbs', navbar);
+
+  const analytics = await engine.renderFile('common/partials/analytics.html');
+  fs.writeFileSync(
+    'site/typedoc/typedoc_theme/partials/analytics.hbs',
+    analytics,
+  );
 }
