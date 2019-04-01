@@ -26,10 +26,13 @@
                     <a href="{% if page.url == "typedoc" %}/rpc_ts/{% endif %}#top" class="title {% if page.url == "/" %}current{% endif %}">rpc_ts</a>
                 </div>
 
+                {% if page.url == "typedoc" %}
                 <div class="table-cell" id="tsd-widgets">
-                    <!-- <div id="header-github-button">Github</div> -->
-                    <a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+                    <a href="#" class="menu" data-toggle="menu">
+                        <img src="{% if page.url == "typedoc" %}/rpc_ts/{% endif %}assets/images/menu.svg" />
+                    </a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>

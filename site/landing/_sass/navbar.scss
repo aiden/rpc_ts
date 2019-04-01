@@ -42,6 +42,7 @@ header {
   #tsd-search .title {
     font-size: 2.5rem;
     transition: $navbar_transition;
+    top: -2px;
   }
 
   .tsd-page-toolbar {
@@ -57,6 +58,24 @@ header {
 
     #tsd-search .title {
       font-size: 1.5rem;
+    }
+  }
+
+  .menu {
+    width: 30px;
+    right: 0;
+    position: absolute;
+  }
+
+  @media (min-width: 992px) {
+    .menu {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .link-container {
+      display: none !important;
     }
   }
 }

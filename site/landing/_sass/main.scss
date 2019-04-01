@@ -25,6 +25,8 @@ a {
   background-color: $MAIN_GRAY;
 }
 
+$hero_section_top_margin: 100px;
+
 #hero-section {
   background-color: #f3f3f3;
   overflow: hidden;
@@ -36,13 +38,18 @@ a {
   }
 
   .main-text {
-    margin: 100px auto 0px auto;
+    margin: $hero_section_top_margin auto 0px auto;
   }
 
   .lead {
     max-width: 520px;
-    margin: 30px auto;
     line-height: 40px;
+  }
+
+  .lead,
+  .main-text h1 {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .usp-container {
@@ -88,6 +95,8 @@ p.emphasis {
 .quicklook-section {
   padding-top: 70px;
   padding-bottom: 70px;
+  padding-left: 5px;
+  padding-right: 5px;
 
   p.section-title {
     margin-top: 50px;
@@ -148,7 +157,7 @@ p.emphasis {
 // Styling for under 576 px
 @media (max-width: 576px) {
   #hero-section .main-text {
-    margin: 20px auto 0px auto;
+    margin: $hero_section_top_margin auto 0px auto;
   }
 
   .display-3 {

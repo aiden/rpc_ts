@@ -1,6 +1,7 @@
 /**
  * Build up the documentation for rpc_ts.
  *
+ * @module ModuleRpcSite
  * @ignore
  *
  * @license

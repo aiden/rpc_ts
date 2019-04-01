@@ -4,9 +4,11 @@ layout: home
 
 <div id="hero-section" class="container-fluid">
   <div class="row gutter">
-    <div class="text-center main-text">
+    <div class="col-lg-12 main-text">
+    <div class="text-center">
       <h1 class="display-3">Remote Procedure Calls in Typescript made simple 🤞</h1>
       <p class="lead">rpc_ts provides a hassle-free way to define APIs in TypeScript so that we can build isomorphic web applications faster.</p>
+    </div>
     </div>
   </div>
   <div class="row gutter button-container">
@@ -14,8 +16,8 @@ layout: home
     {% include button.html color="white" url="https://github.com/aiden/rpc_ts" text="GitHub" target="_blank" %}
   </div>
 
-  <div class="row">
-    <div class="container-fluid usp-container">
+  <div class="row gutter">
+    <div class="container-fluid usp-container" style="padding: 0">
       <div class="row gutter ups-section">
         {% for item in site.data.usps %}
           <div class="col-md p-md-3 py-3 {{ item.position }}">
@@ -28,7 +30,7 @@ layout: home
   </div>
 </div>
 
-<div class="quicklook-section container-fluid">
+<div class="quicklook-section container-fluid" style="padding-left: 0; padding-right: 0">
   <div class="row gutter">
     <div class="col-lg-12">
       <h3 style="margin: 0; margin-bottom: -20px"><a name="syntax" id="syntax"></a>Syntax</h3>
@@ -71,13 +73,21 @@ const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
   </div>
 
   <div class="row gutter">
+    <div class="col-lg-12" style="margin-top: 3.75rem">
+      <a href="/rpc_ts/typedoc/modules/modulerpcclient.html" class="btn btn-primary">
+        API Reference
+      </a>
+    </div>
+  </div>
+
+  <div class="row gutter">
     <div class="col-lg-12">
       <h3 id="examples"><a name="examples"></a>Examples</h3>
     </div>
   </div>
 
   <div class="row gutter">
-    <div class="col-sm-4 d-flex align-items-stretch">
+    <div class="col-sm-4 d-flex align-items-stretch py-3">
       <div class="card w-100">
         <div class="card-body">
           <h5 class="card-title">rpc_ts_primer</h5>
@@ -89,7 +99,7 @@ const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
         </div>
       </div>
     </div>
-    <div class="col-sm-4 d-flex align-items-stretch">
+    <div class="col-sm-4 d-flex align-items-stretch py-3">
       <div class="card w-100 text-white bg-primary">
         <div class="card-body">
           <h5 class="card-title">rpc_ts_chat</h5>
@@ -101,7 +111,7 @@ const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
         </div>
       </div>
     </div>
-    <div class="col-sm-4 d-flex align-items-stretch">
+    <div class="col-sm-4 d-flex align-items-stretch py-3">
       <div class="card w-100">
         <div class="card-body">
           <h5 class="card-title">rpc_ts_aws_cognito</h5>
@@ -145,7 +155,7 @@ const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
   </div>
 
   <div class="row gutter">
-    <div class="col-sm-6 d-flex align-items-stretch">
+    <div class="col-sm-6 d-flex align-items-stretch py-3">
       <div class="card w-100 text-white bg-primary">
         <div class="card-body">
           <h5 class="card-title">Open sourcing rpc_ts, an RPC framework for TypeScript.</h5>
@@ -156,7 +166,7 @@ const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
         </div>
       </div>
     </div>
-    <div class="col-sm-6 d-flex align-items-stretch">
+    <div class="col-sm-6 d-flex align-items-stretch py-3">
       <div class="card w-100">
         <div class="card-body">
           <h5 class="card-title">How to write an authentication middleware for rpc_ts: the case of AWS Cognito.</h5>
