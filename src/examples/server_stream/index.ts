@@ -14,7 +14,7 @@ import { ModuleRpcCommon } from '../../common';
 import { AssertionError } from 'assert';
 import { ModuleRpcContextServer } from '../../context/server';
 import { ModuleRpcProtocolServer } from '../../protocol/server';
-import { ModuleRpcProtocolClient } from 'rpc_ts/src/protocol/client';
+import { ModuleRpcProtocolClient } from '../../protocol/client';
 
 main().catch(
   /* istanbul ignore next */
