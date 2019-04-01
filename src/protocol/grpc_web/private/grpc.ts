@@ -82,7 +82,7 @@ export const errorTypesToGrpcStatuses: {
 /** Conversion table from gRPC statuses to error types. */
 export const grpcStatusesToErrorTypes = _.fromPairs(
   _.map(errorTypesToGrpcStatuses, (status, errorType) => [status, errorType]),
-);
+) as { [errorCode: number]: ModuleRpcCommon.RpcErrorType };
 
 /** Get the error, or null in case the RPC succeeded, for the RPC call metadata. */
 export function getGrpcWebErrorFromMetadata(
