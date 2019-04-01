@@ -6,6 +6,8 @@ rpc_ts is a framework for doing typesafe [Remote Procedure Calls (RPC)](https://
 
 rpc_ts supports both unary calls and server-side streaming and is fully compatible with the [grpc-web+json](https://github.com/grpc/grpc-web) protocol (an adaptation of the popular gRPC protocol for the web). It has been designed with a relentless focus on modularity, simplicity, and robustness, and does not require the use of an intermediate gRPC proxy.
 
+For more information, see [the documentation](https://aiden.github.io/rpc_ts), and [our open-sourcing announcement](https://medium.com/@aiden_ai/open-sourcing-rpc-ts-an-rpc-framework-for-typescript-255073f1fe9b).
+
 ## Examples
 
 ### Chat room
