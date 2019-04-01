@@ -33,7 +33,7 @@ export function getRpcClient<
 >(
   serviceDefinition: serviceDefinition,
   options: RpcClientOptions,
-): ModuleRpcClient.Service<serviceDefinition, any>;
+): ModuleRpcClient.ServiceMethodMap<serviceDefinition, any>;
 export function getRpcClient<
   serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
   ResponseContext
@@ -44,7 +44,7 @@ export function getRpcClient<
       ResponseContext
     >;
   },
-): ModuleRpcClient.Service<serviceDefinition, ResponseContext>;
+): ModuleRpcClient.ServiceMethodMap<serviceDefinition, ResponseContext>;
 export function getRpcClient<
   serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
   ResponseContext
@@ -55,15 +55,15 @@ export function getRpcClient<
       ResponseContext
     >;
   },
-): ModuleRpcClient.Service<serviceDefinition, ResponseContext> {
+): ModuleRpcClient.ServiceMethodMap<serviceDefinition, ResponseContext> {
   const clientContextConnector =
     options.clientContextConnector ||
     new ModuleRpcContextClient.EmptyClientContextConnector();
-  return ModuleRpcProtocolGrpcWebClient.getGrpcWebClient(
+  return (ModuleRpcProtocolGrpcWebClient.getGrpcWebClient(
     serviceDefinition,
     clientContextConnector,
     {
       remoteAddress: options.remoteAddress,
     },
-  ) as ModuleRpcClient.Service<serviceDefinition, ResponseContext>;
+  ) as ModuleRpcClient.Service<serviceDefinition, ResponseContext>).methodMap();
 }

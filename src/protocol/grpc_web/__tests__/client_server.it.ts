@@ -266,7 +266,7 @@ describe('rpc_ts', () => {
           { remoteAddress: `http://example.test` },
         );
         try {
-          await client.nice().unary({});
+          await client.methodMap().unary({});
           throw new AssertionError({
             message: 'expected an Error to be thrown',
           });
@@ -307,7 +307,7 @@ describe('rpc_ts', () => {
               codec: new InvalidCodec(),
             },
           );
-          await client.nice().unary({});
+          await client.methodMap().unary({});
           throw new AssertionError({
             message: 'expected an Error to be thrown',
           });
@@ -475,7 +475,7 @@ describe('rpc_ts', () => {
             new ModuleRpcContextClient.EmptyClientContextConnector(),
             { remoteAddress: `http://localhost:${serverPort}/api` },
           );
-          await client.nice().unary({});
+          await client.methodMap().unary({});
           throw new AssertionError({
             message: 'expected an Error to be thrown',
           });
@@ -523,7 +523,9 @@ describe('rpc_ts', () => {
             new ModuleRpcContextClient.EmptyClientContextConnector(),
             { remoteAddress: `http://localhost:${serverPort}/api` },
           );
-          await ModuleRpcClient.streamAsPromise(client.nice().serverStream({}));
+          await ModuleRpcClient.streamAsPromise(
+            client.methodMap().serverStream({}),
+          );
           throw new AssertionError({
             message: 'expected an Error to be thrown',
           });

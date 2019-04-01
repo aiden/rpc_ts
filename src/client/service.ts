@@ -138,10 +138,10 @@ export class Service<
   }
 
   /**
-   * Return a "nice" service interface with which it is possible to call RPCs
+   * Return a "method map" service interface with which it is possible to call RPCs
    * as "normal" JavaScript functions.
    *
-   * @example ```TypeScript
+   * @example ```Typescript
    * // Before
    * const service: Service<...> = ...;
    * service.stream('serverStream', { foo: 'bar' })
@@ -150,15 +150,15 @@ export class Service<
    * const { response, responseContext } = await service.call('unaryMethod', { foo: 'bar' });
    *
    * // After
-   * const niceService = service.nice();
-   * niceService.serverStream({ foo: 'bar' })
+   * const methodMap = service.methodMap();
+   * methodMap.serverStream({ foo: 'bar' })
    *   .on('message', response => { ... })
    *   .start();
-   * const response = await niceService.unaryMethod({ foo: 'bar' });
+   * const response = await methodMap.unaryMethod({ foo: 'bar' });
    * ```
    */
-  nice(): NiceService<serviceDefinition> {
-    return mapValuesWithStringKeys(
+  methodMap(): ServiceMethodMap<serviceDefinition, ResponseContext> {
+    const methods = mapValuesWithStringKeys(
       this.serviceDefinition,
       (methodDefinition, method) => {
         if (
@@ -180,6 +180,10 @@ export class Service<
         }
       },
     ) as any;
+    return {
+      ...methods,
+      [serviceKey]: this,
+    };
   }
 }
 
@@ -198,12 +202,23 @@ export interface ResponseWithContext<
 }
 
 /**
- * "Nice" service derived from a service definition.
+ * Symbol used as a property name on a [[ServiceMethodMap]] to access the
+ * full service interface from a "method map" service interface.
  *
- * @see [[Service.nice]]
+ * This symbol is private to this module as [[serviceInstance]] should
+ * be used externally instead of directly accessing the service instance
+ * using the symbol.
  */
-export type NiceService<
-  serviceDefinition extends ModuleRpcCommon.ServiceDefinition
+const serviceKey = Symbol('serviceKey');
+
+/**
+ * "Method map" service interface derived from a service definition.
+ *
+ * @see [[Service.methodMap]]
+ */
+export type ServiceMethodMap<
+  serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
+  ResponseContext = any
 > = {
   [method in ModuleRpcCommon.MethodsFor<
     serviceDefinition
@@ -212,9 +227,30 @@ export type NiceService<
   }
     ? ServerStreamMethod<serviceDefinition, method>
     : UnaryMethod<serviceDefinition, method>
+} & {
+  [serviceKey]: Service<serviceDefinition, ResponseContext>;
 };
 
-/** A unary method typed as part of a "nice" service. */
+/**
+ * Get the full service instance from a "method map" service interface.
+ *
+ * Implementation detail: The service instance is stored in a "method map" through a
+ * symbol-named property.
+ *
+ * @example ```Typescript
+ * const service: Service<...> = ...;
+ * const methodMap = service.methodMap();
+ * // serviceInstance(methodMap) === service
+ * ```
+ */
+export function serviceInstance<
+  serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
+  ResponseContext = any
+>(methodMap: ServiceMethodMap<serviceDefinition, ResponseContext>) {
+  return methodMap[serviceKey];
+}
+
+/** A unary method typed as part of a "method map" service interface. */
 export interface UnaryMethod<
   serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
   method extends ModuleRpcCommon.MethodsFor<serviceDefinition>
@@ -224,7 +260,7 @@ export interface UnaryMethod<
   >;
 }
 
-/** A server-stream method typed as part of a "nice" service. */
+/** A server-stream method typed as part of a "method map" service interface. */
 export interface ServerStreamMethod<
   serviceDefinition extends ModuleRpcCommon.ServiceDefinition,
   method extends ModuleRpcCommon.MethodsFor<serviceDefinition>

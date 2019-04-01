@@ -65,7 +65,7 @@ http.createServer(app).listen(3000);
       <div class="codeBlock">{% highlight TypeScript %}
 const { text } = await ModuleRpcProtocolClient.getRpcClient(helloService, {
   remoteAddress: 'http://localhost:3000'
-}).nice().getHello({ language: 'Spanish' });
+}).getHello({ language: 'Spanish' });
 {% endhighlight %}</div>
     </div>
   </div>

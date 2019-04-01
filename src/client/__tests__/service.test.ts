@@ -5,7 +5,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { Service, ServiceRetrier } from '../service';
+import { Service, ServiceRetrier, serviceInstance } from '../service';
 import * as sinon from 'sinon';
 import { Stream } from '../stream';
 import { EventEmitter } from 'events';
@@ -179,8 +179,8 @@ describe('rpc_ts', () => {
       });
     });
 
-    describe('nice', () => {
-      it('unary methods can be called', async () => {
+    describe('methodMap', () => {
+      specify('unary methods can be called', async () => {
         const mockStream = new MockStream();
         const streamProducer = sinon.stub().returns(mockStream);
         const service = new Service<
@@ -188,7 +188,7 @@ describe('rpc_ts', () => {
           ResponseContext
         >(testServiceDefinition, streamProducer);
         const request = { foo: 'bar' };
-        const promise = service.nice().unary(request);
+        const promise = service.methodMap().unary(request);
 
         const message = {
           response: { value: 10 },
@@ -201,59 +201,74 @@ describe('rpc_ts', () => {
         expect(streamProducer.calledOnce).to.be.true;
         expect(streamProducer.args[0]).to.deep.equal(['unary', request]);
       });
-    });
 
-    it('server streams can be called', async () => {
-      const mockStream = new MockStream();
-      const streamProducer = sinon.stub().returns(mockStream);
-      const service = new Service<
-        typeof testServiceDefinition,
-        ResponseContext
-      >(testServiceDefinition, streamProducer);
-      const request = { foo: 'bar' };
-      const stream = service.nice().stream(request);
+      specify('server streams can be called', async () => {
+        const mockStream = new MockStream();
+        const streamProducer = sinon.stub().returns(mockStream);
+        const service = new Service<
+          typeof testServiceDefinition,
+          ResponseContext
+        >(testServiceDefinition, streamProducer);
+        const request = { foo: 'bar' };
+        const stream = service.methodMap().stream(request);
 
-      const message1 = {
-        response: { value: 10 },
-        responseContext: { qux: 'wobble' },
-      };
-      await new Promise((accept, reject) => {
-        stream.on('message', message => {
-          try {
-            expect(message).to.deep.equal({ value: 10 });
+        const message1 = {
+          response: { value: 10 },
+          responseContext: { qux: 'wobble' },
+        };
+        await new Promise((accept, reject) => {
+          stream.on('message', message => {
+            try {
+              expect(message).to.deep.equal({ value: 10 });
+              accept();
+            } catch (err) {
+              reject(err);
+            }
+          });
+          mockStream.emit('message', message1);
+        });
+
+        const message2 = {
+          response: { value: 20 },
+          responseContext: { qux: 'wobble2' },
+        };
+        await new Promise((accept, reject) => {
+          stream.on('message', message => {
+            try {
+              expect(message).to.deep.equal({ value: 20 });
+              accept();
+            } catch (err) {
+              reject(err);
+            }
+          });
+          mockStream.emit('message', message2);
+        });
+
+        await new Promise(accept => {
+          stream.on('complete', () => {
             accept();
-          } catch (err) {
-            reject(err);
-          }
+          });
+          mockStream.emit('complete');
         });
-        mockStream.emit('message', message1);
+
+        expect(streamProducer.calledOnce).to.be.true;
+        expect(streamProducer.args[0]).to.deep.equal(['stream', request]);
       });
 
-      const message2 = {
-        response: { value: 20 },
-        responseContext: { qux: 'wobble2' },
-      };
-      await new Promise((accept, reject) => {
-        stream.on('message', message => {
-          try {
-            expect(message).to.deep.equal({ value: 20 });
-            accept();
-          } catch (err) {
-            reject(err);
-          }
-        });
-        mockStream.emit('message', message2);
-      });
+      specify(
+        'serviceInstance(methodMap) gives the original, full service',
+        async () => {
+          const mockStream = new MockStream();
+          const streamProducer = sinon.stub().returns(mockStream);
+          const service = new Service<
+            typeof testServiceDefinition,
+            ResponseContext
+          >(testServiceDefinition, streamProducer);
 
-      await new Promise(accept => {
-        stream.on('complete', () => {
-          accept();
-        });
-        mockStream.emit('complete');
-      });
-
-      expect(streamProducer.calledOnce).to.be.true;
-      expect(streamProducer.args[0]).to.deep.equal(['stream', request]);
+          const methodMap = service.methodMap();
+          expect(serviceInstance(methodMap)).to.equal(service);
+        },
+      );
     });
   });
 });

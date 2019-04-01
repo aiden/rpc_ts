@@ -66,7 +66,7 @@ async function clientInteraction(remoteAddress: string) {
       remoteAddress,
       clientContextConnector: new AuthClientContextConnector('u1'),
     },
-  ).nice();
+  );
 
   const balanceResponseBefore = await client.getBalance({});
   console.log('Balance is', balanceResponseBefore.value);
@@ -88,7 +88,7 @@ async function clientInteraction(remoteAddress: string) {
         remoteAddress,
         clientContextConnector: new AuthClientContextConnector('u2'),
       },
-    ).nice();
+    );
 
     try {
       await unauthenticatedClient.getBalance({});

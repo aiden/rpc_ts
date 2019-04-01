@@ -6,7 +6,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import * as express from 'express';
-import { getGrpcWebClient } from '../../protocol/grpc_web/client/client';
 import { numberServiceDefinition, NumberService } from './service';
 import * as http from 'http';
 import { getNumberHandler } from './handler';
@@ -14,8 +13,8 @@ import { ModuleRpcClient } from '../../client';
 import { ModuleRpcCommon } from '../../common';
 import { AssertionError } from 'assert';
 import { ModuleRpcContextServer } from '../../context/server';
-import { ModuleRpcContextClient } from '../../context/client';
 import { ModuleRpcProtocolServer } from '../../protocol/server';
+import { ModuleRpcProtocolClient } from 'rpc_ts/src/protocol/client';
 
 main().catch(
   /* istanbul ignore next */
@@ -59,11 +58,9 @@ function setupServer() {
 }
 
 async function clientInteraction(remoteAddress: string) {
-  const client = getGrpcWebClient(
-    numberServiceDefinition,
-    new ModuleRpcContextClient.EmptyClientContextConnector(),
-    { remoteAddress },
-  ).nice();
+  const client = ModuleRpcProtocolClient.getRpcClient(numberServiceDefinition, {
+    remoteAddress,
+  });
 
   // We call our unary method
   const { value } = await client.increment({ value: 10 });
@@ -88,7 +85,7 @@ async function clientInteraction(remoteAddress: string) {
 }
 
 function streamNumbers(
-  client: ModuleRpcClient.NiceService<NumberService>,
+  client: ModuleRpcClient.ServiceMethodMap<NumberService>,
 ): ModuleRpcClient.Stream<
   ModuleRpcCommon.ResponseFor<NumberService, 'streamNumbers'>
 > {

@@ -31,7 +31,7 @@ import { ModuleRpcCommon } from '../../common';
  *     { response: { bar: 1 } },
  *   ]) as ModuleRpcClient.Stream<any>;
  * });
- * const { bar } = await client.nice().foo({});
+ * const { bar } = await client.methodMap().foo({});
  * expect(bar).to.equal(1);
  * ```
  */
