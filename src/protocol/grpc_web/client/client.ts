@@ -52,8 +52,8 @@ export interface GrpcWebClientOptions {
 /**
  * Returns an RPC client for the gRPC-Web protocol.
  *
- * @see [[getRpcClient]] offers a more generic interface and is enough
- * for most use cases.
+ * @see [[getRpcClient]] offers a more generic interface with a more intuitive "method map"
+ * service interface and is enough for most use cases.
  *
  * @param serviceDefinition The definition of the service for which to implement a client.
  * @param clientContextConnector The context connector to use to inject metadata (such

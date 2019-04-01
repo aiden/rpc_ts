@@ -52,7 +52,7 @@ const server = http.createServer(app).listen();
 async function rpc() {
   const { text } = await ModuleRpcProtocolClient.getRpcClient(helloServiceDefinition, {
     remoteAddress: `http://localhost:${server.address().port}`
-  }).nice().getHello({ language: 'Spanish' });
+  }).getHello({ language: 'Spanish' });
   // (Notice that, with TypeScript typing, it is not possible to mess up the
   // type of the request: for instance, `.getHello({ lang: 'Spanish' })`
   // will error.)
