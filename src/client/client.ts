@@ -16,7 +16,7 @@
 export { ClientContextConnector } from './context_connector';
 export * from './errors';
 export { retryStream } from './stream_retrier';
-export { Service, ServiceMethodMap } from './service';
+export { Service, ServiceMethodMap, serviceInstance } from './service';
 export {
   StreamProducer,
   Stream,
