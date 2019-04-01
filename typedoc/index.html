@@ -158,7 +158,7 @@ app.use(ModuleRpcProtocolServer.registerRpcRoutes(helloServiceDefinition, handle
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rpc</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">const</span> { text } = <span class="hljs-keyword">await</span> ModuleRpcProtocolClient.getRpcClient(helloServiceDefinition, {
     remoteAddress: <span class="hljs-string">`http://localhost:<span class="hljs-subst">${server.address().port}</span>`</span>
-  }).nice().getHello({ language: <span class="hljs-string">'Spanish'</span> });
+  }).getHello({ language: <span class="hljs-string">'Spanish'</span> });
   <span class="hljs-comment">// (Notice that, with TypeScript typing, it is not possible to mess up the</span>
   <span class="hljs-comment">// type of the request: for instance, `.getHello({ lang: 'Spanish' })`</span>
   <span class="hljs-comment">// will error.)</span>
