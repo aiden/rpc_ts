@@ -32,8 +32,11 @@ a {
     margin: 100px auto 0px auto; }
   #hero-section .lead {
     max-width: 520px;
-    margin: 30px auto;
     line-height: 40px; }
+  #hero-section .lead,
+  #hero-section .main-text h1 {
+    margin-left: auto;
+    margin-right: auto; }
   #hero-section .usp-container {
     border-top: #fff solid 1px; }
   #hero-section .ups-section {
@@ -63,7 +66,9 @@ p.emphasis {
 
 .quicklook-section {
   padding-top: 70px;
-  padding-bottom: 70px; }
+  padding-bottom: 70px;
+  padding-left: 5px;
+  padding-right: 5px; }
   .quicklook-section p.section-title {
     margin-top: 50px; }
   .quicklook-section h3 {
@@ -102,7 +107,7 @@ p.emphasis {
 
 @media (max-width: 576px) {
   #hero-section .main-text {
-    margin: 20px auto 0px auto; }
+    margin: 100px auto 0px auto; }
 
   .display-3 {
     font-size: 2.5em;
@@ -246,7 +251,8 @@ header {
   transition: all 0.4s ease; }
   header #tsd-search .title {
     font-size: 2.5rem;
-    transition: all 0.4s ease; }
+    transition: all 0.4s ease;
+    top: -2px; }
   header .tsd-page-toolbar {
     transition: all 0.4s ease; }
   header.shrink {
@@ -255,3 +261,13 @@ header {
       padding-top: 3px; }
     header.shrink #tsd-search .title {
       font-size: 1.5rem; }
+  header .menu {
+    width: 30px;
+    right: 0;
+    position: absolute; }
+  @media (min-width: 992px) {
+    header .menu {
+      display: none !important; } }
+  @media (max-width: 992px) {
+    header .link-container {
+      display: none !important; } }

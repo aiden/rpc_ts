@@ -3,7 +3,7 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=1000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script
@@ -68,10 +68,7 @@
                     <a href="#top" class="title current">rpc_ts</a>
                 </div>
 
-                <div class="table-cell" id="tsd-widgets">
-                    <!-- <div id="header-github-button">Github</div> -->
-                    <a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -80,9 +77,11 @@
 
     <div id="hero-section" class="container-fluid">
   <div class="row gutter">
-    <div class="text-center main-text">
+    <div class="col-lg-12 main-text">
+    <div class="text-center">
       <h1 class="display-3">Remote Procedure Calls in Typescript made simple 🤞</h1>
       <p class="lead">rpc_ts provides a hassle-free way to define APIs in TypeScript so that we can build isomorphic web applications faster.</p>
+    </div>
     </div>
   </div>
   <div class="row gutter button-container">
@@ -96,8 +95,8 @@
 
   </div>
 
-  <div class="row">
-    <div class="container-fluid usp-container">
+  <div class="row gutter">
+    <div class="container-fluid usp-container" style="padding: 0">
       <div class="row gutter ups-section">
         
           <div class="col-md p-md-3 py-3 side">
@@ -120,7 +119,7 @@
   </div>
 </div>
 
-<div class="quicklook-section container-fluid">
+<div class="quicklook-section container-fluid" style="padding-left: 0; padding-right: 0">
   <div class="row gutter">
     <div class="col-lg-12">
       <h3 style="margin: 0; margin-bottom: -20px"><a name="syntax" id="syntax"></a>Syntax</h3>
@@ -163,13 +162,21 @@
   </div>
 
   <div class="row gutter">
+    <div class="col-lg-12" style="margin-top: 3.75rem">
+      <a href="/rpc_ts/typedoc/modules/modulerpcclient.html" class="btn btn-primary">
+        API Reference
+      </a>
+    </div>
+  </div>
+
+  <div class="row gutter">
     <div class="col-lg-12">
       <h3 id="examples"><a name="examples"></a>Examples</h3>
     </div>
   </div>
 
   <div class="row gutter">
-    <div class="col-sm-4 d-flex align-items-stretch">
+    <div class="col-sm-4 d-flex align-items-stretch py-3">
       <div class="card w-100">
         <div class="card-body">
           <h5 class="card-title">rpc_ts_primer</h5>
@@ -181,7 +188,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4 d-flex align-items-stretch">
+    <div class="col-sm-4 d-flex align-items-stretch py-3">
       <div class="card w-100 text-white bg-primary">
         <div class="card-body">
           <h5 class="card-title">rpc_ts_chat</h5>
@@ -193,7 +200,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4 d-flex align-items-stretch">
+    <div class="col-sm-4 d-flex align-items-stretch py-3">
       <div class="card w-100">
         <div class="card-body">
           <h5 class="card-title">rpc_ts_aws_cognito</h5>
@@ -237,18 +244,18 @@
   </div>
 
   <div class="row gutter">
-    <div class="col-sm-6 d-flex align-items-stretch">
+    <div class="col-sm-6 d-flex align-items-stretch py-3">
       <div class="card w-100 text-white bg-primary">
         <div class="card-body">
           <h5 class="card-title">Open sourcing rpc_ts, an RPC framework for TypeScript.</h5>
           <p class="card-text">rpc_ts is a framework for type-safe Remote Procedure Calls (RPC) in TypeScript. In this post, I'm going to compare our design to other solutions out there and go through the rationale for coming up with rpc_ts.</p>
-          <a href="#" class="btn btn-light disabled">
-            Coming soon
+          <a href="https://medium.com/@aiden_ai/open-sourcing-rpc-ts-an-rpc-framework-for-typescript-255073f1fe9b" class="btn btn-light" target="_blank">
+            Read more
           </a>
         </div>
       </div>
     </div>
-    <div class="col-sm-6 d-flex align-items-stretch">
+    <div class="col-sm-6 d-flex align-items-stretch py-3">
       <div class="card w-100">
         <div class="card-body">
           <h5 class="card-title">How to write an authentication middleware for rpc_ts: the case of AWS Cognito.</h5>

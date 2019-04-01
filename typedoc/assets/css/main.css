@@ -490,7 +490,7 @@ ul.tsd-descriptions > li > :last-child > :last-child > :last-child {
   padding: 0 1rem; }
   @media (max-width: 640px) {
     .container-typedoc {
-      padding: 0 20px; } }
+      padding: 0 15px; } }
 
 .container-typedoc-main {
   padding-top: 175px;
@@ -1557,7 +1557,7 @@ pre {
   html.default .tsd-navigation {
     padding-left: 10px; } }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   html.default .col-content {
     float: none;
     width: 100%; }
@@ -1706,7 +1706,7 @@ html.minimal .tsd-generator {
   color: #808080;
   font-size: 85%; }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   html.minimal .tsd-navigation {
     display: none; }
   html.minimal .content-wrap {
@@ -1781,7 +1781,7 @@ dl.tsd-comment-tags {
     white-space: nowrap; }
   #tsd-filter input {
     display: none; }
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     #tsd-filter .tsd-filter-group {
       display: block;
       position: absolute;
@@ -1821,7 +1821,7 @@ footer {
     list-style: none;
     line-height: 1.333em;
     vertical-align: top; }
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
       footer .tsd-legend {
         width: 50%; } }
 
@@ -1857,7 +1857,7 @@ footer {
   padding: 0;
   list-style: none;
   line-height: 1.333em; }
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     .tsd-index-panel ul.tsd-index-list {
       -webkit-column-count: 1;
       -moz-column-count: 1;
@@ -2037,7 +2037,7 @@ footer {
   .tsd-navigation.secondary li.current > a {
     font-weight: bold; }
 
-@media (min-width: 901px) {
+@media (min-width: 1001px) {
   .menu-sticky-wrap {
     position: static; }
     .no-csspositionsticky .menu-sticky-wrap.sticky {
@@ -2410,7 +2410,7 @@ ul.tsd-type-parameters {
     background-position: -80px 0; }
   .tsd-widget.options, .tsd-widget.menu {
     display: none; }
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
       .tsd-widget.options, .tsd-widget.menu {
         display: inline-block; } }
   input[type=checkbox] + .tsd-widget:before {
@@ -2458,7 +2458,7 @@ ul.tsd-type-parameters {
         background-color: #fff; }
       .tsd-select .tsd-select-list li.selected:before {
         background-position: -200px 0; }
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     .tsd-select .tsd-select-list {
       top: 0;
       left: auto;
