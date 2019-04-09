@@ -30,7 +30,7 @@ export class GrpcWebJsonCodec implements GrpcWebCodec {
 
   /** @override */
   encodeMessage(_method: string, payload: any): Uint8Array {
-    return encodeUtf8(JSON.stringify(payload));
+    return this.encode(payload);
   }
 
   /** @override */
@@ -49,7 +49,7 @@ export class GrpcWebJsonCodec implements GrpcWebCodec {
 
   /** @override */
   encodeRequest(_method: string, message: any): Uint8Array {
-    return encodeUtf8(JSON.stringify(message));
+    return this.encode(message);
   }
 
   /** @override */
@@ -65,5 +65,15 @@ export class GrpcWebJsonCodec implements GrpcWebCodec {
   /** @override */
   decodeTrailer(encodedTrailer: Uint8Array): grpc.Metadata {
     return new grpc.Metadata(decodeUtf8(encodedTrailer));
+  }
+
+  private encode(payload: any): Uint8Array {
+    if (payload === undefined) {
+      // We need to single out undefined payloads as
+      // JSON.stringify(undefined) === undefined (and so it is not
+      // a string that can be UTF-8 encoded).
+      throw new Error("a payload cannot be 'undefined'");
+    }
+    return encodeUtf8(JSON.stringify(payload));
   }
 }
