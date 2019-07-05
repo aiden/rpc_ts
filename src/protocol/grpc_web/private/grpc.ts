@@ -11,7 +11,7 @@
  */
 import * as _ from 'lodash';
 import * as express from 'express';
-import { grpc } from 'grpc-web-client';
+import { grpc } from '@improbable-eng/grpc-web';
 import { decodeHeaderValue, encodeHeaderValue } from './headers';
 import { ModuleRpcCommon } from '../../../common';
 import { ModuleRpcServer } from '../../../server';

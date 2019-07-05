@@ -7,7 +7,7 @@
  */
 import { expect } from 'chai';
 import * as fc from 'fast-check';
-import { grpc } from 'grpc-web-client';
+import { grpc } from '@improbable-eng/grpc-web';
 import { ModuleRpcProtocolGrpcWebCommon } from '../common';
 import { ModuleRpcUtils } from '../../../utils';
 

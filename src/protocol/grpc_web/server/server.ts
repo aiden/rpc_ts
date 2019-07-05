@@ -30,7 +30,7 @@ import {
 import { isServerStreamMethod, isUnaryMethod } from '../../private/helpers';
 import { GrpcWebJsonCodec } from '../common/json_codec';
 import { AssertionError } from 'assert';
-import { grpc } from 'grpc-web-client';
+import { grpc } from '@improbable-eng/grpc-web';
 import { decodeHeaderValue, encodeHeaderValue } from '../private/headers';
 import { ModuleRpcUtils } from '../../../utils';
 import { ModuleRpcCommon } from '../../../common';

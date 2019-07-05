@@ -18,6 +18,7 @@
  */
 
 /** */
+import { grpc } from '@improbable-eng/grpc-web';
 import { ModuleRpcContextClient } from '../../context/client';
 import { ModuleRpcProtocolGrpcWebClient } from '../grpc_web/client';
 import { ModuleRpcCommon } from '../../common';
@@ -26,6 +27,17 @@ import { ModuleRpcClient } from '../../client';
 export interface RpcClientOptions {
   /** The remote address to connect to (example: https://test.com:8000). */
   remoteAddress: string;
+
+  /**
+   * Optional transport mechanism override.  A `Transport` is a low-level implementation that can
+   * talk to an HTTP server.  The actual transport depends on the runtime (NodeJS, a particular
+   * browser), and if not specified `@improbable-eng/grpc-web` select the most appropriate one.
+   *
+   * @ignore
+   */
+  getGrpcWebTransport?: (
+    options: grpc.TransportOptions,
+  ) => grpc.Transport | Error;
 }
 
 export function getRpcClient<
@@ -64,6 +76,7 @@ export function getRpcClient<
     clientContextConnector,
     {
       remoteAddress: options.remoteAddress,
+      getTransport: options.getGrpcWebTransport,
     },
   ) as ModuleRpcClient.Service<serviceDefinition, ResponseContext>).methodMap();
 }
