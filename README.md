@@ -21,6 +21,7 @@ The [chat room](https://github.com/aiden/rpc_ts_chat) example showcases error ha
 This is how a minimal RPC service with one procedure, `getHello`, looks like:
 
 ```Typescript
+import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 import { ModuleRpcCommon } from 'rpc_ts/lib/common';
 import { ModuleRpcServer } from 'rpc_ts/lib/server';
 import { ModuleRpcProtocolServer } from 'rpc_ts/lib/protocol/server';
@@ -53,7 +54,10 @@ const server = http.createServer(app).listen();
 // Now let's do a Remote Procedure Call
 async function rpc() {
   const { text } = await ModuleRpcProtocolClient.getRpcClient(helloServiceDefinition, {
-    remoteAddress: `http://localhost:${server.address().port}`
+    remoteAddress: `http://localhost:${server.address().port}`,
+    // This "transport" allows the code to run in NodeJS instead of running
+    // in the browser.
+    getGrpcWebTransport: NodeHttpTransport(),
   }).getHello({ language: 'Spanish' });
   // (Notice that, with TypeScript typing, it is not possible to mess up the
   // type of the request: for instance, `.getHello({ lang: 'Spanish' })`

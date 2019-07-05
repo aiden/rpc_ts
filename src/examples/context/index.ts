@@ -6,6 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import * as express from 'express';
+import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 import { bankingServiceDefinition } from './service';
 import { getBankingHandler } from './handler';
 import {
@@ -65,6 +66,7 @@ async function clientInteraction(remoteAddress: string) {
     {
       remoteAddress,
       clientContextConnector: new AuthClientContextConnector('u1'),
+      getGrpcWebTransport: NodeHttpTransport(),
     },
   );
 
@@ -87,6 +89,7 @@ async function clientInteraction(remoteAddress: string) {
       {
         remoteAddress,
         clientContextConnector: new AuthClientContextConnector('u2'),
+        getGrpcWebTransport: NodeHttpTransport(),
       },
     );
 

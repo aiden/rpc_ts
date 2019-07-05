@@ -18,7 +18,7 @@ import { AssertionError } from 'assert';
 import { GrpcWebCodec } from '../common/codec';
 import { GrpcWebJsonCodec } from '../common/json_codec';
 import { encodeUtf8 } from '../private/utf8';
-import { grpc } from 'grpc-web-client';
+import { grpc } from '@improbable-eng/grpc-web';
 import { ModuleRpcContextServer } from '../../../context/server';
 import { ModuleRpcContextClient } from '../../../context/client';
 import { ModuleRpcCommon } from '../../../common';

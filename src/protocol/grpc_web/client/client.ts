@@ -18,11 +18,10 @@
 
 /** */
 import { httpStatusesToErrorTypes } from '../private/http_status';
-import { DefaultTransportFactory } from 'grpc-web-client/dist/transports/Transport';
 import { GrpcWebCodec } from '../common/codec';
 import { getGrpcWebErrorFromMetadata } from '../private/grpc';
-import { grpc } from 'grpc-web-client';
-import { ChunkParser, ChunkType } from 'grpc-web-client/dist/ChunkParser';
+import { grpc } from '@improbable-eng/grpc-web';
+import { ChunkParser, ChunkType } from './private/chunk_parser';
 import { GrpcWebJsonCodec } from '../common/json_codec';
 import * as events from 'events';
 import { decodeHeaderValue } from '../private/headers';
@@ -38,7 +37,7 @@ export interface GrpcWebClientOptions {
   /**
    * Optional transport mechanism override.  A `Transport` is a low-level implementation that can
    * talk to an HTTP server.  The actual transport depends on the runtime (NodeJS, a particular
-   * browser), and if not specified `grpc-web-client` select the most appropriate one.
+   * browser), and if not specified `@improbable-eng/grpc-web` select the most appropriate one.
    */
   getTransport?: (options: grpc.TransportOptions) => grpc.Transport | Error;
 
@@ -74,7 +73,8 @@ export function getGrpcWebClient<
 ): ModuleRpcClient.Service<serviceDefinition, ResponseContext> {
   const codec = options.codec || new GrpcWebJsonCodec();
   const getTransport =
-    options.getTransport || (options => DefaultTransportFactory(options));
+    options.getTransport ||
+    (options => grpc.CrossBrowserHttpTransport({})(options));
 
   return new ModuleRpcClient.Service<serviceDefinition, ResponseContext>(
     serviceDefinition,

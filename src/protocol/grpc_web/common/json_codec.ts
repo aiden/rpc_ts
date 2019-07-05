@@ -11,7 +11,7 @@
  */
 import { GrpcWebCodec } from './codec';
 import { decodeUtf8, encodeUtf8 } from '../private/utf8';
-import { grpc } from 'grpc-web-client';
+import { grpc } from '@improbable-eng/grpc-web';
 
 /**
  * Line separator between the entries of the trailer metadata (as required by

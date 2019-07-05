@@ -8,6 +8,7 @@
 import * as express from 'express';
 import { numberServiceDefinition, NumberService } from './service';
 import * as http from 'http';
+import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 import { getNumberHandler } from './handler';
 import { ModuleRpcClient } from '../../client';
 import { ModuleRpcCommon } from '../../common';
@@ -60,6 +61,7 @@ function setupServer() {
 async function clientInteraction(remoteAddress: string) {
   const client = ModuleRpcProtocolClient.getRpcClient(numberServiceDefinition, {
     remoteAddress,
+    getGrpcWebTransport: NodeHttpTransport(),
   });
 
   // We call our unary method
