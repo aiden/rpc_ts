@@ -17,7 +17,10 @@
  */
 
 /** */
-import { httpStatusesToErrorTypes } from '../private/http_status';
+import {
+  httpStatusesToErrorTypes,
+  httpStatusesToClientErrorMessages,
+} from '../private/http_status';
 import { GrpcWebCodec } from '../common/codec';
 import { getGrpcWebErrorFromMetadata } from '../private/grpc';
 import { grpc } from '@improbable-eng/grpc-web';
@@ -336,10 +339,10 @@ class GrpcWebStream<Request, Response, ResponseContext>
     }
 
     if (status !== 200) {
-      const errorType = guessErrorTypeFromHttpStatus(status);
+      const { type, message } = guessErrorTypeAndMessageFromHttpStatus(status);
       throw new ModuleRpcClient.ClientRpcError<ResponseContext>(
-        errorType,
-        `non-200 HTTP status code (${status})`,
+        type,
+        message,
         responseContext,
       );
     }
@@ -433,11 +436,15 @@ class GrpcWebStream<Request, Response, ResponseContext>
   }
 }
 
-function guessErrorTypeFromHttpStatus(
+function guessErrorTypeAndMessageFromHttpStatus(
   httpStatus: number,
-): ModuleRpcCommon.RpcErrorType {
-  return (
-    httpStatusesToErrorTypes[httpStatus] ||
-    /* istanbul ignore next */ ModuleRpcCommon.RpcErrorType.unknown
-  );
+): { type: ModuleRpcCommon.RpcErrorType; message: string } {
+  return {
+    type:
+      httpStatusesToErrorTypes[httpStatus] ||
+      /* istanbul ignore next */ ModuleRpcCommon.RpcErrorType.unknown,
+    message:
+      httpStatusesToClientErrorMessages[httpStatus] ||
+      `non-200 HTTP status code (${status})`,
+  };
 }

@@ -38,6 +38,19 @@ export const httpStatusesToErrorTypes: {
   ..._.fromPairs(
     _.map(errorTypesToHttpStatuses, (status, errorType) => [status, errorType]),
   ),
+  413 /* Request Entity Too Large */: ModuleRpcCommon.RpcErrorType
+    .invalidArgument,
   502 /* Bad Gateway */: ModuleRpcCommon.RpcErrorType.unavailable,
   504 /* Gateway Timeout */: ModuleRpcCommon.RpcErrorType.unavailable,
+};
+
+/**
+ * Associate HTTP status codes to generic error message.  Status codes
+ * that could not be associated end up giving a generic
+ * 'non-200 status code'.
+ */
+export const httpStatusesToClientErrorMessages: {
+  [status: number]: string;
+} = {
+  413 /* Request Entity Too Large */: 'Request Too Large',
 };

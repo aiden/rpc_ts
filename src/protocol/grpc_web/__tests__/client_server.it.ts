@@ -7,6 +7,7 @@
  */
 import * as fc from 'fast-check';
 import * as express from 'express';
+import { NodeHttpTransport } from '@improbable-eng/grpc-web-node-http-transport';
 import { registerGrpcWebRoutes } from '../server/server';
 import * as Utils from '../../../utils/utils';
 import * as http from 'http';
@@ -172,7 +173,7 @@ describe('rpc_ts', () => {
       );
     }).timeout(30000);
 
-    describe('client errors', () => {
+    describe('client errors with default server', () => {
       let server: http.Server;
       let serverPort: number;
 
@@ -324,6 +325,58 @@ describe('rpc_ts', () => {
         expect(serverError).to.be.instanceof(
           ModuleRpcServer.ServerTransportError,
         );
+      });
+    });
+
+    describe('client errors with custom servers', () => {
+      specify('error when request size exceeds limit', async () => {
+        const app = express();
+        const handler = {
+          async unary() {
+            throw new Error('unexpected call');
+          },
+        };
+        const request = { foo: 'bar', qux: 'wobble' };
+        const requestLimit = 5;
+        expect(JSON.stringify(request).length).to.be.greaterThan(requestLimit);
+        app.use(
+          '/api',
+          registerGrpcWebRoutes(
+            unaryServiceDefinition,
+            handler,
+            new ModuleRpcContextServer.EmptyServerContextConnector(),
+            {
+              requestLimit,
+            },
+          ),
+        );
+        const server = http.createServer(app).listen();
+        const serverPort = server.address().port;
+        app.set('port', serverPort);
+        try {
+          const client = getGrpcWebClient(
+            unaryServiceDefinition,
+            new ModuleRpcContextClient.EmptyClientContextConnector(),
+            {
+              remoteAddress: `http://localhost:${serverPort}/api`,
+              getTransport: NodeHttpTransport(),
+            },
+          );
+          await client.call('unary', request);
+          throw new AssertionError({
+            message: 'expected an Error to be thrown',
+          });
+        } catch (err) {
+          if (!(err instanceof ModuleRpcClient.ClientRpcError)) {
+            throw err;
+          }
+          expect(err.errorType).to.equal(
+            ModuleRpcCommon.RpcErrorType.invalidArgument,
+          );
+          expect(err.msg).to.equal('Request Too Large');
+        } finally {
+          server.close();
+        }
       });
     });
 

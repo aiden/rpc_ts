@@ -60,6 +60,13 @@ export interface GrpcWebServerOptions<
    * the Codec used by the client (this is enforced through content-type negotiation).
    */
   codec?: GrpcWebCodec<serviceDefinition>;
+
+  /**
+   * Maximum request size.   If this is a number, then the value specifies the number of bytes;
+   * if it is a string, the value is passed to the bytes library for parsing.
+   * Defaults to '100kb'.
+   */
+  requestLimit?: number | string;
 }
 
 /**
@@ -90,6 +97,9 @@ const HEADER_SIZE = 5;
 
 /** Flag in the header to identify trailers. */
 const TRAILER_FLAG = 0x80;
+
+/** Default request limit (see [[GrpcWebServerOptions.requestLimit]]). */
+const DEFAULT_REQUEST_LIMIT: number | string = '100kb';
 
 /**
  * Registers the API routes of an RPC service for the gRPC-Web protocol.
@@ -122,7 +132,12 @@ export function registerGrpcWebRoutes<
   const codec = options.codec || new GrpcWebJsonCodec();
 
   // We get the full raw request (no client streaming).
-  router.use(bodyParser.raw({ type: '*/*' }));
+  router.use(
+    bodyParser.raw({
+      type: '*/*',
+      limit: options.requestLimit || DEFAULT_REQUEST_LIMIT,
+    }),
+  );
 
   if (options.useCompression) {
     // We compress the responses.
