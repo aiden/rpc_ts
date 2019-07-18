@@ -71,7 +71,10 @@ describe('rpc_ts', () => {
               const client = getGrpcWebClient(
                 unaryServiceDefinition,
                 clientContextConnector(arb.requestContext, arb.responseContext),
-                { remoteAddress: `http://localhost:${serverPort}/api` },
+                {
+                  remoteAddress: `http://localhost:${serverPort}/api`,
+                  getTransport: NodeHttpTransport(),
+                },
               );
               const { response, responseContext } = await client.call(
                 'unary',
@@ -136,7 +139,10 @@ describe('rpc_ts', () => {
               const client = getGrpcWebClient(
                 serverStreamServiceDefinition,
                 clientContextConnector(arb.requestContext, arb.responseContext),
-                { remoteAddress: `http://localhost:${serverPort}/api` },
+                {
+                  remoteAddress: `http://localhost:${serverPort}/api`,
+                  getTransport: NodeHttpTransport(),
+                },
               );
               const onMessageSpy = sinon.spy();
               await new Promise((accept, reject) => {
@@ -264,7 +270,10 @@ describe('rpc_ts', () => {
               return {};
             },
           },
-          { remoteAddress: `http://example.test` },
+          {
+            remoteAddress: `http://example.test`,
+            getTransport: NodeHttpTransport(),
+          },
         );
         try {
           await client.methodMap().unary({});
@@ -306,6 +315,7 @@ describe('rpc_ts', () => {
             {
               remoteAddress: `http://localhost:${serverPort}/api`,
               codec: new InvalidCodec(),
+              getTransport: NodeHttpTransport(),
             },
           );
           await client.methodMap().unary({});
@@ -407,7 +417,10 @@ describe('rpc_ts', () => {
           const client = getGrpcWebClient(
             unaryServiceDefinition,
             new ModuleRpcContextClient.EmptyClientContextConnector(),
-            { remoteAddress: `http://localhost:${serverPort}/api` },
+            {
+              remoteAddress: `http://localhost:${serverPort}/api`,
+              getTransport: NodeHttpTransport(),
+            },
           );
           await client.call('unary', {});
           throw new AssertionError({
@@ -449,7 +462,10 @@ describe('rpc_ts', () => {
           const client = getGrpcWebClient(
             unaryServiceDefinition,
             new ModuleRpcContextClient.EmptyClientContextConnector(),
-            { remoteAddress: `http://localhost:${serverPort}/api` },
+            {
+              remoteAddress: `http://localhost:${serverPort}/api`,
+              getTransport: NodeHttpTransport(),
+            },
           );
           await client.call('unary', {});
           throw new AssertionError({
@@ -490,7 +506,10 @@ describe('rpc_ts', () => {
           const client = getGrpcWebClient(
             serverStreamServiceDefinition,
             new ModuleRpcContextClient.EmptyClientContextConnector(),
-            { remoteAddress: `http://localhost:${serverPort}/api` },
+            {
+              remoteAddress: `http://localhost:${serverPort}/api`,
+              getTransport: NodeHttpTransport(),
+            },
           );
           const stream = client.stream('serverStream', {});
           const promise = new Promise((_accept, reject) => {
@@ -526,7 +545,10 @@ describe('rpc_ts', () => {
           const client = getGrpcWebClient(
             unaryServiceDefinition,
             new ModuleRpcContextClient.EmptyClientContextConnector(),
-            { remoteAddress: `http://localhost:${serverPort}/api` },
+            {
+              remoteAddress: `http://localhost:${serverPort}/api`,
+              getTransport: NodeHttpTransport(),
+            },
           );
           await client.methodMap().unary({});
           throw new AssertionError({
@@ -574,7 +596,10 @@ describe('rpc_ts', () => {
           const client = getGrpcWebClient(
             serverStreamServiceDefinition,
             new ModuleRpcContextClient.EmptyClientContextConnector(),
-            { remoteAddress: `http://localhost:${serverPort}/api` },
+            {
+              remoteAddress: `http://localhost:${serverPort}/api`,
+              getTransport: NodeHttpTransport(),
+            },
           );
           await ModuleRpcClient.streamAsPromise(
             client.methodMap().serverStream({}),

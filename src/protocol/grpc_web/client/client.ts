@@ -445,6 +445,6 @@ function guessErrorTypeAndMessageFromHttpStatus(
       /* istanbul ignore next */ ModuleRpcCommon.RpcErrorType.unknown,
     message:
       httpStatusesToClientErrorMessages[httpStatus] ||
-      `non-200 HTTP status code (${status})`,
+      `non-200 HTTP status code (${httpStatus})`,
   };
 }
