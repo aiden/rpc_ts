@@ -47,7 +47,7 @@
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.2",
     "shelljs": "^0.8.3",
-    "sinon": "^4.0.1",
+    "sinon": "^7.3.2",
     "ts-node": "^4",
     "tsconfig-paths": "^3.5.0",
     "tslint": "^5.18.0",
