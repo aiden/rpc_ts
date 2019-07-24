@@ -3386,10 +3386,10 @@ type-is@~1.6.17, type-is@~1.6.18:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
-type-zoo@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/type-zoo/-/type-zoo-1.2.1.tgz#978f2a825fef06f440718fa4671adf917e8b16cb"
-  integrity sha1-l48qgl/vBvRAcY+kZxrfkX6LFss=
+type-zoo@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/type-zoo/-/type-zoo-3.4.0.tgz#58c5c7f73314f8461dab0d2382d76e05c61ef5ec"
+  integrity sha512-s/PsXHBxzESKyrIgl9vjrUbwFT0ObSsP4P97BYV/NLWwWxS6oVG5qXI4ME1+8fS5V7uNnvs8pUzAoy4GsrQseQ==
 
 typedoc-default-themes@^0.5.0:
   version "0.5.0"
