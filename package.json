@@ -52,7 +52,7 @@
     "tsconfig-paths": "^3.5.0",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.13.0",
-    "tslint-config-standard": "^7.0.0",
+    "tslint-config-standard": "^8.0.1",
     "tslint-language-service": "^0.9.8",
     "tslint-no-circular-imports": "^0.7.0",
     "type-zoo": "^3.4.0",
