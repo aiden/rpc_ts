@@ -301,10 +301,10 @@
     "@types/glob" "*"
     "@types/node" "*"
 
-"@types/sinon@^2.3.7":
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-2.3.7.tgz#e92c2fed3297eae078d78d1da032b26788b4af86"
-  integrity sha512-w+LjztaZbgZWgt/y/VMP5BUAWLtSyoIJhXyW279hehLPyubDoBNwvhcj3WaSptcekuKYeTCVxrq60rdLc6ImJA==
+"@types/sinon@^7.0.13":
+  version "7.0.13"
+  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-7.0.13.tgz#ca039c23a9e27ebea53e0901ef928ea2a1a6d313"
+  integrity sha512-d7c/C/+H/knZ3L8/cxhicHUiTDxdgap0b/aNJfsmLwFu/iOP17mdgbQsbHA3SJmrzsjD0l3UEE5SN4xxuz5ung==
 
 "@types/strip-bom@^3.0.0":
   version "3.0.0"
