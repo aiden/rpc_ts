@@ -37,7 +37,7 @@
     "codedown": "^2.1.5",
     "coveralls": "^3.0.4",
     "fast-check": "^1.5.0",
-    "fetch-mock": "^6.5.0",
+    "fetch-mock": "^7.3.9",
     "gh-pages": "^2.0.1",
     "liquidjs": "^8.0.2",
     "mocha": "^4",
