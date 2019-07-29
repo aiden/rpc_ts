@@ -33,7 +33,7 @@
     "@types/query-string": "^5.1.0",
     "@types/sinon": "^7.0.13",
     "aiden-doc": "1.0.3",
-    "chai": "3.5.0",
+    "chai": "4.2.0",
     "codedown": "^2.1.5",
     "coveralls": "^3.0.4",
     "fast-check": "^1.5.0",
