@@ -113,10 +113,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@improbable-eng/grpc-web-node-http-transport@^0.9.6":
-  version "0.9.6"
-  resolved "https://registry.yarnpkg.com/@improbable-eng/grpc-web-node-http-transport/-/grpc-web-node-http-transport-0.9.6.tgz#77f2691f2adee1d7a7b8c99e161f89d434259f6e"
-  integrity sha512-3M0jEVCqP1yZo4TkIuL4q6nsuUS1ezfGd89NmFOhdG7InanGdgbBLEMSx553AdTxphZen2NTmt7iSMYzlLKVug==
+"@improbable-eng/grpc-web-node-http-transport@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@improbable-eng/grpc-web-node-http-transport/-/grpc-web-node-http-transport-0.10.0.tgz#0e82c69690812c84870b26d732c86845093370c4"
+  integrity sha512-ZyWk/BaNCnCEMtunarMUwqSXP8SIA2cnY6Gou1TM6zfA1l3aQ2c1qUnKTomT8V32FIHRute28tMwHm76jFjuvQ==
 
 "@improbable-eng/grpc-web@^0.10.0":
   version "0.10.0"
