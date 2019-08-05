@@ -118,10 +118,10 @@
   resolved "https://registry.yarnpkg.com/@improbable-eng/grpc-web-node-http-transport/-/grpc-web-node-http-transport-0.9.6.tgz#77f2691f2adee1d7a7b8c99e161f89d434259f6e"
   integrity sha512-3M0jEVCqP1yZo4TkIuL4q6nsuUS1ezfGd89NmFOhdG7InanGdgbBLEMSx553AdTxphZen2NTmt7iSMYzlLKVug==
 
-"@improbable-eng/grpc-web@^0.9.6":
-  version "0.9.6"
-  resolved "https://registry.yarnpkg.com/@improbable-eng/grpc-web/-/grpc-web-0.9.6.tgz#87e43ebf0eafaca30f5f720bf646b6abea99c1ae"
-  integrity sha512-Qs4++T+UvFmrgELd70VX9WbqiP22rk+a28fiwmerrCfrb2gt+mYAqO5xa5GxvHnL+geXcCbgZOeVWxQXrvXB4Q==
+"@improbable-eng/grpc-web@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@improbable-eng/grpc-web/-/grpc-web-0.10.0.tgz#2aee1ca883768c35560e898007c3e58a4b3fd15a"
+  integrity sha512-uLb5/cYuOj0j7495hUEYOuWkPcH7VOZbhTw4A9mLLTVJoveb3qeHss0KNZvXJCjUr6pm9OuGtXySgqSpfF09Sg==
   dependencies:
     browser-headers "^0.4.0"
 
