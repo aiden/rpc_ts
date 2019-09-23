@@ -153,7 +153,7 @@ export type UnaryMethodsFor<
         type: typeof ServiceMethodType.serverStream;
       }
         ? never
-        : method
+        : method;
     }
   >,
   string

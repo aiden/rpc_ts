@@ -19,7 +19,7 @@ export type CompositeClientContextConnectorsFor<
 > = {
   [connectorName in keyof ResponseContext]: ModuleRpcClient.ClientContextConnector<
     ResponseContext[connectorName]
-  >
+  >;
 };
 
 export class CompositeClientContextConnector<
