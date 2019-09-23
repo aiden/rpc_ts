@@ -210,7 +210,7 @@ export function streamAsPromise<Message>(
         reject(err);
       })
       .on('canceled', () => {
-        reject(new ClientRpcError(ModuleRpcCommon.RpcErrorType.canceled));
+        reject(new ClientRpcError(0, ModuleRpcCommon.RpcErrorType.canceled));
       })
       .on('complete', () => {
         accept(messages);

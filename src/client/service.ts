@@ -119,7 +119,7 @@ export class Service<
           }
         })
         .on('canceled', () => {
-          reject(new ClientRpcError(ModuleRpcCommon.RpcErrorType.canceled));
+          reject(new ClientRpcError(0, ModuleRpcCommon.RpcErrorType.canceled));
         })
         .start();
     });
@@ -226,7 +226,7 @@ export type ServiceMethodMap<
     type: typeof ModuleRpcCommon.ServiceMethodType.serverStream;
   }
     ? ServerStreamMethod<serviceDefinition, method>
-    : UnaryMethod<serviceDefinition, method>
+    : UnaryMethod<serviceDefinition, method>;
 } & {
   [serviceKey]: Service<serviceDefinition, ResponseContext>;
 };

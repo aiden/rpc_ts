@@ -15,6 +15,7 @@ import {
   DEFAULT_BACKOFF_OPTIONS,
   getBackoffMs,
 } from './backoff';
+import { ClientRpcError } from './errors';
 import { Stream } from './stream';
 import { sleep } from '../utils/utils';
 
@@ -138,8 +139,10 @@ class RetryingStreamImpl<Message> extends events.EventEmitter
       })
       .on('error', async err => {
         if (
-          this.options.maxRetries >= 0 &&
-          this.retriesSinceLastReady >= this.options.maxRetries
+          (this.options.maxRetries >= 0 &&
+            this.retriesSinceLastReady >= this.options.maxRetries) ||
+          (err instanceof ClientRpcError &&
+            this.options.statusCodesToIgnore.includes(err.status))
         ) {
           this.state = RetryingStreamState.abandoned;
           this.emit('retryingError', err, this.retriesSinceLastReady, true);

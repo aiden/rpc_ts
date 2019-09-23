@@ -56,6 +56,7 @@ export class ClientRpcError<ResponseContext = any> extends ClientError {
    * @param context Response context given back by the RPC.
    */
   constructor(
+    readonly status: number,
     readonly errorType: ModuleRpcCommon.RpcErrorType,
     readonly msg?: string,
     readonly context?: ResponseContext,

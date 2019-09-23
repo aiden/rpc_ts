@@ -16,6 +16,7 @@ export interface BackoffOptions {
   constantBackoffMs: number;
   maxBackoffMs: number;
   maxRetries: number;
+  statusCodesToIgnore: number[];
 }
 
 /** Default options for an exponential backoff. */
@@ -24,6 +25,7 @@ export const DEFAULT_BACKOFF_OPTIONS: BackoffOptions = {
   constantBackoffMs: 500,
   maxBackoffMs: 3000,
   maxRetries: -1,
+  statusCodesToIgnore: [],
 };
 
 /**

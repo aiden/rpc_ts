@@ -250,6 +250,7 @@ class GrpcWebStream<Request, Response, ResponseContext>
             this.emit(
               'error',
               new ModuleRpcClient.ClientRpcError(
+                0,
                 ModuleRpcCommon.RpcErrorType.unavailable,
                 err.stack || /* istanbul ignore next */ err.message,
               ),
@@ -332,6 +333,7 @@ class GrpcWebStream<Request, Response, ResponseContext>
     if (error) {
       this.transport.cancel();
       throw new ModuleRpcClient.ClientRpcError<ResponseContext>(
+        status,
         error.errorType,
         error.message,
         responseContext,
@@ -341,6 +343,7 @@ class GrpcWebStream<Request, Response, ResponseContext>
     if (status !== 200) {
       const { type, message } = guessErrorTypeAndMessageFromHttpStatus(status);
       throw new ModuleRpcClient.ClientRpcError<ResponseContext>(
+        status,
         type,
         message,
         responseContext,
@@ -372,6 +375,7 @@ class GrpcWebStream<Request, Response, ResponseContext>
               this.emit(
                 'error',
                 new ModuleRpcClient.ClientRpcError<ResponseContext>(
+                  0,
                   error.errorType,
                   error.message,
                   this.responseContext,
@@ -415,6 +419,7 @@ class GrpcWebStream<Request, Response, ResponseContext>
       this.emit(
         'error',
         new ModuleRpcClient.ClientRpcError(
+          0,
           ModuleRpcCommon.RpcErrorType.unavailable,
         ),
       );
