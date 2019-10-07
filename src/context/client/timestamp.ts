@@ -29,9 +29,7 @@ export class TimestampClientContextConnector
       ];
     if (!date) {
       throw new ModuleRpcClient.ResponseContextDecodingError(
-        `${
-          ModuleRpcContextCommon.timestampContextKeys.serverTimestamp
-        } context key is required`,
+        `${ModuleRpcContextCommon.timestampContextKeys.serverTimestamp} context key is required`,
       );
     }
     return {

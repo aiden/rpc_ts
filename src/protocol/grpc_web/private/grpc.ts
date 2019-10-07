@@ -60,7 +60,7 @@ export const enum GrpcErrorCode {
 
 /** Conversion table from error types to gRPC statuses. */
 export const errorTypesToGrpcStatuses: {
-  [errorType in ModuleRpcCommon.RpcErrorType]: GrpcErrorCode
+  [errorType in ModuleRpcCommon.RpcErrorType]: GrpcErrorCode;
 } = {
   [ModuleRpcCommon.RpcErrorType.canceled]: GrpcErrorCode.Canceled,
   [ModuleRpcCommon.RpcErrorType.unknown]: GrpcErrorCode.Unknown,

@@ -24,7 +24,7 @@ describe('rpc_ts', () => {
         path.resolve(projectRoot, 'readme_code.ts'),
         path.resolve(__dirname, '../../../tsconfig.doc.json'),
       );
-    });
+    }).timeout(10000);
   });
 });
 
