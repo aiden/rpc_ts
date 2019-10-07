@@ -31,6 +31,7 @@
     "@types/mocha": "^5.2.7",
     "@types/node": "^8.0.47",
     "@types/query-string": "^6.3.0",
+    "@types/shelljs": "^0.8.5",
     "@types/sinon": "^7.0.13",
     "aiden-doc": "1.0.3",
     "chai": "4.2.0",
