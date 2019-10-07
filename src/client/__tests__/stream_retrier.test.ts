@@ -136,7 +136,7 @@ function getRetryingStreamEvents<T>(
   for (const event of ['ready', 'complete', 'canceled'] as [
     'ready',
     'complete',
-    'canceled'
+    'canceled',
   ]) {
     retryingStream.on(event, () => {
       events.push([event]);

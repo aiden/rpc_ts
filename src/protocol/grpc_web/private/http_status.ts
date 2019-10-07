@@ -11,7 +11,7 @@ import { ModuleRpcCommon } from '../../../common';
 
 /** Exhaustively associate error types to HTTP status codes. */
 export const errorTypesToHttpStatuses: {
-  [errorType in ModuleRpcCommon.RpcErrorType]: number
+  [errorType in ModuleRpcCommon.RpcErrorType]: number;
 } = {
   [ModuleRpcCommon.RpcErrorType.unknown]: HttpStatus.internalServerError,
   [ModuleRpcCommon.RpcErrorType.canceled]: HttpStatus.internalServerError,

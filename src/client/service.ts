@@ -226,7 +226,7 @@ export type ServiceMethodMap<
     type: typeof ModuleRpcCommon.ServiceMethodType.serverStream;
   }
     ? ServerStreamMethod<serviceDefinition, method>
-    : UnaryMethod<serviceDefinition, method>
+    : UnaryMethod<serviceDefinition, method>;
 } & {
   [serviceKey]: Service<serviceDefinition, ResponseContext>;
 };
