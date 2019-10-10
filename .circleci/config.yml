@@ -10,7 +10,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: yarn
+      - run: yarn --frozen-lockfile
       - run: yarn all
       - run: yarn coverage && yarn coverage:upload
       - persist_to_workspace:

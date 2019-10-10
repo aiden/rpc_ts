@@ -14,7 +14,7 @@
 import * as shell from 'shelljs';
 import * as path from 'path';
 import * as fs from 'fs';
-import Liquid from 'liquidjs';
+import { Liquid } from 'liquidjs';
 
 main()
   .then(() => console.log('DONE'))
