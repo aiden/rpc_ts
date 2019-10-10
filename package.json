@@ -59,7 +59,7 @@
     "type-zoo": "^3.4.0",
     "typedoc": "^0.15.0",
     "typedoc-plugin-external-module-name": "^2.1.0",
-    "typescript": "3.5.3"
+    "typescript": "3.6.4"
   },
   "scripts": {
     "clean": "rimraf lib dist es typedoc",
