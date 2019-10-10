@@ -40,7 +40,7 @@ export type ServiceHandlerFor<
     type: typeof ModuleRpcCommon.ServiceMethodType.serverStream;
   }
     ? ServerStreamMethodHandler<serviceDefinition, method, Context>
-    : UnaryMethodHandler<serviceDefinition, method, Context>
+    : UnaryMethodHandler<serviceDefinition, method, Context>;
 };
 
 /**
