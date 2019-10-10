@@ -23,7 +23,7 @@
     "query-string": "^6.0.0"
   },
   "devDependencies": {
-    "@improbable-eng/grpc-web-node-http-transport": "^0.10.0",
+    "@improbable-eng/grpc-web-node-http-transport": "^0.11.0",
     "@types/chai": "^4.0.0",
     "@types/express": "^4.11.1",
     "@types/fetch-mock": "^7.3.1",
