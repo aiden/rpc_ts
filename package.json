@@ -11,7 +11,7 @@
   "module": "es/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@improbable-eng/grpc-web": "^0.10.0",
+    "@improbable-eng/grpc-web": "^0.11.0",
     "@types/compression": "^1.0.1",
     "compression": "^1.0.3",
     "express": "^4.16.3",
