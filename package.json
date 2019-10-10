@@ -12,7 +12,7 @@
   "typings": "lib/index.d.ts",
   "dependencies": {
     "@improbable-eng/grpc-web": "^0.10.0",
-    "@types/compression": "^0.0.36",
+    "@types/compression": "^1.0.1",
     "compression": "^1.0.3",
     "express": "^4.16.3",
     "fast-text-encoding": "^1.0.0",
