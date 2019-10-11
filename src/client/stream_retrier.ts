@@ -26,6 +26,8 @@ import { sleep } from '../utils/utils';
  * stream emits a 'complete' or 'canceled' event, or the maximum number of retries,
  * as per the exponential backoff schedule, has been reached.
  * @param backoffOptions Options for the exponential backoff.
+ * @param shouldRetry Determines whether an error should be retried (the
+ * function returns `true`) or the method should fail immediately.
  *
  * @return A stream that is in effect a "concatenation" of all the streams initiated
  * by `getStream`, with special events emitted to inform on the retrying process.
@@ -38,11 +40,16 @@ import { sleep } from '../utils/utils';
 export function retryStream<Message>(
   getStream: () => Stream<Message>,
   backoffOptions?: Partial<BackoffOptions>,
+  shouldRetry: (err: Error) => boolean = () => true,
 ): RetryingStream<Message> {
-  return new RetryingStreamImpl<Message>(getStream, {
-    ...DEFAULT_BACKOFF_OPTIONS,
-    ...backoffOptions,
-  });
+  return new RetryingStreamImpl<Message>(
+    getStream,
+    {
+      ...DEFAULT_BACKOFF_OPTIONS,
+      ...backoffOptions,
+    },
+    shouldRetry,
+  );
 }
 
 /**
@@ -115,6 +122,7 @@ class RetryingStreamImpl<Message> extends events.EventEmitter
   constructor(
     private readonly getStream: () => Stream<Message>,
     private readonly options: BackoffOptions,
+    private readonly shouldRetry: (err: Error) => boolean,
   ) {
     super();
   }
@@ -138,8 +146,9 @@ class RetryingStreamImpl<Message> extends events.EventEmitter
       })
       .on('error', async err => {
         if (
-          this.options.maxRetries >= 0 &&
-          this.retriesSinceLastReady >= this.options.maxRetries
+          (this.options.maxRetries >= 0 &&
+            this.retriesSinceLastReady >= this.options.maxRetries) ||
+          !this.shouldRetry(err)
         ) {
           this.state = RetryingStreamState.abandoned;
           this.emit('retryingError', err, this.retriesSinceLastReady, true);

@@ -102,6 +102,27 @@ describe('rpc_ts', () => {
         ['error', '__error__'],
       ]);
     });
+
+    it('abandons immediately if shouldRetry yields false', async () => {
+      const retryingStream = streamRetrier.retryStream(
+        () => {
+          const stream = new MockStream();
+          setTimeout(() => {
+            stream.emit('error', new Error('__error__'));
+          });
+          return stream;
+        },
+        undefined,
+        (err: Error) => err.message !== '__error__',
+      );
+      const events = getRetryingStreamEvents(retryingStream);
+      retryingStream.start();
+      await waitForRetryingStream(retryingStream);
+      expect(events).to.deep.equal([
+        ['retryingError', '__error__', 0, true],
+        ['error', '__error__'],
+      ]);
+    });
   });
 
   it('can be canceled', async () => {

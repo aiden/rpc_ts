@@ -16,6 +16,42 @@ import * as events from 'events';
 import { retryStream } from './stream_retrier';
 
 /**
+ * Default list of [[ModuleRpcCommon.RpcErrorType]] error types that
+ * should lead to an immediate failure and not to a retry.
+ */
+export const ERROR_TYPES_TO_FAIL_IMMEDIATELY: ModuleRpcCommon.RpcErrorType[] = [
+  ModuleRpcCommon.RpcErrorType.invalidArgument,
+  ModuleRpcCommon.RpcErrorType.notFound,
+  ModuleRpcCommon.RpcErrorType.alreadyExists,
+  ModuleRpcCommon.RpcErrorType.permissionDenied,
+  ModuleRpcCommon.RpcErrorType.failedPrecondition,
+  ModuleRpcCommon.RpcErrorType.unimplemented,
+  ModuleRpcCommon.RpcErrorType.internal,
+  ModuleRpcCommon.RpcErrorType.unauthenticated,
+];
+
+/**
+ * Default `shouldRetry` predicate.
+ *
+ * With this predicate, all errors lead to a retry except errors of
+ * class [[ClientProtocolError]] and of class [[ClientRpcError]] with
+ * type included in a specific subset of [[ModuleRpcCommon.RpcErrorType]].
+ *
+ * @see [[Service.withRetry]]
+ */
+export const DEFAULT_SHOULD_RETRY = (err: Error): boolean => {
+  if (err instanceof ClientProtocolError) {
+    return false;
+  } else if (
+    err instanceof ClientRpcError &&
+    ERROR_TYPES_TO_FAIL_IMMEDIATELY.includes(err.errorType)
+  ) {
+    return false;
+  }
+  return true;
+};
+
+/**
  * Implements a service from a [[StreamProducer]].  The StreamProducer
  * is provided by a streaming protocol, for instance through [[getGrpcWebClient]] in the
  * case of the gRPC-Web protocol.
@@ -130,11 +166,14 @@ export class Service<
    * the methods of this service.
    *
    * @param backoffOptions Options for the exponential backoff.
+   * @param shouldRetry Determines whether an error should be retried (the
+   * function returns `true`) or the method should fail immediately.
    */
   withRetry(
     backoffOptions: Partial<BackoffOptions> = {},
+    shouldRetry: (err: Error) => boolean = DEFAULT_SHOULD_RETRY,
   ): ServiceRetrier<serviceDefinition, ResponseContext> {
-    return new ServiceRetrierImpl(this, backoffOptions);
+    return new ServiceRetrierImpl(this, backoffOptions, shouldRetry);
   }
 
   /**
@@ -331,6 +370,7 @@ class ServiceRetrierImpl<
   constructor(
     private readonly baseService: Service<serviceDefinition, ResponseContext>,
     private readonly backoffOptions: Partial<BackoffOptions>,
+    private readonly shouldRetry: (err: Error) => boolean,
   ) {
     super();
   }
@@ -353,6 +393,7 @@ class ServiceRetrierImpl<
     return retryStream<ModuleRpcCommon.ResponseFor<serviceDefinition, method>>(
       () => this.baseService.stream(method, request),
       this.backoffOptions,
+      this.shouldRetry,
     )
       .on('ready', () => {
         this.emit('serviceReady', method, request);
