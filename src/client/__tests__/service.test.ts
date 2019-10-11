@@ -5,7 +5,13 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { Service, ServiceRetrier, serviceInstance } from '../service';
+import {
+  Service,
+  ServiceRetrier,
+  serviceInstance,
+  DEFAULT_SHOULD_RETRY,
+} from '../service';
+import { ClientProtocolError, ClientRpcError } from '../errors';
 import * as sinon from 'sinon';
 import { Stream } from '../stream';
 import { EventEmitter } from 'events';
@@ -269,6 +275,30 @@ describe('rpc_ts', () => {
           expect(serviceInstance(methodMap)).to.equal(service);
         },
       );
+    });
+  });
+
+  describe('DEFAULT_SHOULD_RETRY', () => {
+    it('retries on errors by default', () => {
+      const err = new Error('__error__');
+      expect(DEFAULT_SHOULD_RETRY(err)).to.be.true;
+    });
+
+    it('fails immediately on a protocol error', () => {
+      const err = new ClientProtocolError('__url__', '__message__');
+      expect(DEFAULT_SHOULD_RETRY(err)).to.be.false;
+    });
+
+    it('fails immediately on an invalid argument error', () => {
+      const err = new ClientRpcError(
+        ModuleRpcCommon.RpcErrorType.invalidArgument,
+      );
+      expect(DEFAULT_SHOULD_RETRY(err)).to.be.false;
+    });
+
+    it('retries on a "service unavailable" error', () => {
+      const err = new ClientRpcError(ModuleRpcCommon.RpcErrorType.unavailable);
+      expect(DEFAULT_SHOULD_RETRY(err)).to.be.true;
     });
   });
 });
