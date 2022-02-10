@@ -42,7 +42,7 @@
     "gh-pages": "^2.0.1",
     "liquidjs": "^9.1.1",
     "mocha": "^6",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "nyc": "^14.1.1",
     "prettier": "^1.13.7",
     "rimraf": "^3.0.0",
